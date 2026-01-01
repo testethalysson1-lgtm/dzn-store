@@ -4,6 +4,25 @@
 import { useState } from 'react';
 import { Search, Moon, Sun, Menu, X, ShoppingCart, Star, Zap } from 'lucide-react';
 
+type GameItem = {
+  id: number;
+  title: string;
+  price: string;
+  discount: string;
+  description: string[];
+  image: string;
+  checkout: string;
+};
+
+type CoinItem = {
+  id: number;
+  title: string;
+  price: string;
+  discount: string;
+  image: string;
+  checkout: string;
+};
+
 export default function Page() {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,7 +37,7 @@ export default function Page() {
     setMenuOpen(!menuOpen);
   };
 
-  const games = [
+  const games: GameItem[] = [
     {
       id: 1,
       title: 'Trio MSN',
@@ -48,7 +67,7 @@ export default function Page() {
     },
   ];
 
-  const coins = [
+  const coins: CoinItem[] = [
     {
       id: 1,
       title: 'Pacote com 2.130 Moedas',
@@ -192,31 +211,31 @@ export default function Page() {
 
         <section className="px-6 py-16 max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
-            {(activeSection === 'contas' ? games : coins).map((item, index) => (
-              <div
-                key={item.id}
-                className="group rounded-3xl overflow-hidden bg-black/40 backdrop-blur-xl border-2 border-cyan-500/30 hover:border-cyan-400 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/50 transition-all duration-500 animate-in fade-in slide-in-from-bottom duration-700"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
-                  <img 
-                    src={item.image} 
-                    alt={item.title} 
-                    className="h-72 w-full object-contain bg-gradient-to-br from-gray-900 to-black transform group-hover:scale-110 transition-transform duration-500" 
-                  />
-                  <div className="absolute top-4 right-4 z-20">
-                    <span className="bg-gradient-to-r from-green-400 to-emerald-500 text-white px-4 py-2 rounded-full text-sm font-black shadow-xl shadow-green-500/50 flex items-center gap-2 border-2 border-green-300">
-                      <Zap size={16} />
-                      {item.discount}
-                    </span>
+            {activeSection === 'contas' ? (
+              games.map((item, index) => (
+                <div
+                  key={item.id}
+                  className="group rounded-3xl overflow-hidden bg-black/40 backdrop-blur-xl border-2 border-cyan-500/30 hover:border-cyan-400 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/50 transition-all duration-500 animate-in fade-in slide-in-from-bottom duration-700"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
+                    <img 
+                      src={item.image} 
+                      alt={item.title} 
+                      className="h-72 w-full object-contain bg-gradient-to-br from-gray-900 to-black transform group-hover:scale-110 transition-transform duration-500" 
+                    />
+                    <div className="absolute top-4 right-4 z-20">
+                      <span className="bg-gradient-to-r from-green-400 to-emerald-500 text-white px-4 py-2 rounded-full text-sm font-black shadow-xl shadow-green-500/50 flex items-center gap-2 border-2 border-green-300">
+                        <Zap size={16} />
+                        {item.discount}
+                      </span>
+                    </div>
                   </div>
-                </div>
-                
-                <div className="p-7">
-                  <h3 className="text-2xl font-black mb-3 text-white group-hover:text-cyan-300 transition-colors">{item.title}</h3>
                   
-                  {activeSection === 'contas' && item.description && (
+                  <div className="p-7">
+                    <h3 className="text-2xl font-black mb-3 text-white group-hover:text-cyan-300 transition-colors">{item.title}</h3>
+                    
                     <div className="mb-4 space-y-2">
                       {item.description.map((desc, idx) => (
                         <div key={idx} className="flex items-center gap-2 text-cyan-200 text-sm">
@@ -225,23 +244,63 @@ export default function Page() {
                         </div>
                       ))}
                     </div>
-                  )}
-                  
-                  <p className="text-4xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-5">
-                    {item.price}
-                  </p>
-                  <a 
-                    href={item.checkout}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-3 w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white py-4 rounded-xl font-black shadow-xl shadow-cyan-500/50 transition-all transform hover:scale-105 hover:shadow-2xl border-2 border-cyan-400/50 hover:border-cyan-300"
-                  >
-                    <ShoppingCart size={20} />
-                    COMPRAR AGORA
-                  </a>
+                    
+                    <p className="text-4xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-5">
+                      {item.price}
+                    </p>
+                    <a 
+                      href={item.checkout}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-3 w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white py-4 rounded-xl font-black shadow-xl shadow-cyan-500/50 transition-all transform hover:scale-105 hover:shadow-2xl border-2 border-cyan-400/50 hover:border-cyan-300"
+                    >
+                      <ShoppingCart size={20} />
+                      COMPRAR AGORA
+                    </a>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              coins.map((item, index) => (
+                <div
+                  key={item.id}
+                  className="group rounded-3xl overflow-hidden bg-black/40 backdrop-blur-xl border-2 border-cyan-500/30 hover:border-cyan-400 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/50 transition-all duration-500 animate-in fade-in slide-in-from-bottom duration-700"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
+                    <img 
+                      src={item.image} 
+                      alt={item.title} 
+                      className="h-72 w-full object-contain bg-gradient-to-br from-gray-900 to-black transform group-hover:scale-110 transition-transform duration-500" 
+                    />
+                    <div className="absolute top-4 right-4 z-20">
+                      <span className="bg-gradient-to-r from-green-400 to-emerald-500 text-white px-4 py-2 rounded-full text-sm font-black shadow-xl shadow-green-500/50 flex items-center gap-2 border-2 border-green-300">
+                        <Zap size={16} />
+                        {item.discount}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="p-7">
+                    <h3 className="text-2xl font-black mb-3 text-white group-hover:text-cyan-300 transition-colors">{item.title}</h3>
+                    
+                    <p className="text-4xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-5">
+                      {item.price}
+                    </p>
+                    <a 
+                      href={item.checkout}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-3 w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white py-4 rounded-xl font-black shadow-xl shadow-cyan-500/50 transition-all transform hover:scale-105 hover:shadow-2xl border-2 border-cyan-400/50 hover:border-cyan-300"
+                    >
+                      <ShoppingCart size={20} />
+                      COMPRAR AGORA
+                    </a>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </section>
 
