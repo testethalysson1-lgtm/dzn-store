@@ -1,8 +1,7 @@
-
 'use client';
 
 import { useState } from 'react';
-import { Search, Moon, Sun, Menu, X, ShoppingCart, Star, Zap } from 'lucide-react';
+import { Search, Moon, Sun, Menu, X, ShoppingCart, Star, Zap, Shield, Clock, MessageCircle } from 'lucide-react';
 
 type GameItem = {
   id: number;
@@ -39,15 +38,6 @@ export default function Page() {
 
   const games: GameItem[] = [
     {
-      id: 1,
-      title: 'Trio MSN',
-      price: 'R$ 59,99',
-      discount: 'OFERTA',
-      description: ['Conta com trio MSN', 'Pelé 107 + Zaga perfeita', '3281 de Força'],
-      image: 'https://i.imgur.com/dFxiPFW.png',
-      checkout: 'https://lxpay.com.br/checkout/2a0fe751-417c-4b23-895b-578c6059093d?offer=427a7110-902f-4a93-8968-f232fce01611',
-    },
-    {
       id: 2,
       title: 'Conta braba com Ney',
       price: 'R$ 29,99',
@@ -55,6 +45,24 @@ export default function Page() {
       description: ['Melhor carta do Neymar', 'Messi Blitz curler', 'Melhor goleiro do jogo', '3202 de força'],
       image: 'https://i.imgur.com/jmQ7vB2.png',
       checkout: 'https://lxpay.com.br/checkout/d56da249-0a91-4c84-9120-a65e692b98d1?offer=449144fb-b63a-4fa8-8182-6b2951862de7',
+    },
+    {
+      id: 4,
+      title: 'Conta com Ney Loiro',
+      price: 'R$ 49,99',
+      discount: 'MAIS QUERIDA',
+      description: ['Conta com o ney loiro', '3200 de força', 'O Messi e o Neymar mais raros do jogo', 'A mais queridinha dos jogadores de efootball'],
+      image: 'https://i.imgur.com/FPSjYoB.png',
+      checkout: 'https://lxpay.com.br/checkout/5dce45fe-ed54-4e52-9080-728591b9de22?offer=923129e7-56af-49d7-afab-b30c8dc849a7',
+    },
+    {
+      id: 1,
+      title: 'Trio MSN',
+      price: 'R$ 59,99',
+      discount: 'OFERTA',
+      description: ['Conta com trio MSN', 'Pelé 107 + Zaga perfeita', '3281 de Força'],
+      image: 'https://i.imgur.com/dFxiPFW.png',
+      checkout: 'https://lxpay.com.br/checkout/2a0fe751-417c-4b23-895b-578c6059093d?offer=427a7110-902f-4a93-8968-f232fce01611',
     },
     {
       id: 3,
@@ -301,6 +309,51 @@ export default function Page() {
                 </div>
               ))
             )}
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="px-4 py-12 md:px-6 md:py-20 max-w-6xl mx-auto">
+          <h2 className="text-2xl md:text-5xl font-black text-center mb-8 md:mb-16 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+            Perguntas Frequentes
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+            <div className="group bg-black/40 backdrop-blur-xl border-2 border-cyan-500/30 hover:border-cyan-400 rounded-xl md:rounded-2xl p-5 md:p-8 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/30">
+              <div className="flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-full mb-4 md:mb-6 mx-auto group-hover:scale-110 transition-transform">
+                <Shield className="text-white" size={24} />
+              </div>
+              <h3 className="text-base md:text-xl font-black text-cyan-300 mb-2 md:mb-3 text-center">
+                Porque confiar na Dzn Store?
+              </h3>
+              <p className="text-xs md:text-sm text-cyan-100/80 text-center leading-relaxed">
+                Somos um site verificado desde 2024 sempre buscando a satisfação dos nossos clientes
+              </p>
+            </div>
+
+            <div className="group bg-black/40 backdrop-blur-xl border-2 border-cyan-500/30 hover:border-cyan-400 rounded-xl md:rounded-2xl p-5 md:p-8 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/30">
+              <div className="flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full mb-4 md:mb-6 mx-auto group-hover:scale-110 transition-transform">
+                <Clock className="text-white" size={24} />
+              </div>
+              <h3 className="text-base md:text-xl font-black text-purple-300 mb-2 md:mb-3 text-center">
+                Se eu comprar agora em quanto tempo recebo a conta?
+              </h3>
+              <p className="text-xs md:text-sm text-cyan-100/80 text-center leading-relaxed">
+                Após a compra, você receberá em questão de minutos, sempre buscamos agilidade e satisfação pros nossos clientes
+              </p>
+            </div>
+
+            <div className="group bg-black/40 backdrop-blur-xl border-2 border-cyan-500/30 hover:border-cyan-400 rounded-xl md:rounded-2xl p-5 md:p-8 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/30">
+              <div className="flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full mb-4 md:mb-6 mx-auto group-hover:scale-110 transition-transform">
+                <MessageCircle className="text-white" size={24} />
+              </div>
+              <h3 className="text-base md:text-xl font-black text-green-300 mb-2 md:mb-3 text-center">
+                Tenho dúvidas ainda
+              </h3>
+              <p className="text-xs md:text-sm text-cyan-100/80 text-center leading-relaxed">
+                Caso tenha mais alguma dúvida só chamar no nosso Instagram, a equipe Dzn estará 24H online pra atendê-lo
+              </p>
+            </div>
           </div>
         </section>
 
