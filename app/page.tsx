@@ -324,6 +324,15 @@ export default function Page() {
                   <div className="p-4 md:p-7">
                     <h3 className="text-base md:text-2xl font-black mb-2 md:mb-3 text-white group-hover:text-cyan-300 transition-colors">{item.title}</h3>
                     
+                    <div className="mb-3 md:mb-4 space-y-1 md:space-y-2">
+                      {item.description.map((desc, idx) => (
+                        <div key={idx} className="flex items-center gap-1.5 md:gap-2 text-cyan-200 text-xs md:text-sm">
+                          <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-cyan-400 flex-shrink-0"></div>
+                          <span>{desc}</span>
+                        </div>
+                      ))}
+                    </div>
+                    
                     <p className="text-xl md:text-4xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-3 md:mb-5">
                       {item.price}
                     </p>
