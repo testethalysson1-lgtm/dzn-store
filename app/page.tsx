@@ -163,25 +163,26 @@ export default function Page() {
               </span>
             </div>
             
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 order-first md:order-none">
               <button
                 onClick={toggleMenu}
                 className="p-2 md:p-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 transition-all shadow-lg shadow-cyan-500/50 text-white transform hover:scale-105"
               >
                 {menuOpen ? <X size={16} className="md:w-5 md:h-5" /> : <Menu size={16} className="md:w-5 md:h-5" />}
               </button>
-              <button
-                onClick={toggleTheme}
-                className="p-2 md:p-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 transition-all shadow-lg shadow-purple-500/50 transform hover:scale-105"
-              >
-                {isDark ? <Sun className="text-yellow-300" size={16} /> : <Moon className="text-blue-200" size={16} />}
-              </button>
             </div>
+            
+            <button
+              onClick={toggleTheme}
+              className="p-2 md:p-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 transition-all shadow-lg shadow-purple-500/50 transform hover:scale-105"
+            >
+              {isDark ? <Sun className="text-yellow-300" size={16} /> : <Moon className="text-blue-200" size={16} />}
+            </button>
           </div>
 
           {menuOpen && (
-            <div className="mt-3 md:mt-6 p-3 md:p-6 rounded-xl md:rounded-2xl bg-black/60 backdrop-blur-xl border border-cyan-500/40 shadow-2xl shadow-cyan-500/20 animate-in fade-in slide-in-from-top-5 duration-300">
-              <div className="flex gap-2 md:gap-4 justify-center flex-wrap">
+            <div className="mt-3 md:mt-6 p-3 md:p-6 rounded-xl md:rounded-2xl bg-black/60 backdrop-blur-xl border border-cyan-500/40 shadow-2xl shadow-cyan-500/20 animate-in fade-in slide-in-from-left-5 duration-300">
+              <div className="flex flex-col gap-2 md:gap-4">
                 <button
                   onClick={() => {
                     setActiveSection('mobile');
@@ -359,6 +360,18 @@ export default function Page() {
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+            <div className="group bg-black/40 backdrop-blur-xl border-2 border-cyan-500/30 hover:border-cyan-400 rounded-xl md:rounded-2xl p-5 md:p-8 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/30">
+              <div className="flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-full mb-4 md:mb-6 mx-auto group-hover:scale-110 transition-transform">
+                <ShoppingCart className="text-white" size={24} />
+              </div>
+              <h3 className="text-base md:text-xl font-black text-cyan-300 mb-2 md:mb-3 text-center">
+                Como funciona a compra no nosso site?
+              </h3>
+              <p className="text-xs md:text-sm text-cyan-100/80 text-center leading-relaxed">
+                Basta escolher a conta em que você se interessou e clicar em comprar. Você será direcionado para a página de pagamento e lá tem a opção de colocar o seu gmail, esse gmail será usado pra transferência da conta via Konami ID e você irá receber todas as informações da entrega pelo gmail, só verificar sua caixa de gmail após a compra. Todas as nossas contas são apenas konami id para garantir a segurança do cliente.
+              </p>
+            </div>
+
             <div className="group bg-black/40 backdrop-blur-xl border-2 border-cyan-500/30 hover:border-cyan-400 rounded-xl md:rounded-2xl p-5 md:p-8 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/30">
               <div className="flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-full mb-4 md:mb-6 mx-auto group-hover:scale-110 transition-transform">
                 <Shield className="text-white" size={24} />
