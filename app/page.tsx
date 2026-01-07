@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -26,7 +27,7 @@ export default function Page() {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const [searchQuery, setSearchQuery] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<'contas' | 'moedas'>('contas');
+  const [activeSection, setActiveSection] = useState<'mobile' | 'console'>('mobile');
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
@@ -38,40 +39,70 @@ export default function Page() {
 
   const games: GameItem[] = [
     {
-      id: 2,
-      title: 'Conta braba com Ney',
-      price: 'R$ 29,99',
-      discount: 'CUSTO BENEFICIO',
-      description: ['Melhor carta do Neymar', 'Messi Blitz curler', 'Melhor goleiro do jogo', '3202 de força'],
-      image: 'https://i.imgur.com/jmQ7vB2.png',
-      checkout: 'https://lxpay.com.br/checkout/d56da249-0a91-4c84-9120-a65e692b98d1?offer=449144fb-b63a-4fa8-8182-6b2951862de7',
+      id: 1,
+      title: 'Conta com Ney 107 - O BRABO',
+      price: 'R$ 24,99',
+      discount: 'OFERTA',
+      description: ['Ney 107 - Uma das melhores versões do Neymar!', 'Mbappe Showtime', 'Defesa Brutal', '3187 de Força Coletiva'],
+      image: 'https://i.imgur.com/hny2adX.png',
+      checkout: 'https://lxpay.com.br/checkout/7b46f4ca-f693-40ee-bb22-0f2a8d813e39?offer=2fddebe6-6b1c-4a76-b5e9-8071e7ab3986',
     },
     {
-      id: 4,
+      id: 2,
       title: 'Conta com Ney Loiro',
-      price: 'R$ 49,99',
-      discount: 'MAIS QUERIDA',
-      description: ['Conta com o ney loiro', '3200 de força', 'O Messi e o Neymar mais raros do jogo', 'A mais queridinha dos jogadores de efootball'],
-      image: 'https://i.imgur.com/FPSjYoB.png',
+      price: 'R$ 44,99',
+      discount: 'MAIS PROCURADO',
+      description: ['Ney Loiro - O mais Procurado', '3200 de Força Coletiva', 'O Messi mais raro do Jogo!', 'Defesa perfeita'],
+      image: 'https://i.imgur.com/Dorftdg.png',
       checkout: 'https://lxpay.com.br/checkout/5dce45fe-ed54-4e52-9080-728591b9de22?offer=923129e7-56af-49d7-afab-b30c8dc849a7',
     },
     {
-      id: 1,
-      title: 'Trio MSN',
-      price: 'R$ 59,99',
-      discount: 'OFERTA',
-      description: ['Conta com trio MSN', 'Pelé 107 + Zaga perfeita', '3281 de Força'],
-      image: 'https://i.imgur.com/dFxiPFW.png',
-      checkout: 'https://lxpay.com.br/checkout/2a0fe751-417c-4b23-895b-578c6059093d?offer=427a7110-902f-4a93-8968-f232fce01611',
+      id: 3,
+      title: 'O Quarteto fantástico - TIME IMPARÁVEL',
+      price: 'R$ 69,99',
+      discount: 'POPULAR',
+      description: ['Ataque Fatal', 'As melhores cartas do Game', 'Time perfeito pra humilhar seu adversário', '3254 de Força Coletiva'],
+      image: 'https://i.imgur.com/Puzm5lh.png',
+      checkout: 'https://lxpay.com.br/checkout/6c94fa32-c867-45ad-a0b3-560f193469a4?offer=5360c6df-adae-4e16-87c9-3f46f5a649aa',
     },
     {
-      id: 3,
-      title: 'Conta full | A MELHOR DO GAME!',
-      price: 'R$ 99,99',
-      discount: 'A MAIS BRABA',
-      description: ['O Ataque mais fatal do jogo!', 'Melhor goleiro do jogo', 'Uma das melhores contas do Efootball!', '3291 de Força'],
-      image: 'https://i.imgur.com/sQv62ja.png',
-      checkout: 'https://lxpay.com.br/checkout/1aff42cd-88e7-4ad8-8853-4524e6d5116a?offer=0654753a-c4ff-45d8-97a2-510c0911fcf5',
+      id: 4,
+      title: 'Os Dribladores! Conta com Ney e Yamal',
+      price: 'R$ 74,99',
+      discount: 'FIRULAS',
+      description: ['Conta com Ney e Yamal', 'Pelé - O CA Matador', 'Conta perfeita pra quem gosta de FIRULAS!', '3255 de Força Coletiva'],
+      image: 'https://i.imgur.com/7JKhjLD.png',
+      checkout: 'https://lxpay.com.br/checkout/c4671bf1-f71c-4009-b1e2-1c807481ce63?offer=828e6185-fd50-454b-96c2-15f85ed3057d',
+    },
+    {
+      id: 5,
+      title: 'A conta mais Zica do jogo!',
+      price: 'R$ 139,99',
+      discount: 'A MAIS FORTE',
+      description: ['Uma das mais fortes do eFootball', 'Novo Messi 109 + Pelé e Ney no Ataque', 'Meio campo e Defesa perfeitos', '3286 de Força Coletiva'],
+      image: 'https://i.imgur.com/oBYyxxm.png',
+      checkout: 'https://lxpay.com.br/checkout/c0ebc04b-ba48-48ad-83ce-39aa49235af9?offer=e46ec93e-b3b3-4920-b5cf-419de9a0fda0',
+    },
+  ];
+
+  const consoleGames: GameItem[] = [
+    {
+      id: 1,
+      title: 'Conta com Cr7 + Pelé',
+      price: 'R$ 54,99',
+      discount: 'DESTAQUE',
+      description: ['Conta com Cr7 e Pelé', 'Ataque brutal', 'Ronaldinho + meio campo excelente', '3230 de Força Coletiva'],
+      image: 'https://i.imgur.com/ncIXC5O.png',
+      checkout: 'https://lxpay.com.br/checkout/b2c55cde-218b-4eb1-8800-d95f5dddf12f?offer=561e33ec-a213-4201-a63e-d4e2c86f775e',
+    },
+    {
+      id: 2,
+      title: 'Melhor Ataque do Console!',
+      price: 'R$ 79,99',
+      discount: 'MELHOR ATAQUE',
+      description: ['Melhor Ataque do Game!', 'Etoo + R10', 'Meio campo e Defesa excelentes', '3265 de Força Coletiva'],
+      image: 'https://i.imgur.com/NLgzU3O.png',
+      checkout: 'https://lxpay.com.br/checkout/b2c55cde-218b-4eb1-8800-d95f5dddf12f?offer=561e33ec-a213-4201-a63e-d4e2c86f775e',
     },
   ];
 
@@ -153,31 +184,31 @@ export default function Page() {
               <div className="flex gap-2 md:gap-4 justify-center flex-wrap">
                 <button
                   onClick={() => {
-                    setActiveSection('contas');
+                    setActiveSection('mobile');
                     setMenuOpen(false);
                   }}
                   className={`px-4 py-2.5 md:px-8 md:py-4 rounded-lg md:rounded-xl text-xs md:text-base font-bold transition-all transform hover:scale-105 flex items-center gap-1.5 md:gap-2 ${
-                    activeSection === 'contas'
+                    activeSection === 'mobile'
                       ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-xl shadow-cyan-500/50 border-2 border-cyan-400'
                       : 'bg-gray-800/80 text-gray-300 hover:bg-gray-700/80 border-2 border-gray-600/50'
                   }`}
                 >
                   <Zap size={14} className="md:w-5 md:h-5" />
-                  Contas Premium
+                  Mobile
                 </button>
                 <button
                   onClick={() => {
-                    setActiveSection('moedas');
+                    setActiveSection('console');
                     setMenuOpen(false);
                   }}
                   className={`px-4 py-2.5 md:px-8 md:py-4 rounded-lg md:rounded-xl text-xs md:text-base font-bold transition-all transform hover:scale-105 flex items-center gap-1.5 md:gap-2 ${
-                    activeSection === 'moedas'
+                    activeSection === 'console'
                       ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-xl shadow-cyan-500/50 border-2 border-cyan-400'
                       : 'bg-gray-800/80 text-gray-300 hover:bg-gray-700/80 border-2 border-gray-600/50'
                   }`}
                 >
                   <Star size={14} className="md:w-5 md:h-5" />
-                  Moedas
+                  Console
                 </button>
               </div>
             </div>
@@ -189,7 +220,7 @@ export default function Page() {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/30 to-blue-500/30 rounded-xl md:rounded-3xl blur-2xl"></div>
               <img 
-                src="https://i.imgur.com/bYS1ImS.png" 
+                src="https://i.imgur.com/x1elyJr.png" 
                 alt="Banner GameStore" 
                 className="w-full max-w-4xl mx-auto rounded-xl md:rounded-3xl shadow-2xl shadow-cyan-500/40 border-2 md:border-4 border-cyan-400/50 relative z-10"
               />
@@ -197,19 +228,19 @@ export default function Page() {
           </div>
           
           <h1 className="text-2xl md:text-6xl lg:text-7xl font-black mb-3 md:mb-8 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-2xl animate-in fade-in slide-in-from-bottom-5 duration-700">
-            {activeSection === 'contas' ? '⚡ Contas Premium' : '💎 Moedas Premium'}
+            {activeSection === 'mobile' ? '📱 Contas Mobile' : '🎮 Contas Console'}
           </h1>
           <p className="text-sm md:text-2xl mb-6 md:mb-12 text-cyan-200 font-semibold drop-shadow-lg animate-in fade-in slide-in-from-bottom-7 duration-700 delay-100 px-2">
-            {activeSection === 'contas' 
+            {activeSection === 'mobile' 
               ? '🔥 As melhores contas do mercado | Entrega instantânea'
-              : '💰 Recarregue com segurança | Preços imbatíveis'}
+              : '🎯 Contas exclusivas para Console | Máximo desempenho'}
           </p>
 
           <div className="relative max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-9 duration-700 delay-200">
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg md:rounded-2xl blur-xl opacity-30"></div>
             <Search className="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 w-4 h-4 md:w-6 md:h-6 text-cyan-400 z-10" />
             <input
-              placeholder={activeSection === 'contas' ? '🔍 Buscar contas...' : '🔍 Buscar moedas...'}
+              placeholder={activeSection === 'mobile' ? '🔍 Buscar contas mobile...' : '🔍 Buscar contas console...'}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 md:pl-14 pr-3 md:pr-5 py-2.5 md:py-5 rounded-lg md:rounded-2xl text-sm md:text-lg border-2 outline-none bg-black/50 backdrop-blur-xl border-cyan-500/50 focus:border-cyan-400 placeholder-cyan-300/60 text-white shadow-xl relative z-10 transition-all"
@@ -219,7 +250,7 @@ export default function Page() {
 
         <section className="px-4 py-6 md:px-6 md:py-16 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-            {activeSection === 'contas' ? (
+            {activeSection === 'mobile' ? (
               games.map((item, index) => (
                 <div
                   key={item.id}
@@ -269,7 +300,7 @@ export default function Page() {
                 </div>
               ))
             ) : (
-              coins.map((item, index) => (
+              consoleGames.map((item, index) => (
                 <div
                   key={item.id}
                   className="group rounded-xl md:rounded-3xl overflow-hidden bg-black/40 backdrop-blur-xl border-2 border-cyan-500/30 hover:border-cyan-400 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/50 transition-all duration-500 animate-in fade-in slide-in-from-bottom duration-700"
