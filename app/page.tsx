@@ -380,7 +380,7 @@ export default function Page() {
                 Porque confiar na Dzn Store?
               </h3>
               <p className="text-xs md:text-sm text-cyan-100/80 text-center leading-relaxed">
-                Somos um site verificado desde 2024 sempre buscando a satisfação dos nossos clientes
+                Somos um site verificado desde 2024 sempre buscando a satisfação dos nossos clientes. Mais de 200 clientes já compraram com a DZN STORE!
               </p>
             </div>
 
@@ -392,7 +392,7 @@ export default function Page() {
                 Se eu comprar agora em quanto tempo recebo a conta?
               </h3>
               <p className="text-xs md:text-sm text-cyan-100/80 text-center leading-relaxed">
-                Após a compra, você receberá em questão de minutos, sempre buscamos agilidade e satisfação pros nossos clientes
+                Após a compra, você receberá em questão de segundos, verifique a sua caixa de entrada do Gmail!
               </p>
             </div>
 
@@ -404,7 +404,7 @@ export default function Page() {
                 Tenho dúvidas ainda
               </h3>
               <p className="text-xs md:text-sm text-cyan-100/80 text-center leading-relaxed">
-                Caso tenha mais alguma dúvida só chamar no nosso Instagram, a equipe Dzn estará 24H online pra atendê-lo
+                Caso tenha mais alguma dúvida só chamar no nosso Instagram, a equipe Dzn estará 24H online pra atendê-lo no Instagram: @dznstore2026
               </p>
             </div>
           </div>
