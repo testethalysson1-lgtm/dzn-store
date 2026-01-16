@@ -8,6 +8,7 @@ type GameItem = {
   id: number;
   title: string;
   price: string;
+  oldPrice?: string;
   discount: string;
   description: string[];
   image: string;
@@ -42,6 +43,7 @@ export default function Page() {
       id: 1,
       title: 'Conta com Ney 107 - O BRABO',
       price: 'R$ 24,99',
+      oldPrice: 'R$ 49,99',
       discount: 'OFERTA',
       description: ['Ney 107 - Uma das melhores versões do Neymar!', 'Mbappe Showtime', 'Defesa Brutal', '3187 de Força Coletiva'],
       image: 'https://i.imgur.com/hny2adX.png',
@@ -51,6 +53,7 @@ export default function Page() {
       id: 2,
       title: 'Conta com Ney Loiro',
       price: 'R$ 44,99',
+      oldPrice: 'R$ 69,99',
       discount: 'MAIS PROCURADO',
       description: ['Ney Loiro - O mais Procurado', '3200 de Força Coletiva', 'O Messi mais raro do Jogo!', 'Defesa perfeita'],
       image: 'https://i.imgur.com/Dorftdg.png',
@@ -60,6 +63,7 @@ export default function Page() {
       id: 3,
       title: 'O Quarteto fantástico - TIME IMPARÁVEL',
       price: 'R$ 69,99',
+      oldPrice: 'R$ 79,99',
       discount: 'POPULAR',
       description: ['Ataque Fatal', 'As melhores cartas do Game', 'Time perfeito pra humilhar seu adversário', '3254 de Força Coletiva'],
       image: 'https://i.imgur.com/Puzm5lh.png',
@@ -69,6 +73,7 @@ export default function Page() {
       id: 4,
       title: 'Os Dribladores! Conta com Ney e Yamal',
       price: 'R$ 74,99',
+      oldPrice: 'R$ 99,99',
       discount: 'FIRULAS',
       description: ['Conta com Ney e Yamal', 'Pelé - O CA Matador', 'Conta perfeita pra quem gosta de FIRULAS!', '3255 de Força Coletiva'],
       image: 'https://i.imgur.com/7JKhjLD.png',
@@ -78,6 +83,7 @@ export default function Page() {
       id: 5,
       title: 'A conta mais Zica do jogo!',
       price: 'R$ 139,99',
+      oldPrice: 'R$ 200,00',
       discount: 'A MAIS FORTE',
       description: ['Uma das mais fortes do eFootball', 'Novo Messi 109 + Pelé e Ney no Ataque', 'Meio campo e Defesa perfeitos', '3286 de Força Coletiva'],
       image: 'https://i.imgur.com/oBYyxxm.png',
@@ -140,10 +146,7 @@ export default function Page() {
       className="min-h-screen text-white transition-all duration-500 bg-cover bg-center bg-fixed relative"
       style={{ backgroundImage: 'url(https://i.imgur.com/jQxZ45g.png)' }}
     >
-      {/* Overlay gradient */}
       <div className="fixed inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80 pointer-events-none z-0"></div>
-      
-      {/* Animated gradient overlay */}
       <div className="fixed inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-cyan-600/10 pointer-events-none z-0 animate-pulse"></div>
 
       <div className="relative z-10">
@@ -285,9 +288,16 @@ export default function Page() {
                       ))}
                     </div>
                     
-                    <p className="text-xl md:text-4xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-3 md:mb-5">
-                      {item.price}
-                    </p>
+                    <div className="mb-3 md:mb-5">
+                      {item.oldPrice && (
+                        <p className="text-sm md:text-xl text-cyan-300/60 line-through font-semibold mb-1">
+                          {item.oldPrice}
+                        </p>
+                      )}
+                      <p className="text-xl md:text-4xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                        {item.price}
+                      </p>
+                    </div>
                     <a 
                       href={item.checkout}
                       target="_blank"
@@ -334,9 +344,16 @@ export default function Page() {
                       ))}
                     </div>
                     
-                    <p className="text-xl md:text-4xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-3 md:mb-5">
-                      {item.price}
-                    </p>
+                    <div className="mb-3 md:mb-5">
+                      {item.oldPrice && (
+                        <p className="text-sm md:text-xl text-cyan-300/60 line-through font-semibold mb-1">
+                          {item.oldPrice}
+                        </p>
+                      )}
+                      <p className="text-xl md:text-4xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                        {item.price}
+                      </p>
+                    </div>
                     <a 
                       href={item.checkout}
                       target="_blank"
@@ -353,13 +370,12 @@ export default function Page() {
           </div>
         </section>
 
-        {/* FAQ Section */}
         <section className="px-4 py-12 md:px-6 md:py-20 max-w-6xl mx-auto">
           <h2 className="text-2xl md:text-5xl font-black text-center mb-8 md:mb-16 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
             Perguntas Frequentes
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <div className="group bg-black/40 backdrop-blur-xl border-2 border-cyan-500/30 hover:border-cyan-400 rounded-xl md:rounded-2xl p-5 md:p-8 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/30">
               <div className="flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-full mb-4 md:mb-6 mx-auto group-hover:scale-110 transition-transform">
                 <ShoppingCart className="text-white" size={24} />
