@@ -224,7 +224,7 @@ export default function Page() {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/30 to-blue-500/30 rounded-xl md:rounded-3xl blur-2xl"></div>
               <img 
-                src="https://i.imgur.com/KVz9En2.png" 
+                src="https://i.imgur.com/GQMBqhU.png" 
                 alt="Banner GameStore" 
                 className="w-full max-w-4xl mx-auto rounded-xl md:rounded-3xl shadow-2xl shadow-cyan-500/40 border-2 md:border-4 border-cyan-400/50 relative z-10"
               />
