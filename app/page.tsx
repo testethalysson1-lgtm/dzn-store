@@ -2,7 +2,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Search, Moon, Sun, Menu, X, ShoppingCart, Star, Zap, Shield, Clock, MessageCircle, TrendingDown } from 'lucide-react';
+import { Search, Moon, Sun, Menu, X, ShoppingCart, Star, Zap, Shield, Clock, MessageCircle, TrendingDown, ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 
 type GameItem = {
   id: number;
@@ -11,7 +11,7 @@ type GameItem = {
   oldPrice?: string;
   discount: string;
   description: string[];
-  image: string;
+  images: string[];
   checkout: string;
   badge?: string;
 };
@@ -22,19 +22,34 @@ export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<'mobile' | 'console'>('mobile');
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
-  const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<GameItem | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
   const toggleCard = (id: number) => setExpandedCard(expandedCard === id ? null : id);
-  const openModal = (item: GameItem) => {
+  
+  const openDetails = (item: GameItem) => {
     setSelectedItem(item);
-    setModalOpen(true);
+    setCurrentImageIndex(0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  const closeModal = () => {
-    setModalOpen(false);
+  
+  const closeDetails = () => {
     setSelectedItem(null);
+    setCurrentImageIndex(0);
+  };
+
+  const nextImage = () => {
+    if (selectedItem) {
+      setCurrentImageIndex((prev) => (prev + 1) % selectedItem.images.length);
+    }
+  };
+
+  const prevImage = () => {
+    if (selectedItem) {
+      setCurrentImageIndex((prev) => (prev - 1 + selectedItem.images.length) % selectedItem.images.length);
+    }
   };
 
   const games: GameItem[] = [
@@ -45,7 +60,7 @@ export default function Page() {
       oldPrice: 'R$ 49,99',
       discount: '50%',
       description: ['Ney 107 - O BRABO', 'Mbappe Showtime', 'Defesa Brutal', '3187 de Força'],
-      image: 'https://i.imgur.com/hny2adX.png',
+      images: ['https://i.imgur.com/hny2adX.png'],
       checkout: 'https://lxpay.com.br/checkout/7b46f4ca-f693-40ee-bb22-0f2a8d813e39?offer=2fddebe6-6b1c-4a76-b5e9-8071e7ab3986',
     },
     {
@@ -55,7 +70,7 @@ export default function Page() {
       oldPrice: 'R$ 69,99',
       discount: '36%',
       description: ['Ney Loiro - O mais Procurado', '3200 de Força', 'Messi Raro', 'Defesa perfeita'],
-      image: 'https://i.imgur.com/Dorftdg.png',
+      images: ['https://i.imgur.com/Dorftdg.png'],
       checkout: 'https://lxpay.com.br/checkout/5dce45fe-ed54-4e52-9080-728591b9de22?offer=923129e7-56af-49d7-afab-b30c8dc849a7',
     },
     {
@@ -65,7 +80,7 @@ export default function Page() {
       oldPrice: 'R$ 79,99',
       discount: '13%',
       description: ['TIME IMPARÁVEL', 'Ataque Fatal', 'Melhores cartas', '3254 de Força'],
-      image: 'https://i.imgur.com/Puzm5lh.png',
+      images: ['https://i.imgur.com/Puzm5lh.png'],
       checkout: 'https://lxpay.com.br/checkout/6c94fa32-c867-45ad-a0b3-560f193469a4?offer=5360c6df-adae-4e16-87c9-3f46f5a649aa',
     },
     {
@@ -75,7 +90,7 @@ export default function Page() {
       oldPrice: 'R$ 99,99',
       discount: '25%',
       description: ['Ney e Yamal', 'Pelé CA Matador', 'Perfeito pra FIRULAS', '3255 de Força'],
-      image: 'https://i.imgur.com/7JKhjLD.png',
+      images: ['https://i.imgur.com/7JKhjLD.png'],
       checkout: 'https://lxpay.com.br/checkout/c4671bf1-f71c-4009-b1e2-1c807481ce63?offer=828e6185-fd50-454b-96c2-15f85ed3057d',
     },
     {
@@ -85,7 +100,7 @@ export default function Page() {
       oldPrice: 'R$ 200,00',
       discount: '30%',
       description: ['Mais forte do eFootball', 'Messi 109 + Pelé + Ney', 'Defesa perfeita', '3286 de Força'],
-      image: 'https://i.imgur.com/oBYyxxm.png',
+      images: ['https://i.imgur.com/oBYyxxm.png'],
       checkout: 'https://lxpay.com.br/checkout/c0ebc04b-ba48-48ad-83ce-39aa49235af9?offer=e46ec93e-b3b3-4920-b5cf-419de9a0fda0',
     },
     {
@@ -95,7 +110,12 @@ export default function Page() {
       oldPrice: 'R$ 999,99',
       discount: '50%',
       description: ['Melhor que você já viu', 'Ataque perfeito', 'Messi + Gullit', '3301 de Força'],
-      image: 'https://i.imgur.com/VuBE0hE.png',
+      images: [
+        'https://i.imgur.com/VuBE0hE.png',
+        'https://i.imgur.com/5TAUJ8X.png',
+        'https://i.imgur.com/6rnHRCE.png',
+        'https://i.imgur.com/tnqJDWe.png'
+      ],
       checkout: 'https://lxpay.com.br/checkout/818d5b90-f9c9-4448-a890-c785cfc58a20?offer=093b7131-3d6a-450d-8604-6aad356ef1d9',
     },
   ];
@@ -107,7 +127,7 @@ export default function Page() {
       price: 'R$ 54,99',
       discount: '20%',
       description: ['Cr7 e Pelé', 'Ataque brutal', 'Ronaldinho R10', '3230 de Força'],
-      image: 'https://i.imgur.com/ncIXC5O.png',
+      images: ['https://i.imgur.com/ncIXC5O.png'],
       checkout: 'https://lxpay.com.br/checkout/b2c55cde-218b-4eb1-8800-d95f5dddf12f?offer=561e33ec-a213-4201-a63e-d4e2c86f775e',
     },
     {
@@ -116,7 +136,7 @@ export default function Page() {
       price: 'R$ 79,99',
       discount: '35%',
       description: ['Melhor Ataque do Game', 'Etoo + R10', 'Defesa excelente', '3265 de Força'],
-      image: 'https://i.imgur.com/NLgzU3O.png',
+      images: ['https://i.imgur.com/NLgzU3O.png'],
       checkout: 'https://lxpay.com.br/checkout/b2c55cde-218b-4eb1-8800-d95f5dddf12f?offer=561e33ec-a213-4201-a63e-d4e2c86f775e',
     },
   ];
@@ -137,11 +157,11 @@ export default function Page() {
           
           {/* Imagem - Clicável */}
           <div 
-            onClick={() => openModal(item)}
+            onClick={() => openDetails(item)}
             className="relative h-44 bg-gradient-to-br from-purple-950/50 to-pink-950/50 overflow-hidden cursor-pointer"
           >
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
-            <img src={item.image} alt={item.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+            <img src={item.images[0]} alt={item.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
           </div>
 
           {/* Conteúdo */}
@@ -185,10 +205,10 @@ export default function Page() {
             {/* Botões */}
             <div className="space-y-2">
               <button
-                onClick={() => toggleCard(item.id)}
+                onClick={() => openDetails(item)}
                 className="w-full bg-purple-700/30 hover:bg-purple-700/50 text-purple-200 py-2 rounded-xl font-bold text-xs text-center transition-all border border-purple-500/30"
               >
-                {isExpanded ? 'Ver Menos' : 'Ver Detalhes'}
+                Ver Detalhes
               </button>
               
               <a 
@@ -206,6 +226,167 @@ export default function Page() {
     );
   };
 
+  // Se tem item selecionado, mostra a página de detalhes
+  if (selectedItem) {
+    return (
+      <div className="min-h-screen bg-black text-white">
+        <div className="fixed inset-0 bg-gradient-to-br from-purple-950/50 via-black to-pink-950/30 pointer-events-none"></div>
+        
+        <div className="relative z-10">
+          {/* Header simplificado */}
+          <header className="bg-black/80 backdrop-blur-xl border-b border-purple-500/20 py-4 px-4 sticky top-0 z-50">
+            <div className="max-w-7xl mx-auto flex items-center gap-4">
+              <button 
+                onClick={closeDetails}
+                className="flex items-center gap-2 px-4 py-2 bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/30 rounded-xl transition-all"
+              >
+                <ArrowLeft size={20} />
+                <span className="font-bold">Voltar</span>
+              </button>
+              
+              <div className="flex items-center gap-3">
+                <img src="https://i.imgur.com/A2G2M5x.png" alt="Dzn" className="w-10 h-10 rounded-xl border-2 border-purple-500/50" />
+                <span className="text-xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Dzn Store</span>
+              </div>
+            </div>
+          </header>
+
+          {/* Conteúdo da página de detalhes */}
+          <div className="max-w-7xl mx-auto px-4 py-8">
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Galeria de Imagens */}
+              <div className="space-y-4">
+                {/* Imagem Principal */}
+                <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-950/50 to-pink-950/50 aspect-square">
+                  <img 
+                    src={selectedItem.images[currentImageIndex]} 
+                    alt={selectedItem.title}
+                    className="w-full h-full object-cover"
+                  />
+                  
+                  {/* Controles de navegação */}
+                  {selectedItem.images.length > 1 && (
+                    <>
+                      <button
+                        onClick={prevImage}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 backdrop-blur-sm p-3 rounded-full transition-all"
+                      >
+                        <ChevronLeft size={24} />
+                      </button>
+                      <button
+                        onClick={nextImage}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 backdrop-blur-sm p-3 rounded-full transition-all"
+                      >
+                        <ChevronRight size={24} />
+                      </button>
+                      
+                      {/* Indicador de página */}
+                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full">
+                        <span className="text-white font-bold text-sm">
+                          {currentImageIndex + 1} / {selectedItem.images.length}
+                        </span>
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                {/* Miniaturas */}
+                {selectedItem.images.length > 1 && (
+                  <div className="grid grid-cols-4 gap-3">
+                    {selectedItem.images.map((img, idx) => (
+                      <div
+                        key={idx}
+                        onClick={() => setCurrentImageIndex(idx)}
+                        className={`relative rounded-xl overflow-hidden cursor-pointer transition-all ${
+                          currentImageIndex === idx 
+                            ? 'ring-4 ring-purple-500 scale-105' 
+                            : 'ring-2 ring-purple-500/20 hover:ring-purple-500/50'
+                        }`}
+                      >
+                        <div className="aspect-square bg-gradient-to-br from-purple-950/50 to-pink-950/50">
+                          <img 
+                            src={img} 
+                            alt={`${selectedItem.title} ${idx + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Informações do Produto */}
+              <div className="space-y-6">
+                <div>
+                  <h1 className="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
+                    {selectedItem.title}
+                  </h1>
+                  
+                  {/* Preço */}
+                  <div className="bg-purple-950/40 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6 mb-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        {selectedItem.oldPrice && (
+                          <p className="text-purple-300/60 line-through text-xl font-semibold mb-2">
+                            {selectedItem.oldPrice}
+                          </p>
+                        )}
+                        <p className="text-white font-black text-5xl mb-2">{selectedItem.price}</p>
+                        <p className="text-purple-200/80 text-base">À vista no PIX</p>
+                      </div>
+                      
+                      <div className="flex items-center gap-2 bg-green-500/90 backdrop-blur-sm px-5 py-3 rounded-xl">
+                        <TrendingDown size={24} className="text-white" />
+                        <span className="text-white font-black text-2xl">{selectedItem.discount}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Descrição */}
+                <div className="bg-purple-950/30 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-6">
+                  <h3 className="text-2xl font-black text-purple-300 mb-4">Características</h3>
+                  <div className="space-y-3">
+                    {selectedItem.description.map((desc, idx) => (
+                      <div key={idx} className="flex items-start gap-3 text-purple-100">
+                        <div className="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0 mt-2"></div>
+                        <span className="text-lg leading-relaxed">{desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Botão de Compra */}
+                <a 
+                  href={selectedItem.checkout} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white py-5 rounded-2xl font-black text-xl text-center transition-all transform hover:scale-105 shadow-2xl shadow-purple-500/50"
+                >
+                  🛒 Comprar Agora
+                </a>
+
+                {/* Informações adicionais */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-purple-950/30 backdrop-blur-sm border border-purple-500/20 rounded-xl p-4 text-center">
+                    <Shield className="w-8 h-8 text-purple-400 mx-auto mb-2" />
+                    <p className="text-sm font-bold text-purple-200">Conta Segura</p>
+                  </div>
+                  <div className="bg-purple-950/30 backdrop-blur-sm border border-purple-500/20 rounded-xl p-4 text-center">
+                    <Clock className="w-8 h-8 text-purple-400 mx-auto mb-2" />
+                    <p className="text-sm font-bold text-purple-200">Entrega Imediata</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Página principal (grid de produtos)
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Background */}
@@ -294,88 +475,6 @@ export default function Page() {
           <p className="text-purple-300/70 text-sm mb-2">© 2024 Dzn Efootball. Todos os direitos reservados.</p>
           <p className="text-purple-400 font-bold">Suporte 24H: @dznstore2026</p>
         </footer>
-
-        {/* Modal */}
-        {modalOpen && selectedItem && (
-          <div 
-            onClick={closeModal}
-            className="fixed inset-0 bg-black/90 backdrop-blur-xl z-[100] flex items-center justify-center p-4 animate-in fade-in duration-300"
-          >
-            <div 
-              onClick={(e) => e.stopPropagation()}
-              className="relative bg-gradient-to-br from-purple-900/60 via-pink-900/40 to-purple-800/60 backdrop-blur-2xl border-2 border-purple-500/40 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl shadow-purple-500/50 animate-in zoom-in-95 duration-300"
-            >
-              {/* Botão fechar */}
-              <button 
-                onClick={closeModal}
-                className="absolute top-4 right-4 z-10 bg-red-500/80 hover:bg-red-600 text-white p-3 rounded-full transition-all hover:scale-110"
-              >
-                <X size={24} />
-              </button>
-
-              <div className="grid md:grid-cols-2 gap-6 p-6">
-                {/* Imagem Grande */}
-                <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-950/50 to-pink-950/50">
-                  <img 
-                    src={selectedItem.image} 
-                    alt={selectedItem.title} 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                {/* Informações */}
-                <div className="flex flex-col justify-between">
-                  <div>
-                    <h2 className="text-3xl md:text-4xl font-black mb-4 bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
-                      {selectedItem.title}
-                    </h2>
-
-                    {/* Descrição completa */}
-                    <div className="space-y-3 mb-6">
-                      {selectedItem.description.map((desc, idx) => (
-                        <div key={idx} className="flex items-start gap-3 text-purple-100">
-                          <div className="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0 mt-2"></div>
-                          <span className="text-base leading-relaxed">{desc}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Preços */}
-                    <div className="bg-purple-950/40 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6 mb-6">
-                      <div className="flex items-center justify-between mb-3">
-                        <div>
-                          {selectedItem.oldPrice && (
-                            <p className="text-purple-300/60 line-through text-lg font-semibold mb-1">
-                              {selectedItem.oldPrice}
-                            </p>
-                          )}
-                          <p className="text-white font-black text-4xl">{selectedItem.price}</p>
-                          <p className="text-purple-200/80 text-sm mt-1">À vista no PIX</p>
-                        </div>
-                        
-                        {/* Badge de desconto */}
-                        <div className="flex items-center gap-2 bg-green-500/90 backdrop-blur-sm px-4 py-2 rounded-xl">
-                          <TrendingDown size={20} className="text-white" />
-                          <span className="text-white font-black text-xl">{selectedItem.discount}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Botão de compra */}
-                  <a 
-                    href={selectedItem.checkout} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white py-4 rounded-2xl font-black text-lg text-center transition-all transform hover:scale-105 shadow-2xl shadow-purple-500/50"
-                  >
-                    🛒 Comprar Agora
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
