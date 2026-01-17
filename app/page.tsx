@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -99,13 +100,17 @@ export default function Page() {
     },
     {
       id: 5,
-      title: 'A Conta Mais Zica',
+      title: 'Time Full - UMA DAS MELHORES CONTAS',
       price: 'R$ 139,99',
       oldPrice: 'R$ 200,00',
       discount: '30%',
-      description: ['Mais forte do eFootball', 'Messi 109 + Pelé + Ney', 'Defesa perfeita', '3286 de Força'],
-      images: ['https://i.imgur.com/oBYyxxm.png'],
-      checkout: 'https://lxpay.com.br/checkout/c0ebc04b-ba48-48ad-83ce-39aa49235af9?offer=e46ec93e-b3b3-4920-b5cf-419de9a0fda0',
+      description: ['Conta com Messi e Ibra 110', 'Gullit + Meio campo perfeito', 'Domine a partida com essa conta monstruosa', '3298 de Força Coletiva'],
+      images: [
+        'https://i.imgur.com/a513HQt.png',
+        'https://i.imgur.com/HV7a8gj.png',
+        'https://i.imgur.com/BThTm0i.png'
+      ],
+      checkout: 'https://lxpay.com.br/checkout/326b3d09-d159-4b54-9a6c-6477680ba97d?offer=1227ac46-b5ac-4963-b47b-c64223088abb',
     },
     {
       id: 6,
