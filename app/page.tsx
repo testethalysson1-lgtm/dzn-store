@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Search, Moon, Sun, Menu, X, ShoppingCart, Star, Zap, Shield, Clock, MessageCircle } from 'lucide-react';
+import { Search, Moon, Sun, Menu, X, ShoppingCart, Star, Zap, Shield, Clock, MessageCircle, TrendingDown } from 'lucide-react';
 
 type GameItem = {
   id: number;
@@ -12,6 +12,7 @@ type GameItem = {
   description: string[];
   image: string;
   checkout: string;
+  badge?: string;
 };
 
 export default function Page() {
@@ -20,17 +21,18 @@ export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<'mobile' | 'console'>('mobile');
 
-  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
   const toggleMenu = () => setMenuOpen(!menuOpen);
+  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
   const games: GameItem[] = [
     {
       id: 1,
-      title: 'Conta com Ney 107 - O BRABO',
+      title: 'Conta com Ney 107',
       price: 'R$ 24,99',
       oldPrice: 'R$ 49,99',
-      discount: 'OFERTA',
-      description: ['Ney 107 - Uma das melhores versões do Neymar!', 'Mbappe Showtime', 'Defesa Brutal', '3187 de Força Coletiva'],
+      discount: '50%',
+      badge: 'ESGOTADO',
+      description: ['Ney 107 - O BRABO', 'Mbappe Showtime', 'Defesa Brutal', '3187 de Força'],
       image: 'https://i.imgur.com/hny2adX.png',
       checkout: 'https://lxpay.com.br/checkout/7b46f4ca-f693-40ee-bb22-0f2a8d813e39?offer=2fddebe6-6b1c-4a76-b5e9-8071e7ab3986',
     },
@@ -39,48 +41,48 @@ export default function Page() {
       title: 'Conta com Ney Loiro',
       price: 'R$ 44,99',
       oldPrice: 'R$ 69,99',
-      discount: 'MAIS PROCURADO',
-      description: ['Ney Loiro - O mais Procurado', '3200 de Força Coletiva', 'O Messi mais raro do Jogo!', 'Defesa perfeita'],
+      discount: '36%',
+      description: ['Ney Loiro - O mais Procurado', '3200 de Força', 'Messi Raro', 'Defesa perfeita'],
       image: 'https://i.imgur.com/Dorftdg.png',
       checkout: 'https://lxpay.com.br/checkout/5dce45fe-ed54-4e52-9080-728591b9de22?offer=923129e7-56af-49d7-afab-b30c8dc849a7',
     },
     {
       id: 3,
-      title: 'O Quarteto fantástico - TIME IMPARÁVEL',
+      title: 'Quarteto Fantástico',
       price: 'R$ 69,99',
       oldPrice: 'R$ 79,99',
-      discount: 'POPULAR',
-      description: ['Ataque Fatal', 'As melhores cartas do Game', 'Time perfeito pra humilhar seu adversário', '3254 de Força Coletiva'],
+      discount: '13%',
+      description: ['TIME IMPARÁVEL', 'Ataque Fatal', 'Melhores cartas', '3254 de Força'],
       image: 'https://i.imgur.com/Puzm5lh.png',
       checkout: 'https://lxpay.com.br/checkout/6c94fa32-c867-45ad-a0b3-560f193469a4?offer=5360c6df-adae-4e16-87c9-3f46f5a649aa',
     },
     {
       id: 4,
-      title: 'Os Dribladores! Conta com Ney e Yamal',
+      title: 'Os Dribladores',
       price: 'R$ 74,99',
       oldPrice: 'R$ 99,99',
-      discount: 'FIRULAS',
-      description: ['Conta com Ney e Yamal', 'Pelé - O CA Matador', 'Conta perfeita pra quem gosta de FIRULAS!', '3255 de Força Coletiva'],
+      discount: '25%',
+      description: ['Ney e Yamal', 'Pelé CA Matador', 'Perfeito pra FIRULAS', '3255 de Força'],
       image: 'https://i.imgur.com/7JKhjLD.png',
       checkout: 'https://lxpay.com.br/checkout/c4671bf1-f71c-4009-b1e2-1c807481ce63?offer=828e6185-fd50-454b-96c2-15f85ed3057d',
     },
     {
       id: 5,
-      title: 'A conta mais Zica do jogo!',
+      title: 'A Conta Mais Zica',
       price: 'R$ 139,99',
       oldPrice: 'R$ 200,00',
-      discount: 'A MAIS FORTE',
-      description: ['Uma das mais fortes do eFootball', 'Novo Messi 109 + Pelé e Ney no Ataque', 'Meio campo e Defesa perfeitos', '3286 de Força Coletiva'],
+      discount: '30%',
+      description: ['Mais forte do eFootball', 'Messi 109 + Pelé + Ney', 'Defesa perfeita', '3286 de Força'],
       image: 'https://i.imgur.com/oBYyxxm.png',
       checkout: 'https://lxpay.com.br/checkout/c0ebc04b-ba48-48ad-83ce-39aa49235af9?offer=e46ec93e-b3b3-4920-b5cf-419de9a0fda0',
     },
     {
       id: 6,
-      title: 'A melhor conta que você já viu!',
+      title: 'A Melhor Conta',
       price: 'R$ 500,00',
       oldPrice: 'R$ 999,99',
-      discount: 'LENDÁRIA',
-      description: ['A melhor conta que você já viu!', 'Ataque mais perfeito do jogo', 'Novo Messi + Gullit', 'Meio campo e Defesa excelentes', '3301 de Força Coletiva'],
+      discount: '50%',
+      description: ['Melhor que você já viu', 'Ataque perfeito', 'Messi + Gullit', '3301 de Força'],
       image: 'https://i.imgur.com/VuBE0hE.png',
       checkout: 'https://lxpay.com.br/checkout/818d5b90-f9c9-4448-a890-c785cfc58a20?offer=093b7131-3d6a-450d-8604-6aad356ef1d9',
     },
@@ -89,143 +91,163 @@ export default function Page() {
   const consoleGames: GameItem[] = [
     {
       id: 1,
-      title: 'Conta com Cr7 + Pelé',
+      title: 'Cr7 + Pelé',
       price: 'R$ 54,99',
-      discount: 'DESTAQUE',
-      description: ['Conta com Cr7 e Pelé', 'Ataque brutal', 'Ronaldinho + meio campo excelente', '3230 de Força Coletiva'],
+      discount: '20%',
+      description: ['Cr7 e Pelé', 'Ataque brutal', 'Ronaldinho R10', '3230 de Força'],
       image: 'https://i.imgur.com/ncIXC5O.png',
       checkout: 'https://lxpay.com.br/checkout/b2c55cde-218b-4eb1-8800-d95f5dddf12f?offer=561e33ec-a213-4201-a63e-d4e2c86f775e',
     },
     {
       id: 2,
-      title: 'Melhor Ataque do Console!',
+      title: 'Melhor Ataque Console',
       price: 'R$ 79,99',
-      discount: 'MELHOR ATAQUE',
-      description: ['Melhor Ataque do Game!', 'Etoo + R10', 'Meio campo e Defesa excelentes', '3265 de Força Coletiva'],
+      discount: '35%',
+      description: ['Melhor Ataque do Game', 'Etoo + R10', 'Defesa excelente', '3265 de Força'],
       image: 'https://i.imgur.com/NLgzU3O.png',
       checkout: 'https://lxpay.com.br/checkout/b2c55cde-218b-4eb1-8800-d95f5dddf12f?offer=561e33ec-a213-4201-a63e-d4e2c86f775e',
     },
   ];
 
   const renderCard = (item: GameItem, index: number) => (
-    <div
-      key={item.id}
-      className="group rounded-xl md:rounded-3xl overflow-hidden bg-black/40 backdrop-blur-xl border-2 border-cyan-500/30 hover:border-cyan-400 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/50 transition-all duration-500"
-      style={{ animationDelay: `${index * 100}ms` }}
-    >
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
-        <img src={item.image} alt={item.title} className="h-40 md:h-72 w-full object-contain bg-gradient-to-br from-gray-900 to-black transform group-hover:scale-110 transition-transform duration-500" />
-        <div className="absolute top-2 md:top-4 right-2 md:right-4 z-20">
-          <span className="bg-gradient-to-r from-green-400 to-emerald-500 text-white px-2 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-black shadow-xl shadow-green-500/50 flex items-center gap-1 md:gap-2 border-2 border-green-300">
-            <Zap size={12} className="md:w-4 md:h-4" />
-            {item.discount}
-          </span>
+    <div key={item.id} className="relative group" style={{ animationDelay: `${index * 50}ms` }}>
+      <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-900/40 via-pink-900/30 to-purple-800/40 backdrop-blur-sm border border-purple-500/20 hover:border-purple-400/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/30">
+        
+        {/* Badge Esgotado */}
+        {item.badge && (
+          <div className="absolute top-3 left-3 z-20 bg-red-500/90 backdrop-blur-sm px-3 py-1 rounded-lg">
+            <span className="text-white font-black text-xs tracking-wider">{item.badge}</span>
+          </div>
+        )}
+        
+        {/* Imagem */}
+        <div className="relative h-44 bg-gradient-to-br from-purple-950/50 to-pink-950/50 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
+          <img src={item.image} alt={item.title} className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500" />
+          
+          {/* Logo/Marca sobreposta */}
+          <div className="absolute top-3 right-3 z-20 bg-purple-600/20 backdrop-blur-md px-3 py-1.5 rounded-xl border border-purple-400/30">
+            <span className="text-white font-black text-[10px] tracking-widest">DZN STORE</span>
+          </div>
         </div>
-      </div>
-      <div className="p-4 md:p-7">
-        <h3 className="text-base md:text-2xl font-black mb-2 md:mb-3 text-white group-hover:text-cyan-300 transition-colors">{item.title}</h3>
-        <div className="mb-3 md:mb-4 space-y-1 md:space-y-2">
-          {item.description.map((desc, idx) => (
-            <div key={idx} className="flex items-center gap-1.5 md:gap-2 text-cyan-200 text-xs md:text-sm">
-              <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-cyan-400 flex-shrink-0"></div>
-              <span>{desc}</span>
+
+        {/* Conteúdo */}
+        <div className="p-4 space-y-3">
+          <h3 className="text-white font-black text-sm uppercase tracking-wide leading-tight">{item.title}</h3>
+          
+          {/* Preços */}
+          <div className="flex items-center gap-2">
+            <div>
+              {item.oldPrice && (
+                <p className="text-purple-300/60 line-through text-xs font-semibold">{item.oldPrice}</p>
+              )}
+              <p className="text-white font-black text-xl">{item.price}</p>
+              <p className="text-purple-200/70 text-[10px]">À vista no PIX</p>
             </div>
-          ))}
+            
+            {/* Badge de desconto */}
+            <div className="ml-auto flex items-center gap-1 bg-green-500/90 backdrop-blur-sm px-2 py-1 rounded-lg">
+              <TrendingDown size={12} className="text-white" />
+              <span className="text-white font-black text-xs">{item.discount}</span>
+            </div>
+          </div>
+
+          {/* Botão */}
+          <a href={item.checkout} target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white py-2.5 rounded-xl font-black text-sm text-center transition-all transform hover:scale-105 shadow-lg shadow-purple-500/30">
+            Comprar
+          </a>
         </div>
-        <div className="mb-3 md:mb-5">
-          {item.oldPrice && <p className="text-sm md:text-xl text-cyan-300/60 line-through font-semibold mb-1">{item.oldPrice}</p>}
-          <p className="text-xl md:text-4xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">{item.price}</p>
-        </div>
-        <a href={item.checkout} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1.5 md:gap-3 w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white py-2.5 md:py-4 rounded-lg md:rounded-xl text-xs md:text-base font-black shadow-xl shadow-cyan-500/50 transition-all transform hover:scale-105 hover:shadow-2xl border-2 border-cyan-400/50 hover:border-cyan-300">
-          <ShoppingCart size={14} className="md:w-5 md:h-5" />
-          COMPRAR AGORA
-        </a>
       </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen text-white transition-all duration-500 bg-cover bg-center bg-fixed relative" style={{ backgroundImage: 'url(https://i.imgur.com/jQxZ45g.png)' }}>
-      <div className="fixed inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80 pointer-events-none z-0"></div>
-      <div className="fixed inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-cyan-600/10 pointer-events-none z-0 animate-pulse"></div>
+    <div className="min-h-screen bg-black text-white">
+      {/* Background */}
+      <div className="fixed inset-0 bg-gradient-to-br from-purple-950/50 via-black to-pink-950/30 pointer-events-none"></div>
+      
       <div className="relative z-10">
-        <header className="bg-black/40 backdrop-blur-xl border-b border-cyan-500/30 py-3 px-4 md:py-5 md:px-6 sticky top-0 z-50 shadow-lg shadow-cyan-500/10">
+        {/* Header */}
+        <header className="bg-black/80 backdrop-blur-xl border-b border-purple-500/20 py-3 px-4 sticky top-0 z-50">
           <div className="max-w-7xl mx-auto flex justify-between items-center">
-            <div className="flex items-center gap-2 md:gap-4 group">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl blur-lg opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                <img src="https://i.imgur.com/A2G2M5x.png" alt="Dzn Efootball" className="w-9 h-9 md:w-14 md:h-14 rounded-xl relative z-10 border-2 border-cyan-400/50 group-hover:border-cyan-400 transition-all transform group-hover:scale-110" />
-              </div>
-              <span className="text-base md:text-3xl font-black bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-lg">Dzn Efootball</span>
+            <div className="flex items-center gap-3">
+              <img src="https://i.imgur.com/A2G2M5x.png" alt="Dzn" className="w-10 h-10 rounded-xl border-2 border-purple-500/50" />
+              <span className="text-xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Dzn Store</span>
             </div>
-            <div className="flex items-center gap-2 order-first md:order-none">
-              <button onClick={toggleMenu} className="p-2 md:p-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 transition-all shadow-lg shadow-cyan-500/50 text-white transform hover:scale-105">
-                {menuOpen ? <X size={16} className="md:w-5 md:h-5" /> : <Menu size={16} className="md:w-5 md:h-5" />}
-              </button>
-            </div>
-            <button onClick={toggleTheme} className="p-2 md:p-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 transition-all shadow-lg shadow-purple-500/50 transform hover:scale-105">
-              {theme === 'dark' ? <Sun className="text-yellow-300" size={16} /> : <Moon className="text-blue-200" size={16} />}
+            
+            <button onClick={toggleMenu} className="p-2 rounded-xl bg-purple-600/20 border border-purple-500/30 hover:bg-purple-600/30 transition-all">
+              {menuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
+
           {menuOpen && (
-            <div className="mt-3 md:mt-6 p-3 md:p-6 rounded-xl md:rounded-2xl bg-black/60 backdrop-blur-xl border border-cyan-500/40 shadow-2xl shadow-cyan-500/20">
-              <div className="flex flex-col gap-2 md:gap-4">
-                <button onClick={() => { setActiveSection('mobile'); setMenuOpen(false); }} className={`px-4 py-2.5 md:px-8 md:py-4 rounded-lg md:rounded-xl text-xs md:text-base font-bold transition-all transform hover:scale-105 flex items-center gap-1.5 md:gap-2 ${activeSection === 'mobile' ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-xl shadow-cyan-500/50 border-2 border-cyan-400' : 'bg-gray-800/80 text-gray-300 hover:bg-gray-700/80 border-2 border-gray-600/50'}`}>
-                  <Zap size={14} className="md:w-5 md:h-5" />Mobile
+            <div className="mt-4 p-4 rounded-xl bg-purple-950/50 backdrop-blur-xl border border-purple-500/30">
+              <div className="flex flex-col gap-2">
+                <button onClick={() => { setActiveSection('mobile'); setMenuOpen(false); }} className={`px-6 py-3 rounded-xl font-bold text-sm transition-all ${activeSection === 'mobile' ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white' : 'bg-purple-900/30 text-purple-200 hover:bg-purple-900/50'}`}>
+                  📱 Mobile
                 </button>
-                <button onClick={() => { setActiveSection('console'); setMenuOpen(false); }} className={`px-4 py-2.5 md:px-8 md:py-4 rounded-lg md:rounded-xl text-xs md:text-base font-bold transition-all transform hover:scale-105 flex items-center gap-1.5 md:gap-2 ${activeSection === 'console' ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-xl shadow-cyan-500/50 border-2 border-cyan-400' : 'bg-gray-800/80 text-gray-300 hover:bg-gray-700/80 border-2 border-gray-600/50'}`}>
-                  <Star size={14} className="md:w-5 md:h-5" />Console
+                <button onClick={() => { setActiveSection('console'); setMenuOpen(false); }} className={`px-6 py-3 rounded-xl font-bold text-sm transition-all ${activeSection === 'console' ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white' : 'bg-purple-900/30 text-purple-200 hover:bg-purple-900/50'}`}>
+                  🎮 Console
                 </button>
               </div>
             </div>
           )}
         </header>
-        <section className="px-4 py-8 md:px-6 md:py-24 text-center max-w-5xl mx-auto">
-          <div className="mb-6 md:mb-16 transform hover:scale-105 transition-transform duration-500">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/30 to-blue-500/30 rounded-xl md:rounded-3xl blur-2xl"></div>
-              <img src="https://i.imgur.com/GQMBqhU.png" alt="Banner" className="w-full max-w-4xl mx-auto rounded-xl md:rounded-3xl shadow-2xl shadow-cyan-500/40 border-2 md:border-4 border-cyan-400/50 relative z-10" />
-            </div>
+
+        {/* Hero */}
+        <section className="px-4 py-8 text-center max-w-5xl mx-auto">
+          <div className="mb-8">
+            <img src="https://i.imgur.com/GQMBqhU.png" alt="Banner" className="w-full max-w-3xl mx-auto rounded-2xl shadow-2xl shadow-purple-500/20 border-2 border-purple-500/30" />
           </div>
-          <h1 className="text-2xl md:text-6xl lg:text-7xl font-black mb-3 md:mb-8 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-2xl">
-            {activeSection === 'mobile' ? '📱 Contas Mobile' : '🎮 Contas Console'}
+          
+          <h1 className="text-4xl md:text-6xl font-black mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+            {activeSection === 'mobile' ? 'Contas Mobile' : 'Contas Console'}
           </h1>
-          <p className="text-sm md:text-2xl mb-6 md:mb-12 text-cyan-200 font-semibold drop-shadow-lg px-2">
-            {activeSection === 'mobile' ? '🔥 As melhores contas do mercado | Entrega instantânea' : '🎯 Contas exclusivas para Console | Máximo desempenho'}
+          <p className="text-purple-200 mb-6 font-semibold">
+            🔥 As melhores contas | Entrega instantânea
           </p>
+
           <div className="relative max-w-2xl mx-auto">
-            <Search className="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 w-4 h-4 md:w-6 md:h-6 text-cyan-400 z-10" />
-            <input placeholder={activeSection === 'mobile' ? '🔍 Buscar contas mobile...' : '🔍 Buscar contas console...'} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full pl-10 md:pl-14 pr-3 md:pr-5 py-2.5 md:py-5 rounded-lg md:rounded-2xl text-sm md:text-lg border-2 outline-none bg-black/50 backdrop-blur-xl border-cyan-500/50 focus:border-cyan-400 placeholder-cyan-300/60 text-white shadow-xl relative z-10 transition-all" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-purple-400" />
+            <input placeholder="🔍 Buscar contas..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full pl-12 pr-4 py-3 rounded-xl border-2 outline-none bg-purple-950/30 backdrop-blur-xl border-purple-500/30 focus:border-purple-400 placeholder-purple-300/50 text-white transition-all" />
           </div>
         </section>
-        <section className="px-4 py-6 md:px-6 md:py-16 max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+
+        {/* Grid de Contas */}
+        <section className="px-4 py-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {(activeSection === 'mobile' ? games : consoleGames).map(renderCard)}
           </div>
         </section>
-        <section className="px-4 py-12 md:px-6 md:py-20 max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-5xl font-black text-center mb-8 md:mb-16 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">Perguntas Frequentes</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+
+        {/* FAQ */}
+        <section className="px-4 py-16 max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-black text-center mb-12 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            Perguntas Frequentes
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
-              { icon: ShoppingCart, color: 'cyan', title: 'Como funciona a compra no nosso site?', text: 'Basta escolher a conta em que você se interessou e clicar em comprar. Você será direcionado para a página de pagamento e lá tem a opção de colocar o seu gmail, esse gmail será usado pra transferência da conta via Konami ID e você irá receber todas as informações da entrega pelo gmail, só verificar sua caixa de gmail após a compra. Todas as nossas contas são apenas konami id para garantir a segurança do cliente.' },
-              { icon: Shield, color: 'cyan', title: 'Porque confiar na Dzn Store?', text: 'Somos um site verificado desde 2024 sempre buscando a satisfação dos nossos clientes. Mais de 200 clientes já compraram com a DZN STORE!' },
-              { icon: Clock, color: 'purple', title: 'Se eu comprar agora em quanto tempo recebo a conta?', text: 'Após a compra, você receberá em questão de segundos, verifique a sua caixa de entrada do Gmail!' },
-              { icon: MessageCircle, color: 'green', title: 'Tenho dúvidas ainda', text: 'Caso tenha mais alguma dúvida só chamar no nosso Instagram, a equipe Dzn estará 24H online pra atendê-lo no Instagram: @dznstore2026' }
+              { icon: ShoppingCart, title: 'Como funciona a compra?', text: 'Escolha a conta, clique em comprar e será direcionado para pagamento. Coloque seu Gmail para receber a transferência via Konami ID. Todas as contas são seguras!' },
+              { icon: Shield, title: 'Por que confiar na Dzn?', text: 'Somos verificados desde 2024, sempre buscando satisfação. Mais de 200 clientes já compraram!' },
+              { icon: Clock, title: 'Quanto tempo para receber?', text: 'Entrega em segundos! Verifique sua caixa de entrada do Gmail após a compra.' },
+              { icon: MessageCircle, title: 'Tem dúvidas?', text: 'Chame no Instagram! Equipe 24h online: @dznstore2026' }
             ].map((faq, i) => (
-              <div key={i} className={`group bg-black/40 backdrop-blur-xl border-2 border-cyan-500/30 hover:border-cyan-400 rounded-xl md:rounded-2xl p-5 md:p-8 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-${faq.color}-500/30`}>
-                <div className={`flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-${faq.color}-600 to-${faq.color === 'cyan' ? 'blue' : faq.color === 'purple' ? 'pink' : 'emerald'}-600 rounded-full mb-4 md:mb-6 mx-auto group-hover:scale-110 transition-transform`}>
+              <div key={i} className="bg-purple-950/30 backdrop-blur-xl border border-purple-500/20 rounded-2xl p-6 hover:border-purple-400/40 transition-all hover:scale-[1.02]">
+                <div className="flex items-center justify-center w-14 h-14 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full mb-4 mx-auto">
                   <faq.icon className="text-white" size={24} />
                 </div>
-                <h3 className={`text-base md:text-xl font-black text-${faq.color}-300 mb-2 md:mb-3 text-center`}>{faq.title}</h3>
-                <p className="text-xs md:text-sm text-cyan-100/80 text-center leading-relaxed">{faq.text}</p>
+                <h3 className="text-lg font-black text-purple-300 mb-2 text-center">{faq.title}</h3>
+                <p className="text-sm text-purple-100/70 text-center leading-relaxed">{faq.text}</p>
               </div>
             ))}
           </div>
         </section>
-        <footer className="bg-black/60 backdrop-blur-xl border-t border-cyan-500/30 py-6 md:py-12 text-center mt-8 md:mt-20 px-4">
-          <div className="text-cyan-300/70 font-semibold text-xs md:text-lg mb-2 md:mb-3">© 2024 Dzn Efootball. Todos os direitos reservados.</div>
-          <div className="text-cyan-400 font-bold text-xs md:text-lg">Suporte 24H no nosso Instagram @dznstore2026</div>
+
+        {/* Footer */}
+        <footer className="bg-black/80 backdrop-blur-xl border-t border-purple-500/20 py-8 text-center px-4">
+          <p className="text-purple-300/70 text-sm mb-2">© 2024 Dzn Efootball. Todos os direitos reservados.</p>
+          <p className="text-purple-400 font-bold">Suporte 24H: @dznstore2026</p>
         </footer>
       </div>
     </div>
