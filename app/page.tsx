@@ -447,24 +447,27 @@ export default function Page() {
         </header>
 
         {/* Hero */}
-        <section className="px-4 py-8 text-center max-w-5xl mx-auto">
-          <div className="mb-8">
-            <img src="https://i.imgur.com/BgCfgxK.png" alt="Banner" className="w-full mx-auto rounded-2xl shadow-2xl shadow-purple-500/20 border-2 border-purple-500/30 object-cover" />
+        <section className="py-8 text-center">
+          <div className="mb-8 px-4">
+            <img src="https://i.imgur.com/BgCfgxK.png" alt="Banner" className="w-full max-w-7xl mx-auto rounded-2xl shadow-2xl shadow-purple-500/20 border-2 border-purple-500/30 object-cover" />
           </div>
           
-          <h1 className="text-4xl md:text-6xl font-black mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
-            {activeSection === 'mobile' ? 'Contas Mobile' : 'Contas Console'}
-          </h1>
-          <p className="text-purple-200 mb-6 font-semibold">
-            🔥 As melhores contas | Entrega instantânea
-          </p>
+          <div className="max-w-5xl mx-auto px-4">
+            <h1 className="text-4xl md:text-6xl font-black mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+              {activeSection === 'mobile' ? 'Contas Mobile' : 'Contas Console'}
+            </h1>
+            <p className="text-purple-200 mb-6 font-semibold">
+              🔥 As melhores contas | Entrega instantânea
+            </p>
 
-          <div className="relative max-w-2xl mx-auto">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-purple-400" />
-            <input placeholder="🔍 Buscar contas..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full pl-12 pr-4 py-3 rounded-xl border-2 outline-none bg-purple-950/30 backdrop-blur-xl border-purple-500/30 focus:border-purple-400 placeholder-purple-300/50 text-white transition-all" />
+            <div className="relative max-w-2xl mx-auto">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-purple-400" />
+              <input placeholder="🔍 Buscar contas..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full pl-12 pr-4 py-3 rounded-xl border-2 outline-none bg-purple-950/30 backdrop-blur-xl border-purple-500/30 focus:border-purple-400 placeholder-purple-300/50 text-white transition-all" />
+            </div>
           </div>
         </section>
 
+        
         {/* Grid de Contas */}
         <section className="px-4 py-8 max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
