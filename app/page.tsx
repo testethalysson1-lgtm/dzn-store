@@ -59,7 +59,7 @@ export default function Page() {
       price: 'R$ 24,99',
       oldPrice: 'R$ 49,99',
       discount: '50%',
-      description: ['Conta perfeita pra quem está com pouca grana', 'Cr7 + Ibra + Iniesta', 'Meio campo ótimo', '3237 de Força Coletiva'],
+      description: ['Conta perfeita pra você que ta com pouco dinheiro', 'Cr7 + Ibra + Iniesta', 'Meio campo ótimo', '3237 de Força Coletiva'],
       images: [
         'https://i.imgur.com/wWWwhNM.png',
         'https://i.imgur.com/plUBEzZ.png',
@@ -70,7 +70,7 @@ export default function Page() {
     },
     {
       id: 2,
-      title: 'Conta com Ney Loiro + O Messi mais raro',
+      title: 'Ney Loiro + O Messi mais raro',
       price: 'R$ 44,99',
       oldPrice: 'R$ 69,99',
       discount: '36%',
@@ -135,7 +135,7 @@ export default function Page() {
       price: 'R$ 500,00',
       oldPrice: 'R$ 999,99',
       discount: '50%',
-      description: ['Melhor que você já viu', 'Ataque perfeito', 'Messi + Gullit', '3301 de Força'],
+      description: ['A Melhor conta que você já viu!', 'Ataque perfeito', 'Messi + Gullit', '3301 de Força'],
       images: [
         'https://i.imgur.com/VuBE0hE.png',
         'https://i.imgur.com/5TAUJ8X.png',
@@ -480,10 +480,10 @@ export default function Page() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
-              { icon: ShoppingCart, title: 'Como funciona a compra?', text: 'Escolha a conta, clique em comprar e será direcionado para pagamento. Coloque seu Gmail para receber a transferência via Konami ID. Todas as contas são seguras!' },
-              { icon: Shield, title: 'Por que confiar na Dzn?', text: 'Somos verificados desde 2024, sempre buscando satisfação. Mais de 200 clientes já compraram!' },
-              { icon: Clock, title: 'Quanto tempo para receber?', text: 'Entrega em segundos! Verifique sua caixa de entrada do Gmail após a compra.' },
-              { icon: MessageCircle, title: 'Tem dúvidas?', text: 'Chame no Instagram! Equipe 24h online: @dznstore2026' }
+              { icon: ShoppingCart, title: 'Como funciona a compra?', text: 'Escolha a conta que você quer comprar, clique em "comprar agora" e será direcionado para a página de pagamento. Preencha corretamente com seu nome e coloque seu Gmail, você vai receber o login da conta pelo seu gmail imediatamente após realizar o pagamento! Qualquer dúvida só mandar mensagem pro nosso suporte no Instagram. Todas as contas são Konami ID!' },
+              { icon: Shield, title: 'Por que confiar na Dzn?', text: 'Somos o único site de eFootball verificado desde 2023, sempre buscando satisfação dos nossos clientes. Mais de 400 clientes já compraram com o nosso site!' },
+              { icon: Clock, title: 'Quanto tempo para receber?', text: 'A entrega é feita em segundos após o pagamento, agilidade e segurança! Verifique sua caixa de entrada do Gmail após a compra.' },
+              { icon: MessageCircle, title: 'Tem dúvidas?', text: 'Chame no Instagram! Equipe 24h online: @dznefootball' }
             ].map((faq, i) => (
               <div key={i} className="bg-purple-950/30 backdrop-blur-xl border border-purple-500/20 rounded-2xl p-6 hover:border-purple-400/40 transition-all hover:scale-[1.02]">
                 <div className="flex items-center justify-center w-14 h-14 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full mb-4 mx-auto">
@@ -499,7 +499,7 @@ export default function Page() {
         {/* Footer */}
         <footer className="bg-black/80 backdrop-blur-xl border-t border-purple-500/20 py-8 text-center px-4">
           <p className="text-purple-300/70 text-sm mb-2">© 2024 Dzn Efootball. Todos os direitos reservados.</p>
-          <p className="text-purple-400 font-bold">Suporte 24H : @dznstore2026</p>
+          <p className="text-purple-400 font-bold">Suporte 24H : @dznefootball</p>
         </footer>
       </div>
     </div>
