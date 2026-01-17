@@ -449,7 +449,8 @@ export default function Page() {
         {/* Hero */}
         <section className="px-4 py-8 text-center max-w-5xl mx-auto">
           <div className="mb-8">
-            <img src="https://i.imgur.com/GQMBqhU.png" alt="Banner" className="w-full mx-auto rounded-2xl shadow-2xl shadow-purple-500/20 border-2 border-purple-500/30 object-cover" />
+            <img src="https://i.imgur.com/BgCfgxK.png" alt="Banner" className="w-full mx-auto rounded-2xl shadow-2xl shadow-purple-500/20 border-2 border-purple-500/30 object-cover" />
+          </div>
           
           <h1 className="text-4xl md:text-6xl font-black mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
             {activeSection === 'mobile' ? 'Contas Mobile' : 'Contas Console'}
