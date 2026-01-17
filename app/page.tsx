@@ -106,9 +106,14 @@ export default function Page() {
       price: 'R$ 74,99',
       oldPrice: 'R$ 99,99',
       discount: '25%',
-      description: ['Ney e Yamal', 'Pelé CA Matador', 'Perfeito pra FIRULAS', '3255 de Força'],
-      images: ['https://i.imgur.com/7JKhjLD.png'],
-      checkout: 'https://lxpay.com.br/checkout/c4671bf1-f71c-4009-b1e2-1c807481ce63?offer=828e6185-fd50-454b-96c2-15f85ed3057d',
+      description: ['Conta perfeita pra quem gosta de firula!', 'Ney + Bruxo no mesmo time', 'Goleiro 107 de Over + Defesa impecável', '3286 de Força Coletiva'],
+      images: [
+        'https://i.imgur.com/4MqMA51.png',
+        'https://i.imgur.com/ABBv0Yn.png',
+        'https://i.imgur.com/Jrp1nEt.png',
+        'https://i.imgur.com/QaKfNSp.png'
+      ],
+      checkout: 'https://lxpay.com.br/checkout/6b118082-acb5-41c2-999b-0eb101e1952c?offer=3e593cc4-9396-40c2-ae9c-08fcfb7a3b0d',
     },
     {
       id: 5,
@@ -494,7 +499,7 @@ export default function Page() {
         {/* Footer */}
         <footer className="bg-black/80 backdrop-blur-xl border-t border-purple-500/20 py-8 text-center px-4">
           <p className="text-purple-300/70 text-sm mb-2">© 2024 Dzn Efootball. Todos os direitos reservados.</p>
-          <p className="text-purple-400 font-bold">Suporte 24H: @dznstore2026</p>
+          <p className="text-purple-400 font-bold">Suporte 24H : @dznstore2026</p>
         </footer>
       </div>
     </div>
