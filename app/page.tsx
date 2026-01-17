@@ -447,26 +447,26 @@ export default function Page() {
         </header>
 
         {/* Hero */}
-        <section className="py-8 text-center">
-          <div className="mb-8">
+        <section className="py-6 text-center">
+          <div className="mb-6">
             <img src="https://i.imgur.com/BgCfgxK.png" alt="Banner" className="w-full object-cover" />
           </div>
           
           <div className="max-w-5xl mx-auto px-4">
-            <h1 className="text-4xl md:text-6xl font-black mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-black mb-3 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
               {activeSection === 'mobile' ? 'Contas Mobile' : 'Contas Console'}
             </h1>
-            <p className="text-purple-200 mb-6 font-semibold">
+            <p className="text-purple-200 mb-4 font-semibold">
               🔥 CONTAS DISPONÍVEIS LOGO ABAIXO 🔥
             </p>
             
             {/* Linha vermelha separadora */}
-            <div className="w-full h-1 bg-gradient-to-r from-red-500 via-red-600 to-red-500 rounded-full my-6 shadow-lg shadow-red-500/50"></div>
+            <div className="w-full h-1 bg-gradient-to-r from-red-500 via-red-600 to-red-500 rounded-full my-4 shadow-lg shadow-red-500/50"></div>
           </div>
         </section>
 
         {/* Grid de Contas */}
-        <section className="px-4 py-2 max-w-7xl mx-auto">
+        <section className="px-4 pt-0 pb-8 max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {(activeSection === 'mobile' ? games : consoleGames).map(renderCard)}
           </div>
