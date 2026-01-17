@@ -70,7 +70,7 @@ export default function Page() {
     },
     {
       id: 2,
-      title: 'Conta com Ney Loiro',
+      title: 'Conta com Ney Loiro + O Messi mais raro',
       price: 'R$ 44,99',
       oldPrice: 'R$ 69,99',
       discount: '36%',
@@ -131,7 +131,7 @@ export default function Page() {
     },
     {
       id: 6,
-      title: 'A Melhor Conta',
+      title: 'A conta mais bizarra do jogo!',
       price: 'R$ 500,00',
       oldPrice: 'R$ 999,99',
       discount: '50%',
@@ -271,7 +271,7 @@ export default function Page() {
               </button>
               
               <div className="flex items-center gap-3">
-                <img src="https://i.imgur.com/A2G2M5x.png" alt="Dzn" className="w-10 h-10 rounded-xl border-2 border-purple-500/50" />
+                <img src="https://i.imgur.com/ZRTzneV.png" alt="Dzn" className="w-10 h-10 rounded-xl border-2 border-purple-500/50" />
                 <span className="text-xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Dzn Store</span>
               </div>
             </div>
@@ -423,7 +423,7 @@ export default function Page() {
         <header className="bg-black/80 backdrop-blur-xl border-b border-purple-500/20 py-3 px-4 sticky top-0 z-50">
           <div className="max-w-7xl mx-auto flex justify-between items-center">
             <div className="flex items-center gap-3">
-              <img src="https://i.imgur.com/A2G2M5x.png" alt="Dzn" className="w-10 h-10 rounded-xl border-2 border-purple-500/50" />
+              <img src="https://i.imgur.com/ZRTzneV.png" alt="Dzn" className="w-10 h-10 rounded-xl border-2 border-purple-500/50" />
               <span className="text-xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Dzn Store</span>
             </div>
             
