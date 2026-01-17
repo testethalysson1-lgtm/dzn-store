@@ -446,7 +446,7 @@ export default function Page() {
           )}
         </header>
 
-        {/* Hero */}
+typescriptreact        {/* Hero */}
         <section className="py-8 text-center">
           <div className="mb-8">
             <img src="https://i.imgur.com/BgCfgxK.png" alt="Banner" className="w-full object-cover" />
@@ -464,6 +464,13 @@ export default function Page() {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-purple-400" />
               <input placeholder="🔍 Buscar contas..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full pl-12 pr-4 py-3 rounded-xl border-2 outline-none bg-purple-950/30 backdrop-blur-xl border-purple-500/30 focus:border-purple-400 placeholder-purple-300/50 text-white transition-all" />
             </div>
+          </div>
+        </section>
+        
+        {/* Grid de Contas */}
+        <section className="px-4 py-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {(activeSection === 'mobile' ? games : consoleGames).map(renderCard)}
           </div>
         </section>
 
