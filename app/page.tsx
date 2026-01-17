@@ -459,11 +459,14 @@ export default function Page() {
             <p className="text-purple-200 mb-6 font-semibold">
               🔥 As melhores contas | Entrega instantânea
             </p>
+            
+            {/* Linha vermelha separadora */}
+            <div className="w-full h-1 bg-gradient-to-r from-red-500 via-red-600 to-red-500 rounded-full my-6 shadow-lg shadow-red-500/50"></div>
           </div>
         </section>
-        
+
         {/* Grid de Contas */}
-        <section className="px-4 py-8 max-w-7xl mx-auto">
+        <section className="px-4 py-2 max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {(activeSection === 'mobile' ? games : consoleGames).map(renderCard)}
           </div>
