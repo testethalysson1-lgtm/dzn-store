@@ -397,7 +397,7 @@ export default function Page() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-purple-950/30 backdrop-blur-sm border border-purple-500/20 rounded-xl p-4 text-center">
                     <Shield className="w-8 h-8 text-purple-400 mx-auto mb-2" />
-                    <p className="text-sm font-bold text-purple-200">Conta Segura</p>
+                    <p className="text-sm font-bold text-purple-200">Compra Segura</p>
                   </div>
                   <div className="bg-purple-950/30 backdrop-blur-sm border border-purple-500/20 rounded-xl p-4 text-center">
                     <Clock className="w-8 h-8 text-purple-400 mx-auto mb-2" />
