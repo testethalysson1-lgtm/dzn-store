@@ -257,11 +257,11 @@ export default function Page() {
               {/* Galeria de Imagens */}
               <div className="space-y-4">
                 {/* Imagem Principal */}
-                <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-950/50 to-pink-950/50 aspect-square">
+                <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-950/50 to-pink-950/50 aspect-square flex items-center justify-center p-4">
                   <img 
                     src={selectedItem.images[currentImageIndex]} 
                     alt={selectedItem.title}
-                    className="w-full h-full object-cover"
+                    className="max-w-full max-h-full object-contain"
                   />
                   
                   {/* Controles de navegação */}
