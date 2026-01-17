@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -21,10 +22,20 @@ export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<'mobile' | 'console'>('mobile');
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<GameItem | null>(null);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
   const toggleCard = (id: number) => setExpandedCard(expandedCard === id ? null : id);
+  const openModal = (item: GameItem) => {
+    setSelectedItem(item);
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedItem(null);
+  };
 
   const games: GameItem[] = [
     {
@@ -33,7 +44,6 @@ export default function Page() {
       price: 'R$ 24,99',
       oldPrice: 'R$ 49,99',
       discount: '50%',
-      badge: 'ESGOTADO',
       description: ['Ney 107 - O BRABO', 'Mbappe Showtime', 'Defesa Brutal', '3187 de Força'],
       image: 'https://i.imgur.com/hny2adX.png',
       checkout: 'https://lxpay.com.br/checkout/7b46f4ca-f693-40ee-bb22-0f2a8d813e39?offer=2fddebe6-6b1c-4a76-b5e9-8071e7ab3986',
@@ -116,7 +126,7 @@ export default function Page() {
     
     return (
       <div key={item.id} className="relative group" style={{ animationDelay: `${index * 50}ms` }}>
-        <div className={`relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-900/40 via-pink-900/30 to-purple-800/40 backdrop-blur-sm border border-purple-500/20 hover:border-purple-400/50 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/30 ${isExpanded ? 'md:col-span-2 md:row-span-2' : ''}`}>
+        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-900/40 via-pink-900/30 to-purple-800/40 backdrop-blur-sm border border-purple-500/20 hover:border-purple-400/50 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/30">
           
           {/* Badge Esgotado */}
           {item.badge && (
@@ -127,41 +137,34 @@ export default function Page() {
           
           {/* Imagem - Clicável */}
           <div 
-            onClick={() => toggleCard(item.id)}
-            className={`relative bg-gradient-to-br from-purple-950/50 to-pink-950/50 overflow-hidden cursor-pointer transition-all duration-500 ${isExpanded ? 'h-72 md:h-96' : 'h-44'}`}
+            onClick={() => openModal(item)}
+            className="relative h-44 bg-gradient-to-br from-purple-950/50 to-pink-950/50 overflow-hidden cursor-pointer"
           >
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
-            <img src={item.image} alt={item.title} className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500" />
+            <img src={item.image} alt={item.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
             
             {/* Logo/Marca sobreposta */}
             <div className="absolute top-3 right-3 z-20 bg-purple-600/20 backdrop-blur-md px-3 py-1.5 rounded-xl border border-purple-400/30">
               <span className="text-white font-black text-[10px] tracking-widest">DZN STORE</span>
             </div>
-            
-            {/* Indicador de expansão */}
-            {!isExpanded && (
-              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 bg-purple-600/80 backdrop-blur-sm px-3 py-1 rounded-full animate-pulse">
-                <span className="text-white font-bold text-xs">👆 Ver Detalhes</span>
-              </div>
-            )}
           </div>
 
           {/* Conteúdo */}
           <div className="p-4 space-y-3">
             <h3 
               onClick={() => toggleCard(item.id)}
-              className={`text-white font-black uppercase tracking-wide leading-tight cursor-pointer hover:text-purple-300 transition-all duration-300 ${isExpanded ? 'text-lg md:text-2xl' : 'text-sm'}`}
+              className="text-white font-black text-sm uppercase tracking-wide leading-tight cursor-pointer hover:text-purple-300 transition-colors"
             >
               {item.title}
             </h3>
             
             {/* Descrição expandível */}
-            <div className={`overflow-hidden transition-all duration-500 ${isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-              <div className="space-y-2 mb-4 pt-3 border-t border-purple-500/20">
+            <div className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+              <div className="space-y-2 mb-3 pt-2 border-t border-purple-500/20">
                 {item.description.map((desc, idx) => (
-                  <div key={idx} className={`flex items-start gap-2 text-purple-200 transition-all duration-300 ${isExpanded ? 'text-sm md:text-base' : 'text-xs'}`}>
-                    <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex-shrink-0 mt-1.5"></div>
-                    <span className="leading-relaxed font-medium">{desc}</span>
+                  <div key={idx} className="flex items-start gap-2 text-purple-200 text-xs">
+                    <div className="w-1.5 h-1.5 rounded-full bg-purple-400 flex-shrink-0 mt-1"></div>
+                    <span className="leading-relaxed">{desc}</span>
                   </div>
                 ))}
               </div>
@@ -171,16 +174,16 @@ export default function Page() {
             <div className="flex items-center gap-2">
               <div>
                 {item.oldPrice && (
-                  <p className={`text-purple-300/60 line-through font-semibold transition-all duration-300 ${isExpanded ? 'text-sm md:text-base' : 'text-xs'}`}>{item.oldPrice}</p>
+                  <p className="text-purple-300/60 line-through text-xs font-semibold">{item.oldPrice}</p>
                 )}
-                <p className={`text-white font-black transition-all duration-300 ${isExpanded ? 'text-2xl md:text-3xl' : 'text-xl'}`}>{item.price}</p>
-                <p className={`text-purple-200/70 transition-all duration-300 ${isExpanded ? 'text-xs' : 'text-[10px]'}`}>À vista no PIX</p>
+                <p className="text-white font-black text-xl">{item.price}</p>
+                <p className="text-purple-200/70 text-[10px]">À vista no PIX</p>
               </div>
               
               {/* Badge de desconto */}
-              <div className={`ml-auto flex items-center gap-1 bg-green-500/90 backdrop-blur-sm rounded-lg transition-all duration-300 ${isExpanded ? 'px-3 py-2' : 'px-2 py-1'}`}>
-                <TrendingDown size={isExpanded ? 16 : 12} className="text-white" />
-                <span className={`text-white font-black transition-all duration-300 ${isExpanded ? 'text-sm' : 'text-xs'}`}>{item.discount}</span>
+              <div className="ml-auto flex items-center gap-1 bg-green-500/90 backdrop-blur-sm px-2 py-1 rounded-lg">
+                <TrendingDown size={12} className="text-white" />
+                <span className="text-white font-black text-xs">{item.discount}</span>
               </div>
             </div>
 
@@ -188,18 +191,18 @@ export default function Page() {
             <div className="space-y-2">
               <button
                 onClick={() => toggleCard(item.id)}
-                className={`w-full bg-purple-700/30 hover:bg-purple-700/50 text-purple-200 rounded-xl font-bold text-center transition-all border border-purple-500/30 ${isExpanded ? 'py-3 text-sm' : 'py-2 text-xs'}`}
+                className="w-full bg-purple-700/30 hover:bg-purple-700/50 text-purple-200 py-2 rounded-xl font-bold text-xs text-center transition-all border border-purple-500/30"
               >
-                {isExpanded ? '⬆️ Ver Menos' : '⬇️ Ver Detalhes'}
+                {isExpanded ? 'Ver Menos' : 'Ver Detalhes'}
               </button>
               
               <a 
                 href={item.checkout} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className={`block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-xl font-black text-center transition-all transform hover:scale-105 shadow-lg shadow-purple-500/30 ${isExpanded ? 'py-3 text-base' : 'py-2.5 text-sm'}`}
+                className="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white py-2.5 rounded-xl font-black text-sm text-center transition-all transform hover:scale-105 shadow-lg shadow-purple-500/30"
               >
-                🛒 Comprar Agora
+                Comprar
               </a>
             </div>
           </div>
@@ -296,6 +299,93 @@ export default function Page() {
           <p className="text-purple-300/70 text-sm mb-2">© 2024 Dzn Efootball. Todos os direitos reservados.</p>
           <p className="text-purple-400 font-bold">Suporte 24H: @dznstore2026</p>
         </footer>
+
+        {/* Modal */}
+        {modalOpen && selectedItem && (
+          <div 
+            onClick={closeModal}
+            className="fixed inset-0 bg-black/90 backdrop-blur-xl z-[100] flex items-center justify-center p-4 animate-in fade-in duration-300"
+          >
+            <div 
+              onClick={(e) => e.stopPropagation()}
+              className="relative bg-gradient-to-br from-purple-900/60 via-pink-900/40 to-purple-800/60 backdrop-blur-2xl border-2 border-purple-500/40 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl shadow-purple-500/50 animate-in zoom-in-95 duration-300"
+            >
+              {/* Botão fechar */}
+              <button 
+                onClick={closeModal}
+                className="absolute top-4 right-4 z-10 bg-red-500/80 hover:bg-red-600 text-white p-3 rounded-full transition-all hover:scale-110"
+              >
+                <X size={24} />
+              </button>
+
+              <div className="grid md:grid-cols-2 gap-6 p-6">
+                {/* Imagem Grande */}
+                <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-950/50 to-pink-950/50">
+                  <img 
+                    src={selectedItem.image} 
+                    alt={selectedItem.title} 
+                    className="w-full h-full object-cover"
+                  />
+                  
+                  {/* Logo sobreposta */}
+                  <div className="absolute top-4 right-4 bg-purple-600/30 backdrop-blur-md px-4 py-2 rounded-xl border border-purple-400/40">
+                    <span className="text-white font-black text-sm tracking-widest">DZN STORE</span>
+                  </div>
+                </div>
+
+                {/* Informações */}
+                <div className="flex flex-col justify-between">
+                  <div>
+                    <h2 className="text-3xl md:text-4xl font-black mb-4 bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
+                      {selectedItem.title}
+                    </h2>
+
+                    {/* Descrição completa */}
+                    <div className="space-y-3 mb-6">
+                      {selectedItem.description.map((desc, idx) => (
+                        <div key={idx} className="flex items-start gap-3 text-purple-100">
+                          <div className="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0 mt-2"></div>
+                          <span className="text-base leading-relaxed">{desc}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Preços */}
+                    <div className="bg-purple-950/40 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6 mb-6">
+                      <div className="flex items-center justify-between mb-3">
+                        <div>
+                          {selectedItem.oldPrice && (
+                            <p className="text-purple-300/60 line-through text-lg font-semibold mb-1">
+                              {selectedItem.oldPrice}
+                            </p>
+                          )}
+                          <p className="text-white font-black text-4xl">{selectedItem.price}</p>
+                          <p className="text-purple-200/80 text-sm mt-1">À vista no PIX</p>
+                        </div>
+                        
+                        {/* Badge de desconto */}
+                        <div className="flex items-center gap-2 bg-green-500/90 backdrop-blur-sm px-4 py-2 rounded-xl">
+                          <TrendingDown size={20} className="text-white" />
+                          <span className="text-white font-black text-xl">{selectedItem.discount}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Botão de compra */}
+                  <a 
+                    href={selectedItem.checkout} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white py-4 rounded-2xl font-black text-lg text-center transition-all transform hover:scale-105 shadow-2xl shadow-purple-500/50"
+                  >
+                    🛒 Comprar Agora
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
