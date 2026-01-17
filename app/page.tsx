@@ -149,24 +149,37 @@ export default function Page() {
   const consoleGames: GameItem[] = [
     {
       id: 1,
-      title: 'Cr7 + Pelé',
-      price: 'R$ 54,99',
-      discount: '20%',
-      description: ['Cr7 e Pelé', 'Ataque brutal', 'Ronaldinho R10', '3230 de Força'],
-      images: ['https://i.imgur.com/ncIXC5O.png'],
-      checkout: 'https://lxpay.com.br/checkout/b2c55cde-218b-4eb1-8800-d95f5dddf12f?offer=561e33ec-a213-4201-a63e-d4e2c86f775e',
+      title: 'Conta com Messi + Pelé - CONSOLE',
+      price: 'R$ 59,99',
+      oldPrice: 'R$ 79,99',
+      discount: '25%',
+      description: ['Conta com o novo Messi', 'Pelé + Neymar no ataque', 'R10 - O Bruxo das firulas', 'Conta perfeita pra dominar a partida', '3256 de Força Coletiva'],
+      images: [
+        'https://i.imgur.com/m7Clk2e.png',
+        'https://i.imgur.com/YAB6neJ.png',
+        'https://i.imgur.com/EwyWRJO.png',
+        'https://i.imgur.com/vf9SCth.png',
+        'https://i.imgur.com/gcbW42u.png'
+      ],
+      checkout: 'https://lxpay.com.br/checkout/e7c5d97f-9c5f-4029-96d1-07f32df0e163?offer=8f0c58c3-1392-4b10-8290-f7aa8409d470',
     },
     {
       id: 2,
-      title: 'Melhor Ataque Console',
-      price: 'R$ 79,99',
-      discount: '35%',
-      description: ['Melhor Ataque do Game', 'Etoo + R10', 'Defesa excelente', '3265 de Força'],
-      images: ['https://i.imgur.com/NLgzU3O.png'],
-      checkout: 'https://lxpay.com.br/checkout/b2c55cde-218b-4eb1-8800-d95f5dddf12f?offer=561e33ec-a213-4201-a63e-d4e2c86f775e',
+      title: 'A mais Top do Console - MELHOR ELENCO',
+      price: 'R$ 84,99',
+      oldPrice: 'R$ 104,99',
+      discount: '19%',
+      description: ['Uma das melhores contas de console', 'Ataque + Defesa perfeitos', 'Domine o jogo com esse elenco!', '3280 de Força Coletiva'],
+      images: [
+        'https://i.imgur.com/b4N6zH0.png',
+        'https://i.imgur.com/pUO4URa.png',
+        'https://i.imgur.com/PPuMAIX.png',
+        'https://i.imgur.com/GsT5XAs.png',
+        'https://i.imgur.com/ljC5Jnh.png'
+      ],
+      checkout: 'https://lxpay.com.br/checkout/e8737544-4c6c-4aa1-b971-f475abd34479?offer=7205b71c-8805-4cf3-9d18-da281e024ddd',
     },
   ];
-
   const renderCard = (item: GameItem, index: number) => {
     const isExpanded = expandedCard === item.id;
     
