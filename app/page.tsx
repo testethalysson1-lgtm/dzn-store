@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -55,13 +54,18 @@ export default function Page() {
   const games: GameItem[] = [
     {
       id: 1,
-      title: 'Conta com Ney 107',
+      title: 'Conta com CR7 + Iniesta',
       price: 'R$ 24,99',
       oldPrice: 'R$ 49,99',
       discount: '50%',
-      description: ['Ney 107 - O BRABO', 'Mbappe Showtime', 'Defesa Brutal', '3187 de Força'],
-      images: ['https://i.imgur.com/hny2adX.png'],
-      checkout: 'https://lxpay.com.br/checkout/7b46f4ca-f693-40ee-bb22-0f2a8d813e39?offer=2fddebe6-6b1c-4a76-b5e9-8071e7ab3986',
+      description: ['Conta perfeita pra quem está com pouca grana', 'Cr7 + Ibra + Iniesta', 'Meio campo ótimo', '3237 de Força Coletiva'],
+      images: [
+        'https://i.imgur.com/wWWwhNM.png',
+        'https://i.imgur.com/plUBEzZ.png',
+        'https://i.imgur.com/0UBGHPy.png',
+        'https://i.imgur.com/jSL1AX8.png'
+      ],
+      checkout: 'https://lxpay.com.br/checkout/f7233f4f-ba51-4b7f-93a5-ea6bb33a663f?offer=ce3cf6c0-370e-47e1-a529-943ecc0ac4f9',
     },
     {
       id: 2,
