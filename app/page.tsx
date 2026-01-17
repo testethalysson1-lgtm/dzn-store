@@ -142,11 +142,6 @@ export default function Page() {
           >
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
             <img src={item.image} alt={item.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
-            
-            {/* Logo/Marca sobreposta */}
-            <div className="absolute top-3 right-3 z-20 bg-purple-600/20 backdrop-blur-md px-3 py-1.5 rounded-xl border border-purple-400/30">
-              <span className="text-white font-black text-[10px] tracking-widest">DZN STORE</span>
-            </div>
           </div>
 
           {/* Conteúdo */}
@@ -326,11 +321,6 @@ export default function Page() {
                     alt={selectedItem.title} 
                     className="w-full h-full object-cover"
                   />
-                  
-                  {/* Logo sobreposta */}
-                  <div className="absolute top-4 right-4 bg-purple-600/30 backdrop-blur-md px-4 py-2 rounded-xl border border-purple-400/40">
-                    <span className="text-white font-black text-sm tracking-widest">DZN STORE</span>
-                  </div>
                 </div>
 
                 {/* Informações */}
