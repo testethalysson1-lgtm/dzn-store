@@ -457,7 +457,7 @@ export default function Page() {
               {activeSection === 'mobile' ? 'Contas Mobile' : 'Contas Console'}
             </h1>
             <p className="text-purple-200 mb-6 font-semibold">
-              🔥 As melhores contas | Entrega instantânea
+              🔥 CONTAS DISPONÍVEIS LOGO ABAIXO 🔥
             </p>
             
             {/* Linha vermelha separadora */}
