@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -80,13 +79,18 @@ export default function Page() {
     },
     {
       id: 3,
-      title: 'Quarteto Fantástico',
+      title: 'O QUARTETO FANTÁSTICO',
       price: 'R$ 69,99',
       oldPrice: 'R$ 79,99',
       discount: '13%',
-      description: ['TIME IMPARÁVEL', 'Ataque Fatal', 'Melhores cartas', '3254 de Força'],
-      images: ['https://i.imgur.com/Puzm5lh.png'],
-      checkout: 'https://lxpay.com.br/checkout/6c94fa32-c867-45ad-a0b3-560f193469a4?offer=5360c6df-adae-4e16-87c9-3f46f5a649aa',
+      description: ['Neymar | Ronaldinho | Dembele', 'Vitinha dominando o meio campo', 'Zaga excelente', '3231 de Força Coletiva'],
+      images: [
+        'https://i.imgur.com/BAn0vIC.png',
+        'https://i.imgur.com/TshbKKK.png',
+        'https://i.imgur.com/3YxQzKR.png',
+        'https://i.imgur.com/1C3LZNL.png'
+      ],
+      checkout: 'https://lxpay.com.br/checkout/e7c1cfe1-4971-4ffa-991d-f44be1b34488?offer=b0156aa7-54cc-47eb-b482-81534cfbf721',
     },
     {
       id: 4,
