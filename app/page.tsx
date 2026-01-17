@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -73,9 +74,16 @@ export default function Page() {
       price: 'R$ 44,99',
       oldPrice: 'R$ 69,99',
       discount: '36%',
-      description: ['Ney Loiro - O mais Procurado', '3200 de Força', 'Messi Raro', 'Defesa perfeita'],
-      images: ['https://i.imgur.com/Dorftdg.png'],
-      checkout: 'https://lxpay.com.br/checkout/5dce45fe-ed54-4e52-9080-728591b9de22?offer=923129e7-56af-49d7-afab-b30c8dc849a7',
+      description: ['Conta com Ney Loiro + Messi mais raro', 'Diversos jogadores antigos', 'Uma das reliquias do game', 'Perfeita pra quem gosta de coleção antiga', '3206+ de Força Coletiva'],
+      images: [
+        'https://i.imgur.com/z9qqw53.png',
+        'https://i.imgur.com/mibK0Wn.png',
+        'https://i.imgur.com/3toi3lr.png',
+        'https://i.imgur.com/u9JKv0c.png',
+        'https://i.imgur.com/sYr80bX.png',
+        'https://i.imgur.com/EUNPz3t.png'
+      ],
+      checkout: 'https://lxpay.com.br/checkout/182fa30d-84fc-471a-a81a-53bb31344242?offer=ad8947ba-5c33-45bf-bb81-3a65766c51a4',
     },
     {
       id: 3,
