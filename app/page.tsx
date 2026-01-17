@@ -116,7 +116,7 @@ export default function Page() {
     
     return (
       <div key={item.id} className="relative group" style={{ animationDelay: `${index * 50}ms` }}>
-        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-900/40 via-pink-900/30 to-purple-800/40 backdrop-blur-sm border border-purple-500/20 hover:border-purple-400/50 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/30">
+        <div className={`relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-900/40 via-pink-900/30 to-purple-800/40 backdrop-blur-sm border border-purple-500/20 hover:border-purple-400/50 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/30 ${isExpanded ? 'md:col-span-2 md:row-span-2' : ''}`}>
           
           {/* Badge Esgotado */}
           {item.badge && (
@@ -128,7 +128,7 @@ export default function Page() {
           {/* Imagem - Clicável */}
           <div 
             onClick={() => toggleCard(item.id)}
-            className="relative h-44 bg-gradient-to-br from-purple-950/50 to-pink-950/50 overflow-hidden cursor-pointer"
+            className={`relative bg-gradient-to-br from-purple-950/50 to-pink-950/50 overflow-hidden cursor-pointer transition-all duration-500 ${isExpanded ? 'h-72 md:h-96' : 'h-44'}`}
           >
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
             <img src={item.image} alt={item.title} className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500" />
@@ -137,24 +137,31 @@ export default function Page() {
             <div className="absolute top-3 right-3 z-20 bg-purple-600/20 backdrop-blur-md px-3 py-1.5 rounded-xl border border-purple-400/30">
               <span className="text-white font-black text-[10px] tracking-widest">DZN STORE</span>
             </div>
+            
+            {/* Indicador de expansão */}
+            {!isExpanded && (
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 bg-purple-600/80 backdrop-blur-sm px-3 py-1 rounded-full animate-pulse">
+                <span className="text-white font-bold text-xs">👆 Ver Detalhes</span>
+              </div>
+            )}
           </div>
 
           {/* Conteúdo */}
           <div className="p-4 space-y-3">
             <h3 
               onClick={() => toggleCard(item.id)}
-              className="text-white font-black text-sm uppercase tracking-wide leading-tight cursor-pointer hover:text-purple-300 transition-colors"
+              className={`text-white font-black uppercase tracking-wide leading-tight cursor-pointer hover:text-purple-300 transition-all duration-300 ${isExpanded ? 'text-lg md:text-2xl' : 'text-sm'}`}
             >
               {item.title}
             </h3>
             
             {/* Descrição expandível */}
-            <div className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-              <div className="space-y-2 mb-3 pt-2 border-t border-purple-500/20">
+            <div className={`overflow-hidden transition-all duration-500 ${isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+              <div className="space-y-2 mb-4 pt-3 border-t border-purple-500/20">
                 {item.description.map((desc, idx) => (
-                  <div key={idx} className="flex items-start gap-2 text-purple-200 text-xs">
-                    <div className="w-1.5 h-1.5 rounded-full bg-purple-400 flex-shrink-0 mt-1"></div>
-                    <span className="leading-relaxed">{desc}</span>
+                  <div key={idx} className={`flex items-start gap-2 text-purple-200 transition-all duration-300 ${isExpanded ? 'text-sm md:text-base' : 'text-xs'}`}>
+                    <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex-shrink-0 mt-1.5"></div>
+                    <span className="leading-relaxed font-medium">{desc}</span>
                   </div>
                 ))}
               </div>
@@ -164,16 +171,16 @@ export default function Page() {
             <div className="flex items-center gap-2">
               <div>
                 {item.oldPrice && (
-                  <p className="text-purple-300/60 line-through text-xs font-semibold">{item.oldPrice}</p>
+                  <p className={`text-purple-300/60 line-through font-semibold transition-all duration-300 ${isExpanded ? 'text-sm md:text-base' : 'text-xs'}`}>{item.oldPrice}</p>
                 )}
-                <p className="text-white font-black text-xl">{item.price}</p>
-                <p className="text-purple-200/70 text-[10px]">À vista no PIX</p>
+                <p className={`text-white font-black transition-all duration-300 ${isExpanded ? 'text-2xl md:text-3xl' : 'text-xl'}`}>{item.price}</p>
+                <p className={`text-purple-200/70 transition-all duration-300 ${isExpanded ? 'text-xs' : 'text-[10px]'}`}>À vista no PIX</p>
               </div>
               
               {/* Badge de desconto */}
-              <div className="ml-auto flex items-center gap-1 bg-green-500/90 backdrop-blur-sm px-2 py-1 rounded-lg">
-                <TrendingDown size={12} className="text-white" />
-                <span className="text-white font-black text-xs">{item.discount}</span>
+              <div className={`ml-auto flex items-center gap-1 bg-green-500/90 backdrop-blur-sm rounded-lg transition-all duration-300 ${isExpanded ? 'px-3 py-2' : 'px-2 py-1'}`}>
+                <TrendingDown size={isExpanded ? 16 : 12} className="text-white" />
+                <span className={`text-white font-black transition-all duration-300 ${isExpanded ? 'text-sm' : 'text-xs'}`}>{item.discount}</span>
               </div>
             </div>
 
@@ -181,18 +188,18 @@ export default function Page() {
             <div className="space-y-2">
               <button
                 onClick={() => toggleCard(item.id)}
-                className="w-full bg-purple-700/30 hover:bg-purple-700/50 text-purple-200 py-2 rounded-xl font-bold text-xs text-center transition-all border border-purple-500/30"
+                className={`w-full bg-purple-700/30 hover:bg-purple-700/50 text-purple-200 rounded-xl font-bold text-center transition-all border border-purple-500/30 ${isExpanded ? 'py-3 text-sm' : 'py-2 text-xs'}`}
               >
-                {isExpanded ? 'Ver Menos' : 'Ver Detalhes'}
+                {isExpanded ? '⬆️ Ver Menos' : '⬇️ Ver Detalhes'}
               </button>
               
               <a 
                 href={item.checkout} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white py-2.5 rounded-xl font-black text-sm text-center transition-all transform hover:scale-105 shadow-lg shadow-purple-500/30"
+                className={`block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-xl font-black text-center transition-all transform hover:scale-105 shadow-lg shadow-purple-500/30 ${isExpanded ? 'py-3 text-base' : 'py-2.5 text-sm'}`}
               >
-                Comprar
+                🛒 Comprar Agora
               </a>
             </div>
           </div>
