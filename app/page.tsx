@@ -481,7 +481,7 @@ export default function Page() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               { icon: ShoppingCart, title: 'Como funciona a compra?', text: 'Escolha a conta que você quer comprar, clique em "comprar agora" e será direcionado para a página de pagamento. Preencha corretamente com seu nome e coloque seu Gmail, você vai receber o login da conta pelo seu gmail imediatamente após realizar o pagamento! Qualquer dúvida só mandar mensagem pro nosso suporte no Instagram @dznefootball. Todas as contas são Konami ID!' },
-              { icon: Shield, title: 'Por que confiar na Dzn?', text: 'Somos o único site de eFootball verificado desde 2023, sempre buscando satisfação dos nossos clientes. Mais de 400 clientes já compraram no nosso site!' },
+              { icon: Shield, title: 'Por que confiar na Dzn Store?', text: 'Somos o único site de eFootball verificado desde 2023, sempre buscando satisfação dos nossos clientes. Mais de 400 clientes já compraram no nosso site!' },
               { icon: Clock, title: 'Quanto tempo para receber?', text: 'A entrega é feita em segundos após o pagamento, agilidade e segurança! Verifique sua caixa de entrada do Gmail após a compra.' },
               { icon: MessageCircle, title: 'Tem dúvidas?', text: 'Chame no Instagram! Equipe 24h online: @dznefootball' }
             ].map((faq, i) => (
