@@ -66,7 +66,7 @@ export default function Page() {
         'https://i.imgur.com/0UBGHPy.png',
         'https://i.imgur.com/jSL1AX8.png'
       ],
-      checkout: 'https://lxpay.com.br/checkout/f7233f4f-ba51-4b7f-93a5-ea6bb33a663f?offer=ce3cf6c0-370e-47e1-a529-943ecc0ac4f9',
+      checkout: 'https://ig.me/m/dznefootball',
     },
     {
       id: 2,
@@ -83,7 +83,7 @@ export default function Page() {
         'https://i.imgur.com/sYr80bX.png',
         'https://i.imgur.com/EUNPz3t.png'
       ],
-      checkout: 'https://lxpay.com.br/checkout/182fa30d-84fc-471a-a81a-53bb31344242?offer=ad8947ba-5c33-45bf-bb81-3a65766c51a4',
+      checkout: 'https://ig.me/m/dznefootball',
     },
     {
       id: 3,
@@ -98,7 +98,7 @@ export default function Page() {
         'https://i.imgur.com/3YxQzKR.png',
         'https://i.imgur.com/1C3LZNL.png'
       ],
-      checkout: 'https://lxpay.com.br/checkout/e7c1cfe1-4971-4ffa-991d-f44be1b34488?offer=b0156aa7-54cc-47eb-b482-81534cfbf721',
+      checkout: 'https://ig.me/m/dznefootball',
     },
     {
       id: 4,
@@ -113,7 +113,7 @@ export default function Page() {
         'https://i.imgur.com/Jrp1nEt.png',
         'https://i.imgur.com/QaKfNSp.png'
       ],
-      checkout: 'https://lxpay.com.br/checkout/6b118082-acb5-41c2-999b-0eb101e1952c?offer=3e593cc4-9396-40c2-ae9c-08fcfb7a3b0d',
+      checkout: 'https://ig.me/m/dznefootball',
     },
     {
       id: 5,
@@ -127,7 +127,7 @@ export default function Page() {
         'https://i.imgur.com/HV7a8gj.png',
         'https://i.imgur.com/BThTm0i.png'
       ],
-      checkout: 'https://lxpay.com.br/checkout/326b3d09-d159-4b54-9a6c-6477680ba97d?offer=1227ac46-b5ac-4963-b47b-c64223088abb',
+      checkout: 'https://ig.me/m/dznefootball',
     },
     {
       id: 6,
@@ -142,7 +142,7 @@ export default function Page() {
         'https://i.imgur.com/6rnHRCE.png',
         'https://i.imgur.com/tnqJDWe.png'
       ],
-      checkout: 'https://lxpay.com.br/checkout/818d5b90-f9c9-4448-a890-c785cfc58a20?offer=093b7131-3d6a-450d-8604-6aad356ef1d9',
+      checkout: 'https://ig.me/m/dznefootball',
     },
   ];
 
@@ -161,7 +161,7 @@ export default function Page() {
         'https://i.imgur.com/vf9SCth.png',
         'https://i.imgur.com/gcbW42u.png'
       ],
-      checkout: 'https://lxpay.com.br/checkout/e7c5d97f-9c5f-4029-96d1-07f32df0e163?offer=8f0c58c3-1392-4b10-8290-f7aa8409d470',
+      checkout: 'https://ig.me/m/dznefootball',
     },
     {
       id: 2,
@@ -177,7 +177,7 @@ export default function Page() {
         'https://i.imgur.com/GsT5XAs.png',
         'https://i.imgur.com/ljC5Jnh.png'
       ],
-      checkout: 'https://lxpay.com.br/checkout/e8737544-4c6c-4aa1-b971-f475abd34479?offer=7205b71c-8805-4cf3-9d18-da281e024ddd',
+      checkout: 'https://ig.me/m/dznefootball',
     },
   ];
   const renderCard = (item: GameItem, index: number) => {
@@ -493,9 +493,10 @@ export default function Page() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
-              { icon: ShoppingCart, title: 'Como funciona a compra?', text: 'Escolha a conta que você quer comprar, clique em "comprar agora" e será direcionado para a página de pagamento. Preencha corretamente com seu nome e coloque seu Gmail, você vai receber o login da conta pelo seu gmail imediatamente após realizar o pagamento! Qualquer dúvida só mandar mensagem pro nosso suporte no Instagram @dznefootball. Todas as contas são Konami ID!' },
+              { icon: ShoppingCart, title: 'Como funciona a compra?', text: 'Escolha a conta que você se interessou e clique em “Comprar”. Em seguida, você será redirecionado novamente para o nosso atendente. Basta informar qual conta deseja adquirir para que ele gere o PIX e você possa realizar o pagamento. Após efetuar o pagamento, envie o comprovante para que o atendente dê continuidade ao procedimento e você receba a sua conta.' },
+              { icon: Clock, title: 'Como irei receber a conta?', text: 'Todas as nossas contas são Konami ID para garantir a segurança dos clientes, você vai precisar apenas de um gmail que não tenha conta de eFootball vinculada nele. O nosso atendente irá transferir a conta para o seu gmail e depois é só você logar no jogo!' },
               { icon: Shield, title: 'Por que confiar na Dzn Store?', text: 'Somos o único site de eFootball verificado desde 2023, sempre buscando satisfação dos nossos clientes. Mais de 400 clientes já compraram no nosso site!' },
-              { icon: Clock, title: 'Quanto tempo para receber?', text: 'A entrega é feita em segundos após o pagamento, agilidade e segurança! Verifique sua caixa de entrada do Gmail após a compra.' },
+        
               { icon: MessageCircle, title: 'Tem dúvidas?', text: 'Chame no Instagram! Equipe 24h online: @dznefootball' }
             ].map((faq, i) => (
               <div key={i} className="bg-purple-950/30 backdrop-blur-xl border border-purple-500/20 rounded-2xl p-6 hover:border-purple-400/40 transition-all hover:scale-[1.02]">
@@ -508,7 +509,42 @@ export default function Page() {
             ))}
           </div>
         </section>
+        {/* Avaliações */}
+<section className="px-4 py-16 max-w-6xl mx-auto">
+  <h2 className="text-3xl md:text-5xl font-black text-center mb-12 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+    Últimas Avaliações
+  </h2>
 
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {[
+      { name: 'Paulo G.', text: 'Comprei a do trio MSN e o chegou rapidinho. Recomendo!' },
+      { name: 'Ney Edits', text: 'Atendimento bom e a conta do Ney 107 que comprei ajuda demais pra subir divisão agora' },
+      { name: 'Ronaldo Lima.', text: 'Agradeço pelo trabalho de vocês, meu filho já tinha caído em muito golpe tentando comprar conta desse jogo.' },
+      { name: 'Gustavo S.', text: 'Melhor site de contas de eFootball que já comprei.' },
+      { name: 'Augusto M.', text: 'Conta top chegou certinho.' },
+      { name: 'Galáticos', text: 'Comprei a do CR7 com Ney e gostei muito.' },
+    ].map((review, i) => (
+      <div
+        key={i}
+        className="bg-purple-950/30 backdrop-blur-xl border border-purple-500/20 rounded-2xl p-6 hover:border-purple-400/40 transition-all"
+      >
+        <div className="flex justify-center mb-3">
+          {[...Array(5)].map((_, idx) => (
+            <Star key={idx} className="text-yellow-400 fill-yellow-400" size={18} />
+          ))}
+        </div>
+
+        <p className="text-purple-100/80 text-sm text-center mb-4 leading-relaxed">
+          “{review.text}”
+        </p>
+
+        <p className="text-purple-300 font-black text-center">
+          {review.name}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>
         {/* Footer */}
         <footer className="bg-black/80 backdrop-blur-xl border-t border-purple-500/20 py-8 text-center px-4">
           <p className="text-purple-300/70 text-sm mb-2">© 2023 Dzn Efootball. Todos os direitos reservados.</p>
