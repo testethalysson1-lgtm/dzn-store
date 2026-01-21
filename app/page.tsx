@@ -66,7 +66,7 @@ export default function Page() {
         'https://i.imgur.com/0UBGHPy.png',
         'https://i.imgur.com/jSL1AX8.png'
       ],
-      checkout: 'https://ig.me/m/dznefootball',
+      checkout: 'https://wa.me/5579996080617?text=Quero comprar essa de R$24.99',
     },
     {
       id: 2,
