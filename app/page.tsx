@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -87,6 +86,21 @@ export default function Page() {
     },
     {
       id: 3,
+      title: 'OS 3 BLITZ CURLER',
+      price: 'R$ 54,99',
+      oldPrice: 'R$ 74,99',
+      discount: '27%',
+      description: ['Son Blitz', 'A conta mais bugada', 'Araujo melhor defensor do jogo', 'Conta perfeita pra ganhar todas', '3241 de Força Coletiva'],
+      images: [
+        'https://i.imgur.com/uZdTw3u.png',
+        'https://i.imgur.com/SL3wR3i.png',
+        'https://i.imgur.com/l9iS7xS.png',
+        'https://i.imgur.com/IsVtnaP.png'
+      ],
+      checkout: 'https://wa.me/5579996080617?text=Quero comprar essa de R$54.99. Como faço?',
+    },
+    {
+      id: 4,
       title: 'O QUARTETO FANTÁSTICO',
       price: 'R$ 69,99',
       oldPrice: 'R$ 79,99',
@@ -101,7 +115,7 @@ export default function Page() {
       checkout: 'https://wa.me/5579996080617?text=Quero comprar essa de R$69.99. Como faço?',
     },
     {
-      id: 4,
+      id: 5,
       title: 'Os Dribladores',
       price: 'R$ 74,99',
       oldPrice: 'R$ 99,99',
@@ -116,7 +130,7 @@ export default function Page() {
       checkout: 'https://wa.me/5579996080617?text=Quero comprar essa de R$74.99. Como faço?',
     },
     {
-      id: 5,
+      id: 6,
       title: 'Time Full - UMA DAS MELHORES CONTAS',
       price: 'R$ 139,99',
       oldPrice: 'R$ 200,00',
@@ -130,7 +144,7 @@ export default function Page() {
       checkout: 'https://wa.me/5579996080617?text=Quero comprar essa de R$139.99. Como faço?',
     },
     {
-      id: 6,
+      id: 7,
       title: 'A conta mais bizarra do jogo!',
       price: 'R$ 500,00',
       oldPrice: 'R$ 999,99',
@@ -493,7 +507,7 @@ export default function Page() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
-              { icon: ShoppingCart, title: 'Como funciona a compra?', text: 'Escolha a conta que você se interessou e clique em “Comprar”. Em seguida, você será redirecionado novamente para o nosso atendente. Basta informar qual conta deseja adquirir para que ele gere o PIX e você possa realizar o pagamento. Após efetuar o pagamento, envie o comprovante para que o atendente dê continuidade ao procedimento e você receba a sua conta.' },
+              { icon: ShoppingCart, title: 'Como funciona a compra?', text: 'Escolha a conta que você se interessou e clique em "Comprar". Em seguida, você será redirecionado novamente para o nosso atendente. Basta informar qual conta deseja adquirir para que ele gere o PIX e você possa realizar o pagamento. Após efetuar o pagamento, envie o comprovante para que o atendente dê continuidade ao procedimento e você receba a sua conta.' },
               { icon: Clock, title: 'Como irei receber a conta?', text: 'Todas as nossas contas são Konami ID para garantir a segurança dos clientes, você vai precisar apenas de um gmail que não tenha conta de eFootball vinculada nele. O nosso atendente irá transferir a conta para o seu gmail e depois é só você logar no jogo!' },
               { icon: Shield, title: 'Por que confiar na Dzn Store?', text: 'Somos o único site de eFootball verificado desde 2023, sempre buscando satisfação dos nossos clientes. Mais de 400 clientes já compraram no nosso site!' },
         
@@ -534,7 +548,7 @@ export default function Page() {
         </div>
 
         <p className="text-purple-100/80 text-sm text-center mb-4 leading-relaxed">
-          “{review.text}”
+          "{review.text}"
         </p>
 
         <p className="text-purple-300 font-black text-center">
