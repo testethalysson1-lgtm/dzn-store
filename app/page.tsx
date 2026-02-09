@@ -55,7 +55,7 @@ export default function Page() {
     {
       id: 1,
       title: 'Conta com CR7 + Iniesta',
-      price: 'R$ 24,99',
+      price: 'R$ 19,99',
       oldPrice: 'R$ 49,99',
       discount: '50%',
       description: ['Conta perfeita pra você que ta com pouca grana', 'Cr7 + Ibra + Iniesta', 'Meio campo ótimo', '3237 de Força Coletiva'],
@@ -65,12 +65,12 @@ export default function Page() {
         'https://i.imgur.com/0UBGHPy.png',
         'https://i.imgur.com/jSL1AX8.png'
       ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$24.99. Como faço?',
+      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$19.99. Como faço?',
     },
     {
       id: 2,
       title: 'Ney Loiro + O Messi mais raro',
-      price: 'R$ 44,99',
+      price: 'R$ 39,99',
       oldPrice: 'R$ 69,99',
       discount: '36%',
       description: ['Conta com Ney Loiro + Messi mais raro', 'Diversos jogadores antigos', 'Uma das reliquias do game', 'Perfeita pra quem gosta de coleção antiga', '3206+ de Força Coletiva'],
@@ -82,7 +82,7 @@ export default function Page() {
         'https://i.imgur.com/sYr80bX.png',
         'https://i.imgur.com/EUNPz3t.png'
       ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$44.99. Como faço?',
+      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$39.99. Como faço?',
     },
     {
       id: 3,
