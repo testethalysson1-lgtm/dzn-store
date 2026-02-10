@@ -460,8 +460,8 @@ export default function Page() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
-              { icon: ShoppingCart, title: 'Como funciona a compra?', text: 'Escolha a conta que você se interessou e clique em "Comprar". Em seguida, você será redirecionado novamente para o nosso atendente. Basta informar qual conta deseja adquirir para que ele gere o PIX e você possa realizar o pagamento. Após efetuar o pagamento, envie o comprovante para que o atendente dê continuidade ao procedimento e você receba a sua conta.' },
-              { icon: Clock, title: 'Como irei receber a conta?', text: 'Todas as nossas contas são Konami ID para garantir a segurança dos clientes, você vai precisar apenas de um gmail que não tenha conta de eFootball vinculada nele. O nosso atendente irá transferir a conta para o seu gmail e depois é só você logar no jogo!' },
+              { icon: ShoppingCart, title: 'Como funciona a compra?', text: 'Escolha a conta que você se interessou e clique em "Comprar". Em seguida, você será redirecionado novamente para o nosso atendente. Ele vai gerar o PIX e você possa realizar o pagamento. Após efetuar o pagamento, envie o comprovante para que o atendente dê continuidade ao procedimento e você receba sua conta!' },
+              { icon: Clock, title: 'Como irei receber a conta?', text: 'Após a confirmação do pagamento o nosso atendente irá enviar o acesso da conta [GMAIL E SENHA], você irá entrar no eFootball > clicar em transferir dados > Konami ID > gmail e senha. Pronto! Só aproveitar.' },
               { icon: Shield, title: 'Por que confiar na Dzn Store?', text: 'Somos o único site de eFootball verificado desde 2023, sempre buscando satisfação dos nossos clientes. Mais de 400 clientes já compraram no nosso site!' },
         
               { icon: MessageCircle, title: 'Tem dúvidas?', text: 'Chame no Instagram! Equipe 24h online: @dznefootball' }
