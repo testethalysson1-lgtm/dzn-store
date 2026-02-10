@@ -55,9 +55,9 @@ export default function Page() {
     {
       id: 4,
       title: 'O QUARTETO FANTÁSTICO',
-      price: 'R$ 69,99',
+      price: 'R$ 15,00',
       oldPrice: 'R$ 79,99',
-      discount: '13%',
+      discount: '81%',
       description: ['Neymar | Ronaldinho | Dembele', 'Vitinha dominando o meio campo', 'Zaga excelente', '3231 de Força Coletiva'],
       images: [
         'https://i.imgur.com/BAn0vIC.png',
@@ -65,14 +65,14 @@ export default function Page() {
         'https://i.imgur.com/3YxQzKR.png',
         'https://i.imgur.com/1C3LZNL.png'
       ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$69.99. Como faço?',
+      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$15.00. Como faço?',
     },
     {
       id: 5,
       title: 'Os Dribladores',
-      price: 'R$ 74,99',
+      price: 'R$ 20,00',
       oldPrice: 'R$ 99,99',
-      discount: '25%',
+      discount: '80%',
       description: ['Conta perfeita pra quem gosta de firula!', 'Ney + Bruxo no mesmo time', 'Goleiro 107 de Over + Defesa impecável', '3286 de Força Coletiva'],
       images: [
         'https://i.imgur.com/4MqMA51.png',
@@ -80,28 +80,28 @@ export default function Page() {
         'https://i.imgur.com/Jrp1nEt.png',
         'https://i.imgur.com/QaKfNSp.png'
       ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$74.99. Como faço?',
+      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$20.00. Como faço?',
     },
     {
       id: 6,
       title: 'Time Full - UMA DAS MELHORES CONTAS',
-      price: 'R$ 139,99',
+      price: 'R$ 50,00',
       oldPrice: 'R$ 200,00',
-      discount: '30%',
+      discount: '75%',
       description: ['Conta com Messi e Ibra 110', 'Gullit + Meio campo perfeito', 'Domine a partida com essa conta monstruosa', '3298 de Força Coletiva'],
       images: [
         'https://i.imgur.com/a513HQt.png',
         'https://i.imgur.com/HV7a8gj.png',
         'https://i.imgur.com/BThTm0i.png'
       ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$139.99. Como faço?',
+      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$50.00. Como faço?',
     },
     {
       id: 7,
       title: 'A conta mais bizarra do jogo!',
-      price: 'R$ 500,00',
+      price: 'R$ 100,00',
       oldPrice: 'R$ 999,99',
-      discount: '50%',
+      discount: '90%',
       description: ['A Melhor conta que você já viu!', 'Ataque perfeito', 'Messi + Gullit', '3301 de Força'],
       images: [
         'https://i.imgur.com/VuBE0hE.png',
@@ -109,7 +109,7 @@ export default function Page() {
         'https://i.imgur.com/6rnHRCE.png',
         'https://i.imgur.com/tnqJDWe.png'
       ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$500.00. Como faço?',
+      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$100.00. Como faço?',
     },
   ];
 
@@ -117,9 +117,9 @@ export default function Page() {
     {
       id: 1,
       title: 'Conta com Messi + Pelé - CONSOLE',
-      price: 'R$ 59,99',
+      price: 'R$ 40,00',
       oldPrice: 'R$ 79,99',
-      discount: '25%',
+      discount: '50%',
       description: ['Conta com o novo Messi', 'Pelé + Neymar no ataque', 'R10 - O Bruxo das firulas', 'Conta perfeita pra dominar a partida', '3256 de Força Coletiva'],
       images: [
         'https://i.imgur.com/m7Clk2e.png',
@@ -128,14 +128,14 @@ export default function Page() {
         'https://i.imgur.com/vf9SCth.png',
         'https://i.imgur.com/gcbW42u.png'
       ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$59.99. Como faço?',
+      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$40.00. Como faço?',
     },
     {
       id: 2,
       title: 'A mais Top do Console - MELHOR ELENCO',
-      price: 'R$ 84,99',
+      price: 'R$ 65,00',
       oldPrice: 'R$ 104,99',
-      discount: '19%',
+      discount: '38%',
       description: ['Uma das melhores contas de console', 'Ataque + Defesa perfeitos', 'Domine o jogo com esse elenco!', '3280 de Força Coletiva'],
       images: [
         'https://i.imgur.com/b4N6zH0.png',
@@ -144,7 +144,7 @@ export default function Page() {
         'https://i.imgur.com/GsT5XAs.png',
         'https://i.imgur.com/ljC5Jnh.png'
       ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$84.99. Como faço?',
+      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$65.00. Como faço?',
     },
   ];
   const renderCard = (item: GameItem, index: number) => {
