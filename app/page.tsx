@@ -84,7 +84,7 @@ export default function Page() {
     },
     {
       id: 6,
-      title: 'Time Full seja invencível',
+      title: 'Time Full - seja invencível',
       price: 'R$ 50,00',
       oldPrice: 'R$ 200,00',
       discount: '75%',
