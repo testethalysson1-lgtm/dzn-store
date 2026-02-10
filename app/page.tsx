@@ -109,7 +109,7 @@ export default function Page() {
         'https://i.imgur.com/6rnHRCE.png',
         'https://i.imgur.com/tnqJDWe.png'
       ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$100.00. Como faço?',
+      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$95.00. Como faço?',
     },
   ];
 
@@ -132,7 +132,7 @@ export default function Page() {
     },
     {
       id: 2,
-      title: 'A mais Top do Console - MELHOR ELENCO',
+      title: 'A mais Top do Console',
       price: 'R$ 65,00',
       oldPrice: 'R$ 104,99',
       discount: '38%',
