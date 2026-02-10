@@ -99,7 +99,7 @@ export default function Page() {
     {
       id: 7,
       title: 'A conta mais bizarra do jogo!',
-      price: 'R$ 100,00',
+      price: 'R$ 95,00',
       oldPrice: 'R$ 999,99',
       discount: '90%',
       description: ['A Melhor conta que você já viu!', 'Ataque perfeito', 'Messi + Gullit', '3301 de Força'],
