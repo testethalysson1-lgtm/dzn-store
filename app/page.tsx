@@ -69,7 +69,7 @@ export default function Page() {
     },
     {
       id: 5,
-      title: 'Os Dribladores',
+      title: 'Os Dribladores fatais',
       price: 'R$ 20,00',
       oldPrice: 'R$ 99,99',
       discount: '80%',
@@ -84,7 +84,7 @@ export default function Page() {
     },
     {
       id: 6,
-      title: 'Time Full - UMA DAS MELHORES CONTAS',
+      title: 'Time Full seja invencível',
       price: 'R$ 50,00',
       oldPrice: 'R$ 200,00',
       discount: '75%',
@@ -460,8 +460,8 @@ export default function Page() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
-              { icon: ShoppingCart, title: 'Como funciona a compra?', text: 'Escolha a conta que você se interessou e clique em "Comprar". Em seguida, você será redirecionado novamente para o nosso atendente. Ele vai gerar o PIX e você possa realizar o pagamento. Após efetuar o pagamento, envie o comprovante para que o atendente dê continuidade ao procedimento e você receba sua conta!' },
-              { icon: Clock, title: 'Como irei receber a conta?', text: 'Após a confirmação do pagamento o nosso atendente irá enviar o acesso da conta [GMAIL E SENHA], você irá entrar no eFootball > clicar em transferir dados > Konami ID > gmail e senha. Pronto! Só aproveitar.' },
+              { icon: ShoppingCart, title: 'Como funciona a compra?', text: 'Escolha a conta que você se interessou e clique em "Comprar". Em seguida, você será redirecionado novamente para o nosso atendente. Ele vai gerar o PIX para que você possa realizar o pagamento. Após efetuar o pagamento, envie o comprovante para que o atendente dê continuidade ao procedimento e você receba sua conta!' },
+              { icon: Clock, title: 'Como irei receber a conta?', text: 'Após a confirmação do pagamento o nosso atendente irá enviar o acesso da conta [GMAIL E SENHA] , você vai entrar no eFootball > clicar em transferir dados > Konami ID > gmail e senha. Pronto! Só aproveitar.' },
               { icon: Shield, title: 'Por que confiar na Dzn Store?', text: 'Somos o único site de eFootball verificado desde 2023, sempre buscando satisfação dos nossos clientes. Mais de 400 clientes já compraram no nosso site!' },
         
               { icon: MessageCircle, title: 'Tem dúvidas?', text: 'Chame no Instagram! Equipe 24h online: @dznefootball' }
