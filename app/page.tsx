@@ -53,53 +53,6 @@ export default function Page() {
 
   const games: GameItem[] = [
     {
-      id: 1,
-      title: 'Conta com CR7 + Iniesta',
-      price: 'R$ 19,99',
-      oldPrice: 'R$ 49,99',
-      discount: '50%',
-      description: ['Conta perfeita pra você que ta com pouca grana', 'Cr7 + Ibra + Iniesta', 'Meio campo ótimo', '3237 de Força Coletiva'],
-      images: [
-        'https://i.imgur.com/wWWwhNM.png',
-        'https://i.imgur.com/plUBEzZ.png',
-        'https://i.imgur.com/0UBGHPy.png',
-        'https://i.imgur.com/jSL1AX8.png'
-      ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$19.99. Como faço?',
-    },
-    {
-      id: 2,
-      title: 'Ney Loiro + O Messi mais raro',
-      price: 'R$ 39,99',
-      oldPrice: 'R$ 69,99',
-      discount: '36%',
-      description: ['Conta com Ney Loiro + Messi mais raro', 'Diversos jogadores antigos', 'Uma das reliquias do game', 'Perfeita pra quem gosta de coleção antiga', '3206+ de Força Coletiva'],
-      images: [
-        'https://i.imgur.com/z9qqw53.png',
-        'https://i.imgur.com/mibK0Wn.png',
-        'https://i.imgur.com/3toi3lr.png',
-        'https://i.imgur.com/u9JKv0c.png',
-        'https://i.imgur.com/sYr80bX.png',
-        'https://i.imgur.com/EUNPz3t.png'
-      ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$39.99. Como faço?',
-    },
-    {
-      id: 3,
-      title: 'OS 3 BLITZ CURLER',
-      price: 'R$ 54,99',
-      oldPrice: 'R$ 74,99',
-      discount: '27%',
-      description: ['Son Blitz', 'A conta mais bugada', 'Araujo melhor defensor do jogo', 'Conta perfeita pra ganhar todas', '3241 de Força Coletiva'],
-      images: [
-        'https://i.imgur.com/uZdTw3u.png',
-        'https://i.imgur.com/SL3wR3i.png',
-        'https://i.imgur.com/l9iS7xS.png',
-        'https://i.imgur.com/IsVtnaP.png'
-      ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$54.99. Como faço?',
-    },
-    {
       id: 4,
       title: 'O QUARTETO FANTÁSTICO',
       price: 'R$ 69,99',
