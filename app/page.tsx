@@ -69,18 +69,18 @@ export default function Page() {
     },
     {
       id: 5,
-      title: 'Os Dribladores fatais',
-      price: 'R$ 20,00',
-      oldPrice: 'R$ 99,99',
+      title: 'A Cavalaria Lendária',
+      price: 'R$ 25,00',
+      oldPrice: 'R$ 104,99',
       discount: '80%',
-      description: ['Conta perfeita pra quem gosta de firula!', 'Ney + Bruxo no mesmo time', 'Goleiro 107 de Over + Defesa impecável', '3286 de Força Coletiva'],
+      description: ['Conta perfeita pra quem quer massacrar o adversário!', 'Gullit dominando o meio', 'Goleiro 107 de Over + Defesa impecável', '3300 de Força Coletiva'],
       images: [
-        'https://i.imgur.com/4MqMA51.png',
-        'https://i.imgur.com/ABBv0Yn.png',
-        'https://i.imgur.com/Jrp1nEt.png',
-        'https://i.imgur.com/QaKfNSp.png'
+        'https://i.imgur.com/Xf4rjnB.png',
+        'https://i.imgur.com/fHHJMaL.png',
+        'https://i.imgur.com/MNzyRYf.png',
+        'https://i.imgur.com/znuWQy0.png'
       ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$20.00. Como faço?',
+      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$25,00. Como faço?',
     },
     {
       id: 6,
