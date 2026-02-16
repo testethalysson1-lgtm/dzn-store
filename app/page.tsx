@@ -55,17 +55,17 @@ export default function Page() {
     {
       id: 4,
       title: 'O QUARTETO FANTÁSTICO',
-      price: 'R$ 15,00',
-      oldPrice: 'R$ 79,99',
-      discount: '81%',
-      description: ['Neymar | Ronaldinho | Dembele', 'Vitinha dominando o meio campo', 'Zaga excelente', '3231 de Força Coletiva'],
+      price: 'R$ 20,00',
+      oldPrice: 'R$ 99,99',
+      discount: '80%',
+      description: ['Neymar | Pelé | Messi', 'O ataque mais fatal do game', 'Zaga excelente', '3314 de Força Coletiva'],
       images: [
-        'https://i.imgur.com/BAn0vIC.png',
-        'https://i.imgur.com/TshbKKK.png',
-        'https://i.imgur.com/3YxQzKR.png',
-        'https://i.imgur.com/1C3LZNL.png'
+        'https://i.imgur.com/MUuDNfx.png',
+        'https://i.imgur.com/2P9g9Pv.png',
+        'https://i.imgur.com/UZLuCvy.png',
+        'https://i.imgur.com/XZVNLax.png'
       ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$15.00. Como faço?',
+      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$20.00. Como faço?',
     },
     {
       id: 5,
