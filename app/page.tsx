@@ -65,7 +65,7 @@ export default function Page() {
         'https://i.imgur.com/UZLuCvy.png',
         'https://i.imgur.com/XZVNLax.png'
       ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$20.00. Como faço?',
+      checkout: 'https://wa.me/5579991081815?text=Quero comprar essa de R$20.00. Como faço?',
     },
     {
       id: 5,
@@ -80,7 +80,7 @@ export default function Page() {
         'https://i.imgur.com/MNzyRYf.png',
         'https://i.imgur.com/znuWQy0.png'
       ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$25,00. Como faço?',
+      checkout: 'https://wa.me/5579991081815?text=Quero comprar essa de R$25,00. Como faço?',
     },
     {
       id: 6,
@@ -94,7 +94,7 @@ export default function Page() {
         'https://i.imgur.com/HV7a8gj.png',
         'https://i.imgur.com/BThTm0i.png'
       ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$50.00. Como faço?',
+      checkout: 'https://wa.me/5579991081815?text=Quero comprar essa de R$50.00. Como faço?',
     },
     {
       id: 7,
@@ -109,7 +109,7 @@ export default function Page() {
         'https://i.imgur.com/6rnHRCE.png',
         'https://i.imgur.com/tnqJDWe.png'
       ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$95.00. Como faço?',
+      checkout: 'https://wa.me/5579991081815?text=Quero comprar essa de R$95.00. Como faço?',
     },
   ];
 
@@ -128,7 +128,7 @@ export default function Page() {
         'https://i.imgur.com/vf9SCth.png',
         'https://i.imgur.com/gcbW42u.png'
       ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$40.00. Como faço?',
+      checkout: 'https://wa.me/5579991081815?text=Quero comprar essa de R$40.00. Como faço?',
     },
     {
       id: 2,
@@ -144,7 +144,7 @@ export default function Page() {
         'https://i.imgur.com/GsT5XAs.png',
         'https://i.imgur.com/ljC5Jnh.png'
       ],
-      checkout: 'https://wa.me/5579991071611?text=Quero comprar essa de R$65.00. Como faço?',
+      checkout: 'https://wa.me/5579991081815?text=Quero comprar essa de R$65.00. Como faço?',
     },
   ];
   const renderCard = (item: GameItem, index: number) => {
