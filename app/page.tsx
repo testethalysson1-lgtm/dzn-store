@@ -163,6 +163,21 @@ export default function Page() {
       ],
       checkout: 'https://wa.me/5579991081815?text=Quero comprar essa de R$65.00. Como faço?',
     },
+    {
+      id: 3,
+      title: 'A Braba do PS5',
+      price: 'R$ 85,00',
+      oldPrice: 'R$ 124,99',
+      discount: '38%',
+      description: ['Uma das melhores contas do PS5', 'Ataque + Defesa perfeitos', 'Domine o jogo com esse elenco!', '3281 de Força Coletiva'],
+      images: [
+        'https://i.imgur.com/J9zAH1z.jpeg',
+        'https://i.imgur.com/PPDHJIh.jpeg',
+        'https://i.imgur.com/t3Pxl5w.jpeg',
+        'https://i.imgur.com/cSV2Jcz.jpeg'
+      ],
+      checkout: 'https://wa.me/5579991081815?text=Quero comprar essa de R$85.00. Como faço?',
+    },
   ];
   const renderCard = (item: GameItem, index: number) => {
     const isExpanded = expandedCard === item.id;
