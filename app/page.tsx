@@ -53,6 +53,21 @@ export default function Page() {
 
   const games: GameItem[] = [
     {
+      id: 3,
+      title: 'A CONTA PERFEITA',
+      price: 'R$ 15,00',
+      oldPrice: 'R$ 89,99',
+      discount: '80%',
+      description: ['Neymar | Mbappe | Messi', 'Conta perfeita e custo beneficio', 'Zaga excelente', '3290 de Força Coletiva'],
+      images: [
+        'https://i.imgur.com/f6hyppO.jpeg',
+        'https://i.imgur.com/Y2v40eK.jpeg',
+        'https://i.imgur.com/ChkFVNG.jpeg',
+        'https://i.imgur.com/ALZNfiQ.jpeg'
+      ],
+      checkout: 'https://wa.me/5579991081815?text=Quero comprar essa de R$15.00. Como faço?',
+    },
+    {
       id: 4,
       title: 'O QUARTETO FANTÁSTICO',
       price: 'R$ 20,00',
@@ -73,12 +88,14 @@ export default function Page() {
       price: 'R$ 25,00',
       oldPrice: 'R$ 104,99',
       discount: '80%',
-      description: ['Conta perfeita pra quem quer massacrar o adversário!', 'Gullit dominando o meio', 'Goleiro 107 de Over + Defesa impecável', '3300 de Força Coletiva'],
+      description: ['Conta perfeita pra quem quer massacrar o adversário!', 'Gullit dominando o meio', 'Goleiro 107 de Over + Defesa impecável', '3325 de Força Coletiva'],
       images: [
-        'https://i.imgur.com/Xf4rjnB.png',
-        'https://i.imgur.com/fHHJMaL.png',
-        'https://i.imgur.com/MNzyRYf.png',
-        'https://i.imgur.com/znuWQy0.png'
+        'https://i.imgur.com/yBhtlrV.jpeg',
+        'https://i.imgur.com/mNwj40i.jpeg',
+        'https://i.imgur.com/cXPoR7f.jpeg',
+        'https://i.imgur.com/W3NKnja.jpeg',
+        'https://i.imgur.com/CHZ80bI.jpeg',
+        'https://i.imgur.com/QD6KbRZ.jpeg'
       ],
       checkout: 'https://wa.me/5579991081815?text=Quero comprar essa de R$25,00. Como faço?',
     },
