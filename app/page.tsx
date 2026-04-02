@@ -54,7 +54,7 @@ export default function Page() {
   const games: GameItem[] = [
     {
       id: 3,
-      title: 'A CONTA PERFEITA',
+      title: 'A CONTA PERFEITA PRA VOCÊ',
       price: 'R$ 15,00',
       oldPrice: 'R$ 89,99',
       discount: '80%',
@@ -446,7 +446,7 @@ export default function Page() {
         {/* Hero */}
         <section className="py-6 text-center">
           <div className="mb-6">
-            <img src="https://i.imgur.com/BgCfgxK.png" alt="Banner" className="w-full object-cover" />
+            <img src="https://i.imgur.com/hirW2G8.png" alt="Banner" className="w-full object-cover" />
           </div>
           
           <div className="max-w-5xl mx-auto px-4">
