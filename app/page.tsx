@@ -80,7 +80,7 @@ export default function Page() {
         'https://i.imgur.com/UZLuCvy.png',
         'https://i.imgur.com/XZVNLax.png'
       ],
-      checkout: 'https://wa.me/5579991081815?text=Quero comprar essa de R$20.00. Como faço?',
+      checkout: 'https://blacknosepay.com/pay/P8GSOBIF',
     },
     {
       id: 5,
