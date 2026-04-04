@@ -55,8 +55,8 @@ export default function Page() {
     {
       id: 3,
       title: 'A CONTA PERFEITA PRA VOCÊ',
-      price: 'R$ 15,00',
-      oldPrice: 'R$ 89,99',
+      price: 'R$ 10,00',
+      oldPrice: 'R$ 85,99',
       discount: '80%',
       description: ['Neymar | Mbappe | Messi', 'Conta perfeita e custo beneficio', 'Zaga excelente', '3290 de Força Coletiva'],
       images: [
@@ -70,8 +70,8 @@ export default function Page() {
     {
       id: 4,
       title: 'O QUARTETO FANTÁSTICO',
-      price: 'R$ 20,00',
-      oldPrice: 'R$ 99,99',
+      price: 'R$ 15,00',
+      oldPrice: 'R$ 95,99',
       discount: '80%',
       description: ['Neymar | Pelé | Messi', 'O ataque mais fatal do game', 'Zaga excelente', '3314 de Força Coletiva'],
       images: [
@@ -85,8 +85,8 @@ export default function Page() {
     {
       id: 5,
       title: 'A Cavalaria Lendária',
-      price: 'R$ 25,00',
-      oldPrice: 'R$ 104,99',
+      price: 'R$ 20,00',
+      oldPrice: 'R$ 99,99',
       discount: '80%',
       description: ['Conta perfeita pra quem quer massacrar o adversário!', 'Gullit dominando o meio', 'Goleiro 107 de Over + Defesa impecável', '3325 de Força Coletiva'],
       images: [
@@ -102,8 +102,8 @@ export default function Page() {
     {
       id: 6,
       title: 'Time Full - seja invencível',
-      price: 'R$ 50,00',
-      oldPrice: 'R$ 200,00',
+      price: 'R$ 75,00',
+      oldPrice: 'R$ 195,00',
       discount: '75%',
       description: ['Conta com Messi e Ibra 110', 'Gullit + Meio campo perfeito', 'Domine a partida com essa conta monstruosa', '3298 de Força Coletiva'],
       images: [
@@ -116,7 +116,7 @@ export default function Page() {
     {
       id: 7,
       title: 'A conta mais bizarra do jogo!',
-      price: 'R$ 95,00',
+      price: 'R$ 90,00',
       oldPrice: 'R$ 999,99',
       discount: '90%',
       description: ['A Melhor conta que você já viu!', 'Ataque perfeito', 'Messi + Gullit', '3301 de Força'],
@@ -134,8 +134,8 @@ export default function Page() {
     {
       id: 1,
       title: 'Conta com Messi + Pelé - CONSOLE',
-      price: 'R$ 40,00',
-      oldPrice: 'R$ 79,99',
+      price: 'R$ 35,00',
+      oldPrice: 'R$ 75,99',
       discount: '50%',
       description: ['Conta com o novo Messi', 'Pelé + Neymar no ataque', 'R10 - O Bruxo das firulas', 'Conta perfeita pra dominar a partida', '3256 de Força Coletiva'],
       images: [
@@ -150,8 +150,8 @@ export default function Page() {
     {
       id: 2,
       title: 'A mais Top do Console',
-      price: 'R$ 65,00',
-      oldPrice: 'R$ 104,99',
+      price: 'R$ 60,00',
+      oldPrice: 'R$ 99,99',
       discount: '38%',
       description: ['Uma das melhores contas de console', 'Ataque + Defesa perfeitos', 'Domine o jogo com esse elenco!', '3280 de Força Coletiva'],
       images: [
@@ -166,8 +166,8 @@ export default function Page() {
     {
       id: 3,
       title: 'A Braba do PS5',
-      price: 'R$ 85,00',
-      oldPrice: 'R$ 124,99',
+      price: 'R$ 80,00',
+      oldPrice: 'R$ 119,99',
       discount: '38%',
       description: ['Uma das melhores contas do PS5', 'Ataque + Defesa perfeitos', 'Domine o jogo com esse elenco!', '3281 de Força Coletiva'],
       images: [
