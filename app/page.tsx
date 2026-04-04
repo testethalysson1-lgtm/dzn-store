@@ -54,7 +54,7 @@ export default function Page() {
   const games: GameItem[] = [
     {
       id: 3,
-      title: 'A CONTA PERFEITA PRA VOCÊ',
+      title: 'A CONTA PERFEITA',
       price: 'R$ 10,00',
       oldPrice: 'R$ 85,99',
       discount: '80%',
@@ -69,7 +69,7 @@ export default function Page() {
     },
     {
       id: 4,
-      title: 'O QUARTETO FANTÁSTICO',
+      title: 'Quarteto Fantástico',
       price: 'R$ 15,00',
       oldPrice: 'R$ 95,99',
       discount: '80%',
@@ -101,7 +101,7 @@ export default function Page() {
     },
     {
       id: 6,
-      title: 'Time Full - seja invencível',
+      title: 'Time Full - Seja Invencível',
       price: 'R$ 45,00',
       oldPrice: 'R$ 195,00',
       discount: '75%',
@@ -115,7 +115,7 @@ export default function Page() {
     },
     {
       id: 7,
-      title: 'A conta mais bizarra do jogo!',
+      title: 'A conta mais Bizarra!',
       price: 'R$ 75,00',
       oldPrice: 'R$ 999,99',
       discount: '90%',
