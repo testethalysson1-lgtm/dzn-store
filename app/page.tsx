@@ -54,7 +54,7 @@ export default function Page() {
   const games: GameItem[] = [
     {
       id: 3,
-      title: 'A CONTA PERFEITA PRA VOCÊ',
+      title: 'A CONTA PERFEITA PRA VOCÊ!',
       price: 'R$ 10,00',
       oldPrice: 'R$ 85,99',
       discount: '80%',
@@ -84,7 +84,7 @@ export default function Page() {
     },
     {
       id: 5,
-      title: 'A Cavalaria Lendária',
+      title: 'A Cavalaria Lendária!',
       price: 'R$ 20,00',
       oldPrice: 'R$ 99,99',
       discount: '80%',
