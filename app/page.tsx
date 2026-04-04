@@ -65,7 +65,7 @@ export default function Page() {
         'https://i.imgur.com/ChkFVNG.jpeg',
         'https://i.imgur.com/ALZNfiQ.jpeg'
       ],
-      checkout: 'https://wa.me/5579991081815?text=Quero comprar essa de R$15.00. Como faço?',
+      checkout: 'https://blacknosepay.com/pay/KULGFY5W',
     },
     {
       id: 4,
@@ -80,7 +80,7 @@ export default function Page() {
         'https://i.imgur.com/UZLuCvy.png',
         'https://i.imgur.com/XZVNLax.png'
       ],
-      checkout: 'https://blacknosepay.com/pay/26X89LGR',
+      checkout: 'https://blacknosepay.com/pay/HY2UW6QC',
     },
     {
       id: 5,
@@ -97,12 +97,12 @@ export default function Page() {
         'https://i.imgur.com/CHZ80bI.jpeg',
         'https://i.imgur.com/QD6KbRZ.jpeg'
       ],
-      checkout: 'https://wa.me/5579991081815?text=Quero comprar essa de R$25,00. Como faço?',
+      checkout: 'https://blacknosepay.com/pay/QTULJUD9',
     },
     {
       id: 6,
       title: 'Time Full - seja invencível',
-      price: 'R$ 75,00',
+      price: 'R$ 45,00',
       oldPrice: 'R$ 195,00',
       discount: '75%',
       description: ['Conta com Messi e Ibra 110', 'Gullit + Meio campo perfeito', 'Domine a partida com essa conta monstruosa', '3298 de Força Coletiva'],
@@ -111,12 +111,12 @@ export default function Page() {
         'https://i.imgur.com/HV7a8gj.png',
         'https://i.imgur.com/BThTm0i.png'
       ],
-      checkout: 'https://wa.me/5579991081815?text=Quero comprar essa de R$50.00. Como faço?',
+      checkout: 'https://blacknosepay.com/pay/ZHZIENGO',
     },
     {
       id: 7,
       title: 'A conta mais bizarra do jogo!',
-      price: 'R$ 90,00',
+      price: 'R$ 75,00',
       oldPrice: 'R$ 999,99',
       discount: '90%',
       description: ['A Melhor conta que você já viu!', 'Ataque perfeito', 'Messi + Gullit', '3301 de Força'],
@@ -126,7 +126,7 @@ export default function Page() {
         'https://i.imgur.com/6rnHRCE.png',
         'https://i.imgur.com/tnqJDWe.png'
       ],
-      checkout: 'https://wa.me/5579991081815?text=Quero comprar essa de R$95.00. Como faço?',
+      checkout: 'https://blacknosepay.com/pay/M4L1KTC0',
     },
   ];
 
@@ -145,7 +145,7 @@ export default function Page() {
         'https://i.imgur.com/vf9SCth.png',
         'https://i.imgur.com/gcbW42u.png'
       ],
-      checkout: 'https://wa.me/5579991081815?text=Quero comprar essa de R$40.00. Como faço?',
+      checkout: 'https://blacknosepay.com/pay/2N4PS56L',
     },
     {
       id: 2,
@@ -161,7 +161,7 @@ export default function Page() {
         'https://i.imgur.com/GsT5XAs.png',
         'https://i.imgur.com/ljC5Jnh.png'
       ],
-      checkout: 'https://wa.me/5579991081815?text=Quero comprar essa de R$65.00. Como faço?',
+      checkout: 'https://blacknosepay.com/pay/FNM87LRB',
     },
     {
       id: 3,
@@ -176,7 +176,7 @@ export default function Page() {
         'https://i.imgur.com/t3Pxl5w.jpeg',
         'https://i.imgur.com/cSV2Jcz.jpeg'
       ],
-      checkout: 'https://wa.me/5579991081815?text=Quero comprar essa de R$85.00. Como faço?',
+      checkout: 'https://blacknosepay.com/pay/6TSDX2QN',
     },
   ];
   const renderCard = (item: GameItem, index: number) => {
