@@ -54,7 +54,7 @@ export default function Page() {
   const games: GameItem[] = [
     {
       id: 3,
-      title: 'A CONTA PERFEITA',
+      title: 'A CONTA PERFEITA PRA VOCÊ',
       price: 'R$ 10,00',
       oldPrice: 'R$ 85,99',
       discount: '80%',
@@ -69,7 +69,7 @@ export default function Page() {
     },
     {
       id: 4,
-      title: 'Quarteto Fantástico',
+      title: 'O Quarteto Fantástico!',
       price: 'R$ 15,00',
       oldPrice: 'R$ 95,99',
       discount: '80%',
@@ -115,7 +115,7 @@ export default function Page() {
     },
     {
       id: 7,
-      title: 'A conta mais Bizarra!',
+      title: 'A conta mais Bizarra do Jogo!',
       price: 'R$ 75,00',
       oldPrice: 'R$ 999,99',
       discount: '90%',
