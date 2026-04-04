@@ -65,7 +65,7 @@ export default function Page() {
         'https://i.imgur.com/ChkFVNG.jpeg',
         'https://i.imgur.com/ALZNfiQ.jpeg'
       ],
-      checkout: 'https://blacknosepay.com/pay/OKBYPE71',
+      checkout: 'https://blacknosepay.com/pay/1ICXS7CJ',
     },
     {
       id: 4,
