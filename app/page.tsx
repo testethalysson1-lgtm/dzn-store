@@ -80,7 +80,7 @@ export default function Page() {
         'https://i.imgur.com/UZLuCvy.png',
         'https://i.imgur.com/XZVNLax.png'
       ],
-      checkout: 'https://blacknosepay.com/pay/0BVW7L9Y',
+      checkout: 'https://blacknosepay.com/pay/CPPVSA7E',
     },
     {
       id: 5,
