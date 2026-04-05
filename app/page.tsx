@@ -145,7 +145,7 @@ export default function Page() {
         'https://i.imgur.com/vf9SCth.png',
         'https://i.imgur.com/gcbW42u.png'
       ],
-      checkout: 'https://blacknosepay.com/pay/D3VWR8AN',
+      checkout: 'https://blacknosepay.com/pay/JTQPP6X6',
     },
     {
       id: 2,
@@ -161,7 +161,7 @@ export default function Page() {
         'https://i.imgur.com/GsT5XAs.png',
         'https://i.imgur.com/ljC5Jnh.png'
       ],
-      checkout: 'https://blacknosepay.com/pay/YS897Z04',
+      checkout: 'https://blacknosepay.com/pay/S7SUIDCG',
     },
     {
       id: 3,
@@ -176,7 +176,7 @@ export default function Page() {
         'https://i.imgur.com/t3Pxl5w.jpeg',
         'https://i.imgur.com/cSV2Jcz.jpeg'
       ],
-      checkout: 'https://blacknosepay.com/pay/KJUP0A6V',
+      checkout: 'https://blacknosepay.com/pay/MXG5Q90C',
     },
   ];
   const renderCard = (item: GameItem, index: number) => {
