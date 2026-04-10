@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Search, Moon, Sun, Menu, X, ShoppingCart, Star, Zap, Shield, Clock, MessageCircle, TrendingDown, ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 
 type GameItem = {
@@ -23,7 +23,40 @@ export default function Page() {
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
   const [selectedItem, setSelectedItem] = useState<GameItem | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  useEffect(() => {
+  const disableRightClick = (e: MouseEvent) => e.preventDefault();
+  document.addEventListener('contextmenu', disableRightClick);
 
+  const blockKeys = (e: KeyboardEvent) => {
+    if (
+      e.key === 'F12' ||
+      (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key)) ||
+      (e.ctrlKey && e.key === 'U')
+    ) {
+      e.preventDefault();
+    }
+  };
+  document.addEventListener('keydown', blockKeys);
+
+  const detectDevTools = () => {
+    const threshold = 160;
+    if (
+      window.outerWidth - window.innerWidth > threshold ||
+      window.outerHeight - window.innerHeight > threshold
+    ) {
+      document.body.innerHTML =
+        "<h1 style='color:white;text-align:center;margin-top:20%'>Acesso bloqueado</h1>";
+    }
+  };
+
+  const interval = setInterval(detectDevTools, 1000);
+
+  return () => {
+    document.removeEventListener('contextmenu', disableRightClick);
+    document.removeEventListener('keydown', blockKeys);
+    clearInterval(interval);
+  };
+}, []);
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
   const toggleCard = (id: number) => setExpandedCard(expandedCard === id ? null : id);
