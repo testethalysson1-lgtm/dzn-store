@@ -91,14 +91,14 @@ export default function Page() {
       price: 'R$ 10,00',
       oldPrice: 'R$ 85,99',
       discount: '80%',
-      description: ['Neymar | Mbappe | Messi', 'Conta perfeita e custo beneficio', 'Zaga excelente', '3290 de Força Coletiva'],
+      description: ['Yamal | Kaká | Messi', 'Conta perfeita e custo beneficio', 'Zaga excelente', '3299 de Força Coletiva'],
       images: [
-        'https://i.imgur.com/f6hyppO.jpeg',
-        'https://i.imgur.com/Y2v40eK.jpeg',
-        'https://i.imgur.com/ChkFVNG.jpeg',
-        'https://i.imgur.com/ALZNfiQ.jpeg'
+        'https://i.imgur.com/72vhlhq.jpeg',
+        'https://i.imgur.com/ZbpT0T5.jpeg',
+        'https://i.imgur.com/5qTm5AK.jpeg',
+        'https://i.imgur.com/KVKAGt3.jpeg'
       ],
-      checkout: 'https://blacknosepay.com/pay/IT8LVLB5',
+      checkout: 'https://blacknosepay.com/pay/PTOYOY5V',
     },
     {
       id: 4,
