@@ -327,10 +327,11 @@ function PixModal({ item, onClose }: { item: GameItem; onClose: () => void }) {
               <button
                 onClick={() => {
                   setError('');
-                  if (status === 'waiting_product') setStatus('idle');
-                  else if (status === 'waiting_tax_full') startTaxPayment(false);
-                  else if (status === 'waiting_tax_reduced') startTaxPayment(true);
-                  else setStatus('form');
+                  if (status === 'waiting_tax_reduced') {
+                    startTaxPayment(true);
+                  } else { 
+                    setStatus('form');
+                  }
                 }}
                 className="w-full bg-purple-600 hover:bg-purple-500 text-white py-3 rounded-xl font-black text-sm transition-all"
               >
@@ -725,7 +726,3 @@ export default function Page() {
     </div>
   );
 }
-
-                                      
-                                    
-
