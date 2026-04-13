@@ -183,12 +183,12 @@ export default function Page() {
       priceNumber: 10.00,
       oldPrice: 'R$ 85,99',
       discount: '80%',
-      description: ['Yamal | Kaká | Messi', 'Conta perfeita e custo beneficio', 'Zaga excelente', '3290 de Força Coletiva'],
+      description: ['CR7 | Neymar | Messi', 'Conta perfeita e custo beneficio', 'Zaga excelente', '3271 de Força Coletiva'],
       images: [
-        'https://i.imgur.com/f6hyppO.jpeg',
-        'https://i.imgur.com/Y2v40eK.jpeg',
-        'https://i.imgur.com/ChkFVNG.jpeg',
-        'https://i.imgur.com/ALZNfiQ.jpeg'
+        'https://i.imgur.com/J7WpyQz.jpeg',
+        'https://i.imgur.com/HBOHusW.jpeg',
+        'https://i.imgur.com/pJo51c3.jpeg',
+        'https://i.imgur.com/nDzAkrT.jpeg'
       ],
     },
     {
@@ -600,7 +600,7 @@ export default function Page() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
-              { icon: ShoppingCart, title: 'Como funciona a compra?', text: 'Escolha a conta que você se interessou e clique em "Comprar". Preencha seu nome e telefone, gere o PIX e finalize o pagamento. Após a confirmação, você receberá os dados da conta.' },
+              { icon: ShoppingCart, title: 'Como funciona a compra?', text: 'Escolha a conta que você se interessou e clique em "Comprar". Preencha seu nome e telefone, o pix vai ser gerado, realize o pagamento e aguarde. Após a confirmação, você é direcionado automaticamente para a página de acessar os dados da conta.' },
               { icon: Shield, title: 'Por que confiar na Dzn Store?', text: 'Somos o único site de eFootball verificado desde 2023, sempre buscando satisfação dos nossos clientes. Mais de 400 clientes já compraram no nosso site!' },
               { icon: MessageCircle, title: 'Tem dúvidas?', text: 'Chame no Instagram! Equipe 24h online: @dznefootball' }
             ].map((faq, i) => (
