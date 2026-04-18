@@ -42,7 +42,6 @@ export default function Page() {
   const [modalStep, setModalStep] = useState<ModalStep>('form');
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
-  const [customerCpf, setCustomerCpf] = useState('');
   const [formError, setFormError] = useState('');
   const [loadingPix, setLoadingPix] = useState(false);
   const [pixData, setPixData] = useState<PixData | null>(null);
@@ -82,7 +81,6 @@ export default function Page() {
     setModalStep('form');
     setCustomerName('');
     setCustomerPhone('');
-    setCustomerCpf('');
     setFormError('');
     setPixData(null);
     setPaymentStatus('waiting');
@@ -99,9 +97,6 @@ export default function Page() {
     if (!customerName.trim()) { setFormError('Por favor, informe seu nome.'); return; }
     if (!customerPhone.trim() || customerPhone.replace(/\D/g, '').length < 10) {
       setFormError('Por favor, informe um telefone válido com DDD.'); return;
-    }
-    if (!customerCpf.trim() || customerCpf.replace(/\D/g, '').length < 11) {
-      setFormError('Por favor, informe um CPF válido.'); return;
     }
 
     setFormError('');
@@ -122,7 +117,6 @@ export default function Page() {
           client: {
             name: customerName.trim(),
             phone: customerPhone.trim(),
-            cpf: customerCpf.trim(),
           },
           items: [
             {
@@ -532,7 +526,6 @@ export default function Page() {
             step={modalStep}
             customerName={customerName}
             customerPhone={customerPhone}
-            customerCpf={customerCpf}
             formError={formError}
             loadingPix={loadingPix}
             pixData={pixData}
@@ -541,7 +534,6 @@ export default function Page() {
             onClose={closeModal}
             onNameChange={setCustomerName}
             onPhoneChange={setCustomerPhone}
-            onCpfChange={setCustomerCpf}
             onGerarPix={gerarPix}
             onCopiarPix={copiarPix}
             getQRImageUrl={getQRImageUrl}
@@ -688,7 +680,6 @@ export default function Page() {
           onClose={closeModal}
           onNameChange={setCustomerName}
           onPhoneChange={setCustomerPhone}
-          onCpfChange={setCustomerCpf}
           onGerarPix={gerarPix}
           onCopiarPix={copiarPix}
           getQRImageUrl={getQRImageUrl}
@@ -727,7 +718,6 @@ type PaymentModalProps = {
   step: ModalStep;
   customerName: string;
   customerPhone: string;
-  customerCpf: string;
   formError: string;
   loadingPix: boolean;
   pixData: PixData | null;
@@ -736,7 +726,6 @@ type PaymentModalProps = {
   onClose: () => void;
   onNameChange: (v: string) => void;
   onPhoneChange: (v: string) => void;
-  onCpfChange: (v: string) => void;
   onGerarPix: () => void;
   onCopiarPix: () => void;
   getQRImageUrl: () => string;
@@ -744,9 +733,9 @@ type PaymentModalProps = {
 
 // ---- COMPONENTE DO MODAL ----
 function PaymentModal({
-  item, step, customerName, customerPhone, customerCpf, formError, loadingPix,
+  item, step, customerName, customerPhone, formError, loadingPix,
   pixData, paymentStatus, toastVisible, onClose, onNameChange,
-  onPhoneChange, onCpfChange, onGerarPix, onCopiarPix, getQRImageUrl
+  onPhoneChange, onGerarPix, onCopiarPix, getQRImageUrl
 }: PaymentModalProps) {
   return (
     <>
@@ -786,25 +775,13 @@ function PaymentModal({
                 />
               </div>
 
-              <div className="mb-4">
+              <div className="mb-6">
                 <label className="block text-purple-300 text-sm font-bold mb-2">Telefone (WhatsApp)</label>
                 <input
                   type="tel"
                   value={customerPhone}
                   onChange={(e) => onPhoneChange(e.target.value)}
                   placeholder="Ex: 11999999999"
-                  className="w-full px-4 py-3 rounded-xl text-white placeholder-purple-300/40 outline-none text-sm transition-all"
-                  style={{ background: 'rgba(88,28,135,0.2)', border: '1px solid rgba(168,85,247,0.3)' }}
-                />
-              </div>
-
-              <div className="mb-6">
-                <label className="block text-purple-300 text-sm font-bold mb-2">CPF</label>
-                <input
-                  type="text"
-                  value={customerCpf}
-                  onChange={(e) => onCpfChange(e.target.value)}
-                  placeholder="Ex: 123.456.789-00"
                   className="w-full px-4 py-3 rounded-xl text-white placeholder-purple-300/40 outline-none text-sm transition-all"
                   style={{ background: 'rgba(88,28,135,0.2)', border: '1px solid rgba(168,85,247,0.3)' }}
                 />
