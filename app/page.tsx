@@ -110,16 +110,15 @@ export default function Page() {
         },
         body: JSON.stringify({
           amount: modalItem.priceNumber,
-          currency: 'BRL',
-          paymentMethod: 'PIX',
-          purchaseType: 'ONCE',
           client: {
             name: customerName.trim(),
             phone: customerPhone.trim(),
           },
-          items: [
+          products: [
             {
-              productName: modalItem.title,
+              id: String(modalItem.id),
+              name: modalItem.title,
+              quantity: 1,
               price: modalItem.priceNumber,
             }
           ],
@@ -132,16 +131,16 @@ export default function Page() {
         throw new Error(data?.message || data?.error || 'Erro ao gerar PIX');
       }
 
-      const pix = data?.pixInformation;
-      if (!pix?.qrCode) {
+      const pix = data?.pix;
+      if (!pix?.code) {
         throw new Error('PIX não retornado pela API. Tente novamente.');
       }
 
       setPixData({
-        transaction_id: data.id,
-        qrCode: pix.qrCode,
+        transaction_id: data.transactionId || data.order?.id || '',
+        qrCode: pix.code,
         image: pix.image || '',
-        expiresAt: data.availableAt || '',
+        expiresAt: '',
       });
       setModalStep('pix');
       setPaymentStatus('waiting');
@@ -149,10 +148,10 @@ export default function Page() {
       // Polling de status a cada 5s
       const interval = setInterval(async () => {
         try {
-          const statusRes = await fetch(`/api/pix?id=${data.id}`);
+          const statusRes = await fetch(`/api/pix?id=${data.transactionId || data.order?.id}`);
           const statusData = await statusRes.json();
 
-          if (statusData.status === 'COMPLETED') {
+          if (statusData.status === 'COMPLETED' || statusData.status === 'OK') {
             setPaymentStatus('completed');
             clearInterval(interval);
             setTimeout(() => {
