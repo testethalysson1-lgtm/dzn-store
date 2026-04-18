@@ -668,7 +668,6 @@ export default function Page() {
           step={modalStep}
           customerName={customerName}
           customerPhone={customerPhone}
-          customerCpf={customerCpf}
           formError={formError}
           loadingPix={loadingPix}
           pixData={pixData}
