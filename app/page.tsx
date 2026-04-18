@@ -103,11 +103,10 @@ export default function Page() {
     setLoadingPix(true);
 
     try {
-      const res = await fetch(`${SIGILOPAY_API_URL}/gateway/transactions`, {
+      const res = await fetch(`/api/pix`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-public-key': SIGILOPAY_PUBLIC_KEY,
         },
         body: JSON.stringify({
           amount: modalItem.priceNumber,
@@ -150,9 +149,7 @@ export default function Page() {
       // Polling de status a cada 5s
       const interval = setInterval(async () => {
         try {
-          const statusRes = await fetch(`${SIGILOPAY_API_URL}/gateway/transactions/${data.id}`, {
-            headers: { 'x-public-key': SIGILOPAY_PUBLIC_KEY },
-          });
+          const statusRes = await fetch(`/api/pix?id=${data.id}`);
           const statusData = await statusRes.json();
 
           if (statusData.status === 'COMPLETED') {
