@@ -8,13 +8,18 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const res = await fetch(`${SIGILOPAY_API_URL}/gateway/transactions`, {
+    const res = await fetch(`${SIGILOPAY_API_URL}/gateway/pix/receive`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'x-public-key': SIGILOPAY_PUBLIC_KEY,
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify({
+        identifier: `order_${Date.now()}`,
+        amount: body.amount,
+        client: body.client,
+        products: body.products,
+      }),
     });
 
     const data = await res.json();
