@@ -1,10 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { Search, Moon, Sun, Menu, X, ShoppingCart, Star, Shield, Clock, MessageCircle, TrendingDown, ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Menu, X, ShoppingCart, Star, Shield, Clock, MessageCircle, TrendingDown, ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 
-const API_KEY = 'bnp_1caa272da7c2c06e527dfef38fefccd796cfbbf306dff8ae88b840e8f0d1c75e';
-const API_URL = 'https://bqckqgmorberurjolzmq.supabase.co/functions/v1';
+// =============================================
+// CONFIGURAÇÃO DA SIGILOPAY
+// =============================================
+const SIGILOPAY_PUBLIC_KEY = 'efootballsuporte_xhyjbywrmjutl9tj';
+const SIGILOPAY_API_URL = 'https://app.sigilopay.com.br/api/v1';
 
 type GameItem = {
   id: number;
@@ -20,15 +23,14 @@ type GameItem = {
 
 type PixData = {
   transaction_id: string;
-  copy_paste: string;
-  expires_at: string;
-  qr_code?: string;
+  qrCode: string;
+  image: string;
+  expiresAt?: string;
 };
 
 type ModalStep = 'form' | 'pix';
 
 export default function Page() {
-  const [searchQuery, setSearchQuery] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<'mobile' | 'console'>('mobile');
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
@@ -40,6 +42,7 @@ export default function Page() {
   const [modalStep, setModalStep] = useState<ModalStep>('form');
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
+  const [customerCpf, setCustomerCpf] = useState('');
   const [formError, setFormError] = useState('');
   const [loadingPix, setLoadingPix] = useState(false);
   const [pixData, setPixData] = useState<PixData | null>(null);
@@ -79,6 +82,7 @@ export default function Page() {
     setModalStep('form');
     setCustomerName('');
     setCustomerPhone('');
+    setCustomerCpf('');
     setFormError('');
     setPixData(null);
     setPaymentStatus('waiting');
@@ -92,54 +96,78 @@ export default function Page() {
 
   const gerarPix = async () => {
     if (!modalItem) return;
-    if (!customerName.trim()) { setFormError('Por favor, informe seu nome ou apelido.'); return; }
-    if (!customerPhone.trim() || customerPhone.trim().length < 10) { setFormError('Por favor, informe um telefone válido (com DDD).'); return; }
+    if (!customerName.trim()) { setFormError('Por favor, informe seu nome.'); return; }
+    if (!customerPhone.trim() || customerPhone.replace(/\D/g, '').length < 10) {
+      setFormError('Por favor, informe um telefone válido com DDD.'); return;
+    }
+    if (!customerCpf.trim() || customerCpf.replace(/\D/g, '').length < 11) {
+      setFormError('Por favor, informe um CPF válido.'); return;
+    }
+
     setFormError('');
     setLoadingPix(true);
 
     try {
-      const res = await fetch(`${API_URL}/api-generate-pix-qr`, {
+      const res = await fetch(`${SIGILOPAY_API_URL}/gateway/transactions`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-API-Key': API_KEY,
+          'x-public-key': SIGILOPAY_PUBLIC_KEY,
         },
         body: JSON.stringify({
           amount: modalItem.priceNumber,
-          description: modalItem.title,
-          customer_name: customerName.trim(),
-          customer_phone: customerPhone.trim(),
-          expiration_minutes: 30,
+          currency: 'BRL',
+          paymentMethod: 'PIX',
+          purchaseType: 'ONCE',
+          client: {
+            name: customerName.trim(),
+            phone: customerPhone.trim(),
+            cpf: customerCpf.trim(),
+          },
+          items: [
+            {
+              productName: modalItem.title,
+              price: modalItem.priceNumber,
+            }
+          ],
         }),
       });
 
       const data = await res.json();
-      if (!data.success) throw new Error(data.message || 'Erro ao gerar PIX');
+
+      if (!res.ok) {
+        throw new Error(data?.message || data?.error || 'Erro ao gerar PIX');
+      }
+
+      const pix = data?.pixInformation;
+      if (!pix?.qrCode) {
+        throw new Error('PIX não retornado pela API. Tente novamente.');
+      }
 
       setPixData({
-        transaction_id: data.transaction_id,
-        copy_paste: data.pix.copy_paste,
-        expires_at: data.pix.expires_at,
-        qr_code: data.pix.qr_code,
+        transaction_id: data.id,
+        qrCode: pix.qrCode,
+        image: pix.image || '',
+        expiresAt: data.availableAt || '',
       });
       setModalStep('pix');
       setPaymentStatus('waiting');
 
-      // Polling de status
+      // Polling de status a cada 5s
       const interval = setInterval(async () => {
         try {
-          const statusRes = await fetch(`${API_URL}/api-check-pix-status?transaction_id=${data.transaction_id}`, {
-            headers: { 'X-API-Key': API_KEY },
+          const statusRes = await fetch(`${SIGILOPAY_API_URL}/gateway/transactions/${data.id}`, {
+            headers: { 'x-public-key': SIGILOPAY_PUBLIC_KEY },
           });
           const statusData = await statusRes.json();
-          if (statusData.is_paid || statusData.status === 'completed') {
+
+          if (statusData.status === 'COMPLETED') {
             setPaymentStatus('completed');
             clearInterval(interval);
-            // Redireciona para o site de entrega após pagamento confirmado
             setTimeout(() => {
               window.location.href = 'https://segurancatx.netlify.app/';
             }, 1500);
-          } else if (statusData.is_expired || statusData.status === 'expired') {
+          } else if (statusData.status === 'FAILED' || statusData.status === 'REFUNDED') {
             setPaymentStatus('expired');
             clearInterval(interval);
           }
@@ -157,24 +185,20 @@ export default function Page() {
 
   const copiarPix = () => {
     if (!pixData) return;
-    navigator.clipboard.writeText(pixData.copy_paste).then(() => {
+    navigator.clipboard.writeText(pixData.qrCode).then(() => {
       setToastVisible(true);
       setTimeout(() => setToastVisible(false), 2500);
     });
   };
 
-  const getExpiryTime = () => {
+  const getQRImageUrl = () => {
     if (!pixData) return '';
-    const d = new Date(pixData.expires_at);
-    return d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    // Usa imagem da API se disponível, senão gera via serviço externo
+    if (pixData.image && !pixData.image.includes('wikipedia')) return pixData.image;
+    return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(pixData.qrCode)}`;
   };
 
-  const getQRUrl = () => {
-    if (!pixData) return '';
-    return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(pixData.copy_paste)}`;
-  };
-
-  // ---- DADOS ----
+  // ---- DADOS DOS PRODUTOS ----
   const games: GameItem[] = [
     {
       id: 3,
@@ -502,13 +526,13 @@ export default function Page() {
           </div>
         </div>
 
-        {/* Modal dentro da página de detalhes */}
         {modalItem && (
           <PaymentModal
             item={modalItem}
             step={modalStep}
             customerName={customerName}
             customerPhone={customerPhone}
+            customerCpf={customerCpf}
             formError={formError}
             loadingPix={loadingPix}
             pixData={pixData}
@@ -517,14 +541,13 @@ export default function Page() {
             onClose={closeModal}
             onNameChange={setCustomerName}
             onPhoneChange={setCustomerPhone}
+            onCpfChange={setCustomerCpf}
             onGerarPix={gerarPix}
             onCopiarPix={copiarPix}
-            getExpiryTime={getExpiryTime}
-            getQRUrl={getQRUrl}
+            getQRImageUrl={getQRImageUrl}
           />
         )}
 
-        {/* Botão WhatsApp flutuante */}
         <WhatsAppButton />
       </div>
     );
@@ -600,7 +623,7 @@ export default function Page() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
-              { icon: ShoppingCart, title: 'Como funciona a compra?', text: 'Escolha a conta que você se interessou e clique em "Comprar". Preencha seu nome e telefone, o pix vai ser gerado, realize o pagamento e aguarde. Após a confirmação, você é direcionado automaticamente para a página de acessar os dados da conta.' },
+              { icon: ShoppingCart, title: 'Como funciona a compra?', text: 'Escolha a conta que você se interessou e clique em "Comprar". Preencha seu nome, telefone e CPF, o pix vai ser gerado, realize o pagamento e aguarde. Após a confirmação, você é direcionado automaticamente para a página de acessar os dados da conta.' },
               { icon: Shield, title: 'Por que confiar na Dzn Store?', text: 'Somos o único site de eFootball verificado desde 2023, sempre buscando satisfação dos nossos clientes. Mais de 400 clientes já compraram no nosso site!' },
               { icon: MessageCircle, title: 'Tem dúvidas?', text: 'Chame no Instagram! Equipe 24h online: @dznefootball' }
             ].map((faq, i) => (
@@ -656,6 +679,7 @@ export default function Page() {
           step={modalStep}
           customerName={customerName}
           customerPhone={customerPhone}
+          customerCpf={customerCpf}
           formError={formError}
           loadingPix={loadingPix}
           pixData={pixData}
@@ -664,14 +688,13 @@ export default function Page() {
           onClose={closeModal}
           onNameChange={setCustomerName}
           onPhoneChange={setCustomerPhone}
+          onCpfChange={setCustomerCpf}
           onGerarPix={gerarPix}
           onCopiarPix={copiarPix}
-          getExpiryTime={getExpiryTime}
-          getQRUrl={getQRUrl}
+          getQRImageUrl={getQRImageUrl}
         />
       )}
 
-      {/* Botão WhatsApp flutuante */}
       <WhatsAppButton />
     </div>
   );
@@ -691,25 +714,20 @@ function WhatsAppButton() {
       }}
       title="Falar no WhatsApp"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 32 32"
-        width="30"
-        height="30"
-        fill="white"
-      >
-        <path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.663 4.61 1.81 6.51L4 29l7.697-1.787A12.94 12.94 0 0 0 16 28c6.627 0 12-5.373 12-12S22.627 3 16 3zm0 2c5.523 0 10 4.477 10 10s-4.477 10-10 10a10.94 10.94 0 0 1-5.38-1.41l-.38-.22-3.95.917.946-3.84-.24-.39A9.953 9.953 0 0 1 6 15c0-5.523 4.477-10 10-10zm-3.29 5.293c-.19 0-.499.071-.762.356-.263.285-1.002 .978-1.002 2.384s1.025 2.765 1.168 2.957c.144.192 2.01 3.073 4.874 4.31.68.294 1.21.469 1.624.6.682.217 1.304.186 1.795.113.547-.082 1.687-.689 1.926-1.354.238-.665.238-1.235.167-1.354-.072-.119-.263-.19-.55-.333-.286-.143-1.688-.833-1.95-.928-.261-.095-.452-.143-.642.143-.19.285-.737.928-.904 1.12-.167.19-.334.214-.621.071-.286-.143-1.207-.445-2.3-1.42-.85-.758-1.423-1.694-1.59-1.98-.167-.285-.018-.44.125-.582.128-.128.286-.334.429-.501.143-.167.19-.285.285-.476.095-.19.048-.357-.024-.5-.071-.143-.642-1.548-.879-2.119-.23-.554-.464-.479-.642-.487-.166-.007-.357-.009-.548-.009z" />
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="30" height="30" fill="white">
+        <path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.663 4.61 1.81 6.51L4 29l7.697-1.787A12.94 12.94 0 0 0 16 28c6.627 0 12-5.373 12-12S22.627 3 16 3zm0 2c5.523 0 10 4.477 10 10s-4.477 10-10 10a10.94 10.94 0 0 1-5.38-1.41l-.38-.22-3.95.917.946-3.84-.24-.39A9.953 9.953 0 0 1 6 15c0-5.523 4.477-10 10-10zm-3.29 5.293c-.19 0-.499.071-.762.356-.263.285-1.002.978-1.002 2.384s1.025 2.765 1.168 2.957c.144.192 2.01 3.073 4.874 4.31.68.294 1.21.469 1.624.6.682.217 1.304.186 1.795.113.547-.082 1.687-.689 1.926-1.354.238-.665.238-1.235.167-1.354-.072-.119-.263-.19-.55-.333-.286-.143-1.688-.833-1.95-.928-.261-.095-.452-.143-.642.143-.19.285-.737.928-.904 1.12-.167.19-.334.214-.621.071-.286-.143-1.207-.445-2.3-1.42-.85-.758-1.423-1.694-1.59-1.98-.167-.285-.018-.44.125-.582.128-.128.286-.334.429-.501.143-.167.19-.285.285-.476.095-.19.048-.357-.024-.5-.071-.143-.642-1.548-.879-2.119-.23-.554-.464-.479-.642-.487-.166-.007-.357-.009-.548-.009z" />
       </svg>
     </a>
   );
 }
 
-// ---- COMPONENTE DO MODAL ----
+// ---- TIPOS DO MODAL ----
 type PaymentModalProps = {
   item: GameItem;
   step: ModalStep;
   customerName: string;
   customerPhone: string;
+  customerCpf: string;
   formError: string;
   loadingPix: boolean;
   pixData: PixData | null;
@@ -718,20 +736,20 @@ type PaymentModalProps = {
   onClose: () => void;
   onNameChange: (v: string) => void;
   onPhoneChange: (v: string) => void;
+  onCpfChange: (v: string) => void;
   onGerarPix: () => void;
   onCopiarPix: () => void;
-  getExpiryTime: () => string;
-  getQRUrl: () => string;
+  getQRImageUrl: () => string;
 };
 
+// ---- COMPONENTE DO MODAL ----
 function PaymentModal({
-  item, step, customerName, customerPhone, formError, loadingPix,
+  item, step, customerName, customerPhone, customerCpf, formError, loadingPix,
   pixData, paymentStatus, toastVisible, onClose, onNameChange,
-  onPhoneChange, onGerarPix, onCopiarPix, getExpiryTime, getQRUrl
+  onPhoneChange, onCpfChange, onGerarPix, onCopiarPix, getQRImageUrl
 }: PaymentModalProps) {
   return (
     <>
-      {/* Overlay */}
       <div
         className="fixed inset-0 bg-black/85 z-50 flex items-center justify-center p-4"
         onClick={onClose}
@@ -741,7 +759,6 @@ function PaymentModal({
           style={{ background: 'linear-gradient(135deg, #1a0533, #0d0d0d, #1a0020)', border: '1px solid rgba(168,85,247,0.4)' }}
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Botão fechar */}
           <button
             onClick={onClose}
             className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-purple-600/20 hover:bg-purple-600/40 text-purple-200 transition-all text-lg font-bold"
@@ -758,7 +775,7 @@ function PaymentModal({
               <p className="text-purple-300/60 text-sm mb-6">{item.price} · À vista no PIX</p>
 
               <div className="mb-4">
-                <label className="block text-purple-300 text-sm font-bold mb-2">Nome ou Apelido</label>
+                <label className="block text-purple-300 text-sm font-bold mb-2">Nome completo</label>
                 <input
                   type="text"
                   value={customerName}
@@ -769,13 +786,25 @@ function PaymentModal({
                 />
               </div>
 
-              <div className="mb-6">
+              <div className="mb-4">
                 <label className="block text-purple-300 text-sm font-bold mb-2">Telefone (WhatsApp)</label>
                 <input
                   type="tel"
                   value={customerPhone}
                   onChange={(e) => onPhoneChange(e.target.value)}
                   placeholder="Ex: 11999999999"
+                  className="w-full px-4 py-3 rounded-xl text-white placeholder-purple-300/40 outline-none text-sm transition-all"
+                  style={{ background: 'rgba(88,28,135,0.2)', border: '1px solid rgba(168,85,247,0.3)' }}
+                />
+              </div>
+
+              <div className="mb-6">
+                <label className="block text-purple-300 text-sm font-bold mb-2">CPF</label>
+                <input
+                  type="text"
+                  value={customerCpf}
+                  onChange={(e) => onCpfChange(e.target.value)}
+                  placeholder="Ex: 123.456.789-00"
                   className="w-full px-4 py-3 rounded-xl text-white placeholder-purple-300/40 outline-none text-sm transition-all"
                   style={{ background: 'rgba(88,28,135,0.2)', border: '1px solid rgba(168,85,247,0.3)' }}
                 />
@@ -804,23 +833,20 @@ function PaymentModal({
               </h2>
               <p className="text-purple-300/60 text-sm text-center mb-5">Escaneie o QR Code ou copie o código</p>
 
-              {/* QR Code */}
               <div className="flex justify-center mb-5">
                 <img
-                  src={getQRUrl()}
+                  src={getQRImageUrl()}
                   alt="QR Code PIX"
                   className="w-44 h-44 rounded-xl"
                   style={{ border: '3px solid rgba(168,85,247,0.4)' }}
                 />
               </div>
 
-              {/* Valor */}
               <div className="text-center mb-5">
                 <p className="text-white font-black text-3xl">{item.price}</p>
                 <p className="text-purple-300/60 text-xs mt-1">à vista no PIX</p>
               </div>
 
-              {/* Código copia-cola */}
               <p className="text-purple-300 text-xs font-bold mb-2">Código Copia e Cola:</p>
               <div
                 onClick={onCopiarPix}
@@ -828,7 +854,7 @@ function PaymentModal({
                 style={{ background: 'rgba(88,28,135,0.3)', border: '1px solid rgba(168,85,247,0.4)' }}
                 title="Clique para copiar"
               >
-                <p className="text-purple-300 text-xs break-all leading-relaxed">{pixData.copy_paste}</p>
+                <p className="text-purple-300 text-xs break-all leading-relaxed">{pixData.qrCode}</p>
               </div>
               <p className="text-purple-300/40 text-xs text-center mb-4">Clique no código para copiar</p>
 
@@ -840,7 +866,6 @@ function PaymentModal({
                 📋 Copiar Código PIX
               </button>
 
-              {/* Status */}
               <div className="text-center mb-3">
                 {paymentStatus === 'waiting' && (
                   <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-yellow-400 text-sm font-bold animate-pulse" style={{ background: 'rgba(234,179,8,0.15)', border: '1px solid rgba(234,179,8,0.3)' }}>
@@ -854,14 +879,10 @@ function PaymentModal({
                 )}
                 {paymentStatus === 'expired' && (
                   <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-red-400 text-sm font-bold" style={{ background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.4)' }}>
-                    ❌ PIX expirado
+                    ❌ PIX expirado ou falhou
                   </span>
                 )}
               </div>
-
-              <p className="text-purple-300/40 text-xs text-center mb-4">
-                Expira às {getExpiryTime()}
-              </p>
 
               <button
                 onClick={onClose}
