@@ -65,7 +65,7 @@ export default function Page() {
         'https://i.imgur.com/ChkFVNG.jpeg',
         'https://i.imgur.com/ALZNfiQ.jpeg'
       ],
-      checkout: 'https://checkoutseguro.ru/checkout/cmo59qfe70s5q1royr6ijgu02?offer=AGXHBGH',
+      checkout: 'https://checkoutseguro.ru/checkout/cmo5bj4zz0r4r1yoypukiniy0?offer=VAVL1B6',
     },
     {
       id: 4,
