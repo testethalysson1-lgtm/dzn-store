@@ -152,7 +152,7 @@ function PixModal({ item, onClose }: { item: GameItem; onClose: () => void }) {
           setStatus('paid');
           clearInterval(interval);
           setTimeout(() => {
-            window.location.href = 'https://segurancatx.netlify.app/';
+            window.location.href = 'https://checkoutseguro.ru/checkout/cmo59cm8e0s011roy3mvvlpo4?offer=5A4QYLW';
           }, 2000);
         } else {
           setStatus('pix_generated');
