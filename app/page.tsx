@@ -55,16 +55,40 @@ async function createPixTransaction(item: GameItem, customer: CustomerForm): Pro
   });
 
   const data = await res.json();
-  console.log('RESPOSTA SIGILOPAY:', JSON.stringify(data));
+  console.log('RESPOSTA SIGILOPAY COMPLETA:', JSON.stringify(data, null, 2));
 
   if (data.error) throw new Error(data.error);
   if (data.errorCode) throw new Error(data.message || 'Erro na API');
 
+  const code =
+    data.pix?.code ||
+    data.pix?.qrcode ||
+    data.pix?.emv ||
+    data.qrcode ||
+    data.code ||
+    data.emv ||
+    '';
+
+  const base64 =
+    data.pix?.base64 ||
+    data.pix?.qrcodeImage ||
+    data.pix?.image ||
+    data.qrcodeImage ||
+    data.base64 ||
+    '';
+
+  const image =
+    data.pix?.image ||
+    data.pix?.imageUrl ||
+    data.imageUrl ||
+    data.image ||
+    '';
+
   return {
-    transactionId: data.transactionId || identifier,
-    code: data.pix?.code || '',
-    base64: data.pix?.base64 || '',
-    image: data.pix?.image || '',
+    transactionId: data.transactionId || data.id || identifier,
+    code,
+    base64,
+    image,
   };
 }
 
@@ -150,9 +174,14 @@ function PixModal({ item, onClose }: { item: GameItem; onClose: () => void }) {
 
   const getQrSrc = () => {
     if (!pixData) return '';
-    if (pixData.base64) return pixData.base64;
+    // Se base64 já vier com o prefixo data:image, usa direto
+    if (pixData.base64) {
+      if (pixData.base64.startsWith('data:')) return pixData.base64;
+      return `data:image/png;base64,${pixData.base64}`;
+    }
     if (pixData.image) return pixData.image;
-    if (pixData.code) return `https://api.qrserver.com/v1/create-qr-code/?size=192x192&data=${encodeURIComponent(pixData.code)}`;
+    // Fallback: gera QR a partir do código via API externa
+    if (pixData.code) return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(pixData.code)}`;
     return '';
   };
 
@@ -230,9 +259,21 @@ function PixModal({ item, onClose }: { item: GameItem; onClose: () => void }) {
                   <div className="flex justify-center">
                     <div className="bg-white p-4 rounded-2xl">
                       {getQrSrc() ? (
-                        <img src={getQrSrc()} alt="QR Code PIX" className="w-48 h-48" />
+                        <img
+                          src={getQrSrc()}
+                          alt="QR Code PIX"
+                          className="w-48 h-48"
+                          onError={(e) => {
+                            // Se a imagem falhar, tenta gerar via qrserver
+                            if (pixData.code) {
+                              (e.target as HTMLImageElement).src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(pixData.code)}`;
+                            }
+                          }}
+                        />
                       ) : (
-                        <div className="w-48 h-48 flex items-center justify-center text-gray-400 text-xs text-center">QR Code não disponível</div>
+                        <div className="w-48 h-48 flex items-center justify-center text-gray-400 text-xs text-center p-4">
+                          QR Code não disponível.<br />Use o código abaixo.
+                        </div>
                       )}
                     </div>
                   </div>
