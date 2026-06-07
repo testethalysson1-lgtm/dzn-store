@@ -6,7 +6,6 @@ const API_URL = 'https://app.sigilopay.com.br/api/v1/gateway';
 
 async function safeJson(res: Response) {
   const text = await res.text();
-  console.log('RAW RESPONSE:', text);
   try {
     return JSON.parse(text);
   } catch {
@@ -20,50 +19,46 @@ const authHeaders = () => ({
   'Content-Type': 'application/json',
 });
 
-const PAID = ['COMPLETED', 'PAID', 'paid', 'completed', 'APPROVED', 'approved'];
+// Armazena pagamentos confirmados em memória (dura enquanto o servidor estiver ativo)
+const paidTransactions = new Set<string>();
 
-async function fetchStatus(id: string): Promise<any | null> {
-  try {
-    const res = await fetch(`${API_URL}/transactions?id=${id}`, {
-      method: 'GET',
-      headers: authHeaders(),
-    });
-    if (!res.ok) return null;
-    const data = await safeJson(res);
-    console.log(`STATUS para id=${id}:`, JSON.stringify(data, null, 2));
-    return data;
-  } catch {
-    return null;
-  }
-}
-
-async function fetchStatusByIdentifier(identifier: string): Promise<any | null> {
-  try {
-    const res = await fetch(`${API_URL}/transactions?clientIdentifier=${identifier}`, {
-      method: 'GET',
-      headers: authHeaders(),
-    });
-    if (!res.ok) return null;
-    const data = await safeJson(res);
-    console.log(`STATUS para identifier=${identifier}:`, JSON.stringify(data, null, 2));
-    return data;
-  } catch {
-    return null;
-  }
+// GET - recebe webhook da SigiloPay
+export async function GET(req: NextRequest) {
+  return NextResponse.json({ ok: true });
 }
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const { action, payload } = body;
 
+  // Webhook da SigiloPay — chamado automaticamente quando o PIX é pago
+  if (!action) {
+    console.log('WEBHOOK RECEBIDO:', JSON.stringify(body, null, 2));
+    const status = body.status || body.data?.status || '';
+    const id = body.transactionId || body.id || body.data?.id || body.data?.transactionId || '';
+    const clientIdentifier = body.clientIdentifier || body.data?.clientIdentifier || '';
+
+    if (['COMPLETED', 'PAID', 'paid', 'completed', 'APPROVED'].includes(status)) {
+      if (id) paidTransactions.add(id);
+      if (clientIdentifier) paidTransactions.add(clientIdentifier);
+      console.log('PAGAMENTO CONFIRMADO VIA WEBHOOK:', id, clientIdentifier);
+    }
+
+    return NextResponse.json({ received: true });
+  }
+
   try {
     if (action === 'create_pix') {
+      // Monta a URL do webhook apontando para essa mesma rota
+      const webhookUrl = 'https://dzn-storeefb.vercel.app/api/pix';
+
       const pixRes = await fetch(`${API_URL}/pix/receive`, {
         method: 'POST',
         headers: authHeaders(),
         body: JSON.stringify({
           identifier: payload.identifier,
           amount: payload.amount,
+          webhookUrl,
           client: {
             name: payload.client.name,
             email: payload.client.email,
@@ -78,7 +73,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         ...pixData,
         _identifier: payload.identifier,
-        // Expõe o orderId também para usar no check
         _orderId: pixData.order?.id || pixData.orderId || '',
       });
     }
@@ -86,40 +80,42 @@ export async function POST(req: NextRequest) {
     if (action === 'check_status') {
       const { transactionId, identifier, orderId } = payload;
 
-      let found: any = null;
-
-      // 1. Tenta pelo transactionId
-      if (transactionId) {
-        found = await fetchStatus(transactionId);
-        if (found && PAID.includes(found.status)) {
-          return NextResponse.json({ status: 'PAID', raw: found });
-        }
+      // Verifica se já recebemos confirmação via webhook
+      if (
+        (transactionId && paidTransactions.has(transactionId)) ||
+        (identifier && paidTransactions.has(identifier)) ||
+        (orderId && paidTransactions.has(orderId))
+      ) {
+        return NextResponse.json({ status: 'PAID' });
       }
 
-      // 2. Tenta pelo orderId (order.id retornado na criação)
-      if (orderId && orderId !== transactionId) {
-        const d = await fetchStatus(orderId);
-        if (d) {
-          found = d;
-          if (PAID.includes(d.status)) {
-            return NextResponse.json({ status: 'PAID', raw: d });
+      // Fallback: consulta direta na API
+      const attempts = [
+        transactionId ? `${API_URL}/transactions?id=${transactionId}` : null,
+        orderId ? `${API_URL}/transactions?id=${orderId}` : null,
+        identifier ? `${API_URL}/transactions?clientIdentifier=${identifier}` : null,
+      ].filter(Boolean) as string[];
+
+      for (const url of attempts) {
+        try {
+          const res = await fetch(url, { method: 'GET', headers: authHeaders() });
+          if (!res.ok) continue;
+          const data = await safeJson(res);
+          console.log('CHECK STATUS:', url, data.status);
+
+          if (['COMPLETED', 'PAID', 'paid', 'completed', 'APPROVED'].includes(data.status)) {
+            if (transactionId) paidTransactions.add(transactionId);
+            if (identifier) paidTransactions.add(identifier);
+            return NextResponse.json({ status: 'PAID', raw: data });
           }
+
+          return NextResponse.json({ status: data.status || 'PENDING', raw: data });
+        } catch {
+          continue;
         }
       }
 
-      // 3. Tenta pelo clientIdentifier
-      if (identifier) {
-        const d = await fetchStatusByIdentifier(identifier);
-        if (d) {
-          found = d;
-          if (PAID.includes(d.status)) {
-            return NextResponse.json({ status: 'PAID', raw: d });
-          }
-        }
-      }
-
-      const rawStatus = found?.status || 'PENDING';
-      return NextResponse.json({ status: rawStatus, raw: found });
+      return NextResponse.json({ status: 'PENDING' });
     }
 
     return NextResponse.json({ error: 'Ação inválida' }, { status: 400 });
