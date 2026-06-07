@@ -23,6 +23,8 @@ type PixData = {
   base64?: string;
   image?: string;
   transactionId: string;
+  identifier: string;
+  orderId: string;
 };
 
 type CustomerForm = {
@@ -63,7 +65,9 @@ async function createPixTransaction(item: GameItem, customer: CustomerForm): Pro
   const code =
     data.pix?.code ||
     data.pix?.qrcode ||
+    data.pix?.qrCode ||
     data.pix?.emv ||
+    data.pixInformation?.qrCode ||
     data.qrcode ||
     data.code ||
     data.emv ||
@@ -73,6 +77,7 @@ async function createPixTransaction(item: GameItem, customer: CustomerForm): Pro
     data.pix?.base64 ||
     data.pix?.qrcodeImage ||
     data.pix?.image ||
+    data.pixInformation?.base64 ||
     data.qrcodeImage ||
     data.base64 ||
     '';
@@ -80,25 +85,32 @@ async function createPixTransaction(item: GameItem, customer: CustomerForm): Pro
   const image =
     data.pix?.image ||
     data.pix?.imageUrl ||
+    data.pixInformation?.image ||
     data.imageUrl ||
     data.image ||
     '';
 
   return {
     transactionId: data.transactionId || data.id || identifier,
+    identifier,
+    orderId: data._orderId || data.order?.id || data.orderId || '',
     code,
     base64,
     image,
   };
 }
 
-async function checkPaymentStatus(transactionId: string): Promise<string> {
+async function checkPaymentStatus(transactionId: string, identifier: string, orderId: string): Promise<string> {
   const res = await fetch('/api/pix', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ action: 'check_status', payload: { transactionId } }),
+    body: JSON.stringify({
+      action: 'check_status',
+      payload: { transactionId, identifier, orderId },
+    }),
   });
   const data = await res.json();
+  console.log('CHECK STATUS RETORNO:', data);
   return data.status || 'PENDING';
 }
 
@@ -134,21 +146,21 @@ function PixModal({ item, onClose }: { item: GameItem; onClose: () => void }) {
       setPixData(pix);
       setStatus('pix_generated');
       setStep('pix');
-      startPolling(pix.transactionId);
+      startPolling(pix.transactionId, pix.identifier, pix.orderId);
     } catch (e: any) {
       setStatus('error');
       setError(e.message || 'Erro ao gerar PIX. Tente novamente.');
     }
   };
 
-  const startPolling = (txId: string) => {
+  const startPolling = (txId: string, identifier: string, orderId: string) => {
     let attempts = 0;
     const interval = setInterval(async () => {
       attempts++;
       try {
         setStatus('checking');
-        const s = await checkPaymentStatus(txId);
-        if (['COMPLETED', 'PAID', 'paid', 'completed', 'OK'].includes(s)) {
+        const s = await checkPaymentStatus(txId, identifier, orderId);
+        if (['COMPLETED', 'PAID', 'paid', 'completed'].includes(s)) {
           setStatus('paid');
           clearInterval(interval);
           setTimeout(() => {
@@ -257,10 +269,7 @@ function PixModal({ item, onClose }: { item: GameItem; onClose: () => void }) {
                   <div className="flex justify-center">
                     <div className="bg-white p-4 rounded-2xl">
                       {getQrSrc() ? (
-                        <img
-                          src={getQrSrc()}
-                          alt="QR Code PIX"
-                          className="w-48 h-48"
+                        <img src={getQrSrc()} alt="QR Code PIX" className="w-48 h-48"
                           onError={(e) => {
                             if (pixData.code) {
                               (e.target as HTMLImageElement).src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(pixData.code)}`;

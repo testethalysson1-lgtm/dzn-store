@@ -20,6 +20,38 @@ const authHeaders = () => ({
   'Content-Type': 'application/json',
 });
 
+const PAID = ['COMPLETED', 'PAID', 'paid', 'completed', 'APPROVED', 'approved'];
+
+async function fetchStatus(id: string): Promise<any | null> {
+  try {
+    const res = await fetch(`${API_URL}/transactions?id=${id}`, {
+      method: 'GET',
+      headers: authHeaders(),
+    });
+    if (!res.ok) return null;
+    const data = await safeJson(res);
+    console.log(`STATUS para id=${id}:`, JSON.stringify(data, null, 2));
+    return data;
+  } catch {
+    return null;
+  }
+}
+
+async function fetchStatusByIdentifier(identifier: string): Promise<any | null> {
+  try {
+    const res = await fetch(`${API_URL}/transactions?clientIdentifier=${identifier}`, {
+      method: 'GET',
+      headers: authHeaders(),
+    });
+    if (!res.ok) return null;
+    const data = await safeJson(res);
+    console.log(`STATUS para identifier=${identifier}:`, JSON.stringify(data, null, 2));
+    return data;
+  } catch {
+    return null;
+  }
+}
+
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const { action, payload } = body;
@@ -42,29 +74,52 @@ export async function POST(req: NextRequest) {
         }),
       });
       const pixData = await safeJson(pixRes);
-      return NextResponse.json(pixData);
+      console.log('CRIAR PIX:', JSON.stringify(pixData, null, 2));
+      return NextResponse.json({
+        ...pixData,
+        _identifier: payload.identifier,
+        // Expõe o orderId também para usar no check
+        _orderId: pixData.order?.id || pixData.orderId || '',
+      });
     }
 
     if (action === 'check_status') {
-      const { transactionId } = payload;
+      const { transactionId, identifier, orderId } = payload;
 
-      // Endpoint correto da SigiloPay: GET /transactions?id=
-      const statusRes = await fetch(`${API_URL}/transactions?id=${transactionId}`, {
-        method: 'GET',
-        headers: authHeaders(),
-      });
+      let found: any = null;
 
-      const statusData = await safeJson(statusRes);
-      console.log('STATUS SIGILOPAY:', JSON.stringify(statusData, null, 2));
+      // 1. Tenta pelo transactionId
+      if (transactionId) {
+        found = await fetchStatus(transactionId);
+        if (found && PAID.includes(found.status)) {
+          return NextResponse.json({ status: 'PAID', raw: found });
+        }
+      }
 
-      const rawStatus = statusData.status || 'PENDING';
+      // 2. Tenta pelo orderId (order.id retornado na criação)
+      if (orderId && orderId !== transactionId) {
+        const d = await fetchStatus(orderId);
+        if (d) {
+          found = d;
+          if (PAID.includes(d.status)) {
+            return NextResponse.json({ status: 'PAID', raw: d });
+          }
+        }
+      }
 
-      // Statuses possíveis: PENDING, COMPLETED, FAILED, REFUNDED, CHARGED_BACK
-      const paidStatuses = ['COMPLETED'];
+      // 3. Tenta pelo clientIdentifier
+      if (identifier) {
+        const d = await fetchStatusByIdentifier(identifier);
+        if (d) {
+          found = d;
+          if (PAID.includes(d.status)) {
+            return NextResponse.json({ status: 'PAID', raw: d });
+          }
+        }
+      }
 
-      const normalizedStatus = paidStatuses.includes(rawStatus) ? 'PAID' : rawStatus;
-
-      return NextResponse.json({ status: normalizedStatus, raw: statusData });
+      const rawStatus = found?.status || 'PENDING';
+      return NextResponse.json({ status: rawStatus, raw: found });
     }
 
     return NextResponse.json({ error: 'Ação inválida' }, { status: 400 });
