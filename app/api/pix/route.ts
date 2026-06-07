@@ -6,6 +6,7 @@ const API_URL = 'https://app.sigilopay.com.br/api/v1/gateway';
 
 async function safeJson(res: Response) {
   const text = await res.text();
+  console.log('RAW RESPONSE:', text);
   try {
     return JSON.parse(text);
   } catch {
@@ -45,15 +46,30 @@ export async function POST(req: NextRequest) {
     }
 
     if (action === 'check_status') {
-      const statusRes = await fetch(`${API_URL}/transactions/${payload.transactionId}`, {
+      const { transactionId } = payload;
+
+      // Endpoint correto da SigiloPay: GET /transactions?id=
+      const statusRes = await fetch(`${API_URL}/transactions?id=${transactionId}`, {
+        method: 'GET',
         headers: authHeaders(),
       });
+
       const statusData = await safeJson(statusRes);
-      return NextResponse.json(statusData);
+      console.log('STATUS SIGILOPAY:', JSON.stringify(statusData, null, 2));
+
+      const rawStatus = statusData.status || 'PENDING';
+
+      // Statuses possíveis: PENDING, COMPLETED, FAILED, REFUNDED, CHARGED_BACK
+      const paidStatuses = ['COMPLETED'];
+
+      const normalizedStatus = paidStatuses.includes(rawStatus) ? 'PAID' : rawStatus;
+
+      return NextResponse.json({ status: normalizedStatus, raw: statusData });
     }
 
     return NextResponse.json({ error: 'Ação inválida' }, { status: 400 });
   } catch (e: any) {
+    console.error('ERRO API PIX:', e.message);
     return NextResponse.json({ error: e.message }, { status: 500 });
   }
 }
