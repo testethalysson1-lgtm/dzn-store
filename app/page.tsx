@@ -152,7 +152,7 @@ function PixModal({ item, onClose }: { item: GameItem; onClose: () => void }) {
           setStatus('paid');
           clearInterval(interval);
           setTimeout(() => {
-            window.location.href = 'https://checkoutseguro.ru/checkout/cmo59cm8e0s011roy3mvvlpo4?offer=5A4QYLW';
+            window.location.href = 'https://enchanting-eclair-9ba667.netlify.app/';
           }, 2000);
         } else {
           setStatus('pix_generated');
@@ -174,13 +174,11 @@ function PixModal({ item, onClose }: { item: GameItem; onClose: () => void }) {
 
   const getQrSrc = () => {
     if (!pixData) return '';
-    // Se base64 já vier com o prefixo data:image, usa direto
     if (pixData.base64) {
       if (pixData.base64.startsWith('data:')) return pixData.base64;
       return `data:image/png;base64,${pixData.base64}`;
     }
     if (pixData.image) return pixData.image;
-    // Fallback: gera QR a partir do código via API externa
     if (pixData.code) return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(pixData.code)}`;
     return '';
   };
@@ -264,7 +262,6 @@ function PixModal({ item, onClose }: { item: GameItem; onClose: () => void }) {
                           alt="QR Code PIX"
                           className="w-48 h-48"
                           onError={(e) => {
-                            // Se a imagem falhar, tenta gerar via qrserver
                             if (pixData.code) {
                               (e.target as HTMLImageElement).src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(pixData.code)}`;
                             }
