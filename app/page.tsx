@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Menu, X, ShoppingCart, Star, Shield, Clock, MessageCircle, TrendingDown, ArrowLeft, ChevronLeft, ChevronRight, Copy, CheckCircle, Loader2, AlertCircle } from 'lucide-react';
+import { Menu, X, ShoppingCart, Star, Shield, Clock, MessageCircle, TrendingDown, ArrowLeft, ChevronLeft, ChevronRight, Copy, CheckCircle, Loader2, AlertCircle, PlayCircle } from 'lucide-react';
 
 type GameItem = {
   id: number;
@@ -31,6 +31,11 @@ type CustomerForm = {
   name: string;
   phone: string;
 };
+
+// Detecta se a URL é de vídeo pela extensão
+function isVideoUrl(url: string): boolean {
+  return /\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i.test(url);
+}
 
 async function createPixTransaction(item: GameItem, customer: CustomerForm): Promise<PixData> {
   const identifier = `dzn_${Date.now()}_${item.id}`;
@@ -334,9 +339,9 @@ export default function Page() {
   const prevImage = () => { if (selectedItem) setCurrentImageIndex(p => (p - 1 + selectedItem.images.length) % selectedItem.images.length); };
 
   const games: GameItem[] = [
-    { id: 3, title: 'A CONTA PERFEITA PRA VOCÊ!', price: 'R$ 10,00', priceNumber: 10, oldPrice: 'R$ 85,99', discount: '80%', description: ['Yamal | CR7 | Messi', 'Conta perfeita e custo beneficio', 'Zaga excelente', '3290 de Força Coletiva'], images: ['https://i.imgur.com/EVq9cin.png','https://i.imgur.com/X8m18Tc.png','https://i.imgur.com/AGlZffR.png','https://i.imgur.com/UqYvxR6.png'], checkout: '' },
-    { id: 4, title: 'O Quarteto Fantástico!', price: 'R$ 15,00', priceNumber: 15, oldPrice: 'R$ 95,99', discount: '80%', description: ['Neymar | Pelé | Messi', 'O ataque mais fatal do game', 'Zaga excelente', '3314 de Força Coletiva'], images: ['https://i.imgur.com/MUuDNfx.png','https://i.imgur.com/2P9g9Pv.png','https://i.imgur.com/UZLuCvy.png','https://i.imgur.com/XZVNLax.png'], checkout: '' },
-    { id: 5, title: 'A Cavalaria Lendária!', price: 'R$ 20,00', priceNumber: 20, oldPrice: 'R$ 99,99', discount: '80%', description: ['Conta perfeita pra quem quer massacrar o adversário!', 'Gullit dominando o meio', 'Goleiro 107 de Over + Defesa impecável', '3325 de Força Coletiva'], images: ['https://i.imgur.com/yBhtlrV.jpeg','https://i.imgur.com/mNwj40i.jpeg','https://i.imgur.com/cXPoR7f.jpeg','https://i.imgur.com/W3NKnja.jpeg','https://i.imgur.com/CHZ80bI.jpeg','https://i.imgur.com/QD6KbRZ.jpeg'], checkout: '' },
+    { id: 3, title: 'A CONTA PERFEITA PRA VOCÊ!', price: 'R$ 10,00', priceNumber: 10, oldPrice: 'R$ 85,99', discount: '80%', description: ['Yamal | CR7 | Buffon', 'Conta perfeita e custo beneficio', 'Zaga excelente', '3275 de Força Coletiva', 'Ataque matador com CR7 e companhia'], images: ['https://i.imgur.com/vyY72EL.png','https://i.imgur.com/LucqFTo.mp4'], checkout: '' },
+    { id: 4, title: 'O Quarteto Fantástico!', price: 'R$ 15,00', priceNumber: 15, oldPrice: 'R$ 95,99', discount: '80%', description: ['Neymar | Pelé | Ronaldinho', 'O ataque mais fatal do game', 'Zaga excelente', '3292 de Força Coletiva'], images: ['https://i.imgur.com/6HqokVd.png','https://i.imgur.com/IeoGOp4.mp4'], checkout: '' },
+    { id: 5, title: 'A Cavalaria Lendária!', price: 'R$ 20,00', priceNumber: 20, oldPrice: 'R$ 99,99', discount: '80%', description: ['Conta perfeita pra quem quer massacrar o adversário!', 'Meio Campo perfeito', 'Goleiro 106 de Over + Defesa impecável', '3300 de Força Coletiva'], images: ['https://i.imgur.com/L8ae1ix.png','https://i.imgur.com/y0BNr92.mp4'], checkout: '' },
     { id: 6, title: 'Time Full - Seja Invencível', price: 'R$ 45,00', priceNumber: 45, oldPrice: 'R$ 195,00', discount: '75%', description: ['Conta com Messi e Ibra 110', 'Gullit + Meio campo perfeito', 'Domine a partida com essa conta monstruosa', '3298 de Força Coletiva'], images: ['https://i.imgur.com/a513HQt.png','https://i.imgur.com/HV7a8gj.png','https://i.imgur.com/BThTm0i.png'], checkout: '' },
     { id: 7, title: 'A conta mais Bizarra do Jogo!', price: 'R$ 75,00', priceNumber: 75, oldPrice: 'R$ 999,99', discount: '90%', description: ['A Melhor conta que você já viu!', 'Ataque perfeito', 'Messi + Gullit', '3301 de Força'], images: ['https://i.imgur.com/VuBE0hE.png','https://i.imgur.com/5TAUJ8X.png','https://i.imgur.com/6rnHRCE.png','https://i.imgur.com/tnqJDWe.png'], checkout: '' },
   ];
@@ -349,12 +354,22 @@ export default function Page() {
 
   const renderCard = (item: GameItem, index: number) => {
     const isExpanded = expandedCard === item.id;
+    const cover = item.images[0];
     return (
       <div key={item.id} className="relative group" style={{ animationDelay: `${index * 50}ms` }}>
         <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-900/40 via-pink-900/30 to-purple-800/40 backdrop-blur-sm border border-purple-500/20 hover:border-purple-400/50 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/30">
           <div onClick={() => openDetails(item)} className="relative h-44 bg-gradient-to-br from-purple-950/50 to-pink-950/50 overflow-hidden cursor-pointer">
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
-            <img src={item.images[0]} alt={item.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+            {isVideoUrl(cover) ? (
+              <video src={cover} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" muted playsInline />
+            ) : (
+              <img src={cover} alt={item.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+            )}
+            {isVideoUrl(cover) && (
+              <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+                <PlayCircle size={40} className="text-white/90 drop-shadow-lg" />
+              </div>
+            )}
           </div>
           <div className="p-4 space-y-3">
             <h3 onClick={() => toggleCard(item.id)} className="text-white font-black text-sm uppercase tracking-wide leading-tight cursor-pointer hover:text-purple-300 transition-colors">{item.title}</h3>
@@ -390,6 +405,7 @@ export default function Page() {
   };
 
   if (selectedItem) {
+    const currentMedia = selectedItem.images[currentImageIndex];
     return (
       <div className="min-h-screen bg-black text-white">
         {payingItem && <PixModal item={payingItem} onClose={() => setPayingItem(null)} />}
@@ -410,12 +426,25 @@ export default function Page() {
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-4">
                 <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-950/50 to-pink-950/50 aspect-square flex items-center justify-center p-4">
-                  <img src={selectedItem.images[currentImageIndex]} alt={selectedItem.title} className="max-w-full max-h-full object-contain" />
+                  {isVideoUrl(currentMedia) ? (
+                    <video
+                      key={currentMedia}
+                      src={currentMedia}
+                      controls
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="max-w-full max-h-full object-contain rounded-xl"
+                    />
+                  ) : (
+                    <img src={currentMedia} alt={selectedItem.title} className="max-w-full max-h-full object-contain" />
+                  )}
                   {selectedItem.images.length > 1 && (
                     <>
-                      <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 backdrop-blur-sm p-3 rounded-full transition-all"><ChevronLeft size={24} /></button>
-                      <button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 backdrop-blur-sm p-3 rounded-full transition-all"><ChevronRight size={24} /></button>
-                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full">
+                      <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 backdrop-blur-sm p-3 rounded-full transition-all z-20"><ChevronLeft size={24} /></button>
+                      <button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 backdrop-blur-sm p-3 rounded-full transition-all z-20"><ChevronRight size={24} /></button>
+                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full z-20">
                         <span className="text-white font-bold text-sm">{currentImageIndex + 1} / {selectedItem.images.length}</span>
                       </div>
                     </>
@@ -425,8 +454,17 @@ export default function Page() {
                   <div className="grid grid-cols-4 gap-3">
                     {selectedItem.images.map((img, idx) => (
                       <div key={idx} onClick={() => setCurrentImageIndex(idx)} className={`relative rounded-xl overflow-hidden cursor-pointer transition-all ${currentImageIndex === idx ? 'ring-4 ring-purple-500 scale-105' : 'ring-2 ring-purple-500/20 hover:ring-purple-500/50'}`}>
-                        <div className="aspect-square bg-gradient-to-br from-purple-950/50 to-pink-950/50">
-                          <img src={img} alt={`${selectedItem.title} ${idx + 1}`} className="w-full h-full object-cover" />
+                        <div className="aspect-square bg-gradient-to-br from-purple-950/50 to-pink-950/50 relative">
+                          {isVideoUrl(img) ? (
+                            <>
+                              <video src={img} className="w-full h-full object-cover" muted playsInline />
+                              <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                                <PlayCircle size={24} className="text-white drop-shadow" />
+                              </div>
+                            </>
+                          ) : (
+                            <img src={img} alt={`${selectedItem.title} ${idx + 1}`} className="w-full h-full object-cover" />
+                          )}
                         </div>
                       </div>
                     ))}
@@ -509,7 +547,7 @@ export default function Page() {
 
         <section className="py-6 text-center">
           <div className="mb-6">
-            <img src="https://i.imgur.com/hirW2G8.png" alt="Banner" className="w-full object-cover" />
+            <img src="https://i.imgur.com/U4xSodC.png" alt="Banner" className="w-full object-cover" />
           </div>
           <div className="max-w-5xl mx-auto px-4">
             <h1 className="text-4xl md:text-6xl font-black mb-3 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
