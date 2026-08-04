@@ -325,7 +325,7 @@ function PixModal({ item, onClose }: { item: GameItem; onClose: () => void }) {
 
 export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<'mobile' | 'console'>('mobile');
+  const [activeSection, setActiveSection] = useState<'mobile' | 'console' | 'fcmobile'>('mobile');
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
   const [selectedItem, setSelectedItem] = useState<GameItem | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -344,6 +344,11 @@ export default function Page() {
     { id: 5, title: 'A Cavalaria Lendária!', price: 'R$ 20,00', priceNumber: 20, oldPrice: 'R$ 99,99', discount: '80%', description: ['Conta perfeita pra quem quer massacrar o adversário!', 'Meio Campo perfeito', 'Goleiro 106 de Over + Defesa impecável', '3300 de Força Coletiva'], images: ['https://i.imgur.com/L8ae1ix.png','https://i.imgur.com/y0BNr92.mp4'], checkout: '' },
     { id: 6, title: 'Time Full - Seja Invencível', price: 'R$ 45,00', priceNumber: 45, oldPrice: 'R$ 195,00', discount: '75%', description: ['Conta com Messi e Ibra 110', 'Gullit + Meio campo perfeito', 'Domine a partida com essa conta monstruosa', '3298 de Força Coletiva'], images: ['https://i.imgur.com/a513HQt.png','https://i.imgur.com/HV7a8gj.png','https://i.imgur.com/BThTm0i.png'], checkout: '' },
     { id: 7, title: 'A conta mais Bizarra do Jogo!', price: 'R$ 75,00', priceNumber: 75, oldPrice: 'R$ 999,99', discount: '90%', description: ['A Melhor conta que você já viu!', 'Ataque perfeito', 'Messi + Gullit', '3301 de Força'], images: ['https://i.imgur.com/VuBE0hE.png','https://i.imgur.com/5TAUJ8X.png','https://i.imgur.com/6rnHRCE.png','https://i.imgur.com/tnqJDWe.png'], checkout: '' },
+  ];
+
+  const fcMobileGames: GameItem[] = [
+    { id: 101, title: 'CONTA PERFEITA', price: 'R$ 10,00', priceNumber: 10, discount: '', description: ['CONTA GER 110', 'ATAQUE EXCELENTE', 'MEIO CAMPO PERFEITO'], images: ['https://i.imgur.com/LxcCnRH.png','https://i.imgur.com/BCgBayk.png','https://i.imgur.com/uU6ChcV.png'], checkout: '' },
+    { id: 102, title: 'CONTA IMBATÍVEL', price: 'R$ 20,00', priceNumber: 20, discount: '', description: ['CONTA GER 128', 'ATAQUE PERFEITO', 'MEIO CAMPO EXCELENTE'], images: ['https://i.imgur.com/tqYz6BF.png','https://i.imgur.com/fiVsk21.png','https://i.imgur.com/3eKLm2W.png','https://i.imgur.com/OMX5SVO.png'], checkout: '' },
   ];
 
   const consoleGames: GameItem[] = [
@@ -389,10 +394,12 @@ export default function Page() {
                 <p className="text-white font-black text-xl">{item.price}</p>
                 <p className="text-purple-200/70 text-[10px]">À vista no PIX</p>
               </div>
-              <div className="ml-auto flex items-center gap-1 bg-green-500/90 backdrop-blur-sm px-2 py-1 rounded-lg">
-                <TrendingDown size={12} className="text-white" />
-                <span className="text-white font-black text-xs">{item.discount}</span>
-              </div>
+              {item.discount && (
+                <div className="ml-auto flex items-center gap-1 bg-green-500/90 backdrop-blur-sm px-2 py-1 rounded-lg">
+                  <TrendingDown size={12} className="text-white" />
+                  <span className="text-white font-black text-xs">{item.discount}</span>
+                </div>
+              )}
             </div>
             <div className="space-y-2">
               <button onClick={() => openDetails(item)} className="w-full bg-purple-700/30 hover:bg-purple-700/50 text-purple-200 py-2 rounded-xl font-bold text-xs text-center transition-all border border-purple-500/30">Ver Detalhes</button>
@@ -481,10 +488,12 @@ export default function Page() {
                         <p className="text-white font-black text-5xl mb-2">{selectedItem.price}</p>
                         <p className="text-purple-200/80 text-base">À vista no PIX</p>
                       </div>
-                      <div className="flex items-center gap-2 bg-green-500/90 backdrop-blur-sm px-5 py-3 rounded-xl">
-                        <TrendingDown size={24} className="text-white" />
-                        <span className="text-white font-black text-2xl">{selectedItem.discount}</span>
-                      </div>
+                      {selectedItem.discount && (
+                        <div className="flex items-center gap-2 bg-green-500/90 backdrop-blur-sm px-5 py-3 rounded-xl">
+                          <TrendingDown size={24} className="text-white" />
+                          <span className="text-white font-black text-2xl">{selectedItem.discount}</span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -539,6 +548,7 @@ export default function Page() {
             <div className="mt-4 p-4 rounded-xl bg-purple-950/50 backdrop-blur-xl border border-purple-500/30">
               <div className="flex flex-col gap-2">
                 <button onClick={() => { setActiveSection('mobile'); setMenuOpen(false); }} className={`px-6 py-3 rounded-xl font-bold text-sm transition-all ${activeSection === 'mobile' ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white' : 'bg-purple-900/30 text-purple-200 hover:bg-purple-900/50'}`}>📱 Mobile</button>
+                <button onClick={() => { setActiveSection('fcmobile'); setMenuOpen(false); }} className={`px-6 py-3 rounded-xl font-bold text-sm transition-all ${activeSection === 'fcmobile' ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white' : 'bg-purple-900/30 text-purple-200 hover:bg-purple-900/50'}`}>⚽ FC Mobile</button>
                 <button onClick={() => { setActiveSection('console'); setMenuOpen(false); }} className={`px-6 py-3 rounded-xl font-bold text-sm transition-all ${activeSection === 'console' ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white' : 'bg-purple-900/30 text-purple-200 hover:bg-purple-900/50'}`}>🎮 Console</button>
               </div>
             </div>
@@ -551,7 +561,7 @@ export default function Page() {
           </div>
           <div className="max-w-5xl mx-auto px-4">
             <h1 className="text-4xl md:text-6xl font-black mb-3 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
-              {activeSection === 'mobile' ? 'Contas Mobile' : 'Contas Console'}
+              {activeSection === 'mobile' ? 'Contas Mobile' : activeSection === 'fcmobile' ? 'Contas FC Mobile' : 'Contas Console'}
             </h1>
             <p className="text-purple-200 mb-4 font-semibold">🔥 CONTAS DISPONÍVEIS LOGO ABAIXO 🔥</p>
             <div className="w-full h-1 bg-gradient-to-r from-red-500 via-red-600 to-red-500 rounded-full my-4 shadow-lg shadow-red-500/50"></div>
@@ -560,7 +570,7 @@ export default function Page() {
 
         <section className="px-4 pt-0 pb-8 max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {(activeSection === 'mobile' ? games : consoleGames).map(renderCard)}
+            {(activeSection === 'mobile' ? games : activeSection === 'fcmobile' ? fcMobileGames : consoleGames).map(renderCard)}
           </div>
         </section>
 
